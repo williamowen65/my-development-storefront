@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/cptc_CPW219_eCommerceSite.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="./css/list-groups.css">
 </head>
 <body>
 
@@ -31,7 +32,7 @@
 
     @* Color-theme-menu *@
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-        <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (dark)" fdprocessedid="gu7vsd">
+        <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center bg-primary" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (dark)" fdprocessedid="gu7vsd">
             <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
             <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
         </button>
@@ -65,9 +66,9 @@
         <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
             <div class="dropdown">
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false">
-                    
+
                     Will's Development Storefront
-                 </a>
+                </a>
                 <ul class="dropdown-menu text-small shadow" style="">
                     <li><a class="dropdown-item active" href="#" aria-current="page">Overview</a></li>
                     <li><a class="dropdown-item" href="#">Inventory</a></li>
@@ -117,22 +118,24 @@
         </main>
     </div>
 
-    
 
-        <footer class="py-3 my-4">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-            </ul>
-            <p class="text-center text-body-secondary">  &copy; 2025 - Will's Development Storefront - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
-        </footer>
+
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+        </ul>
+        <p class="text-center text-body-secondary">  &copy; 2025 - Will's Development Storefront - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/color-modes.js" asp-append-version="true"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
