@@ -45,9 +45,19 @@ body {
 
 .body-section {
     box-shadow: 0 .5em 1.5em rgba(0, 0, 0, .1), 0 .125em .5em rgba(0, 0, 0, .15);
+   
 }
 
-.wo-body-background{
-        background-color: var(--wo-background-color);
+.wo-body-background {
+    background-color: var(--wo-background-color);
+    padding-inline: 5px;
+}
+
+.card {
+z-index: 1 !important;
+}
+
+.dropdown {
+z-index:2 !important;
 }
 
