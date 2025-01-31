@@ -15,3 +15,8 @@ I am really happy about the Bootstrap break through, and will use this technique
 
 
 <img src="./demo-images/screenshot.png"/>
+
+# Prerequisites to run the project locally
+
+- VS and the ASP.NET MVC Workload
+  
