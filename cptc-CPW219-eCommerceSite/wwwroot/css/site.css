@@ -53,3 +53,11 @@ body {
     padding-inline: 5px;
 }
 
+.card {
+z-index: 1 !important;
+}
+
+.dropdown {
+z-index:2 !important;
+}
+
