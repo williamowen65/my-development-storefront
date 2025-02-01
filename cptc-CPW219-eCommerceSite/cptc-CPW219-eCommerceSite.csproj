@@ -7,4 +7,17 @@
     <RootNamespace>cptc_CPW219_eCommerceSite</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\Shared\Index.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\svg-definitions.razor" />
+    <Content Remove="Views\Shared\svg-definitons.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Shared\htmlpage.html" />
+  </ItemGroup>
+
 </Project>
