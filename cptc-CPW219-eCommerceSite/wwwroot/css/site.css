@@ -61,3 +61,6 @@ z-index: 1 !important;
 z-index:2 !important;
 }
 
+.svg-font {
+    stroke: var(--bs-emphasis-color);
+}
