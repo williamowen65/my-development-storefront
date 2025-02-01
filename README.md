@@ -14,7 +14,7 @@ I'll probably turn this into a real eCommerceSite in the future. But I have to f
 I am really happy about the Bootstrap break through, and will use this technique with any style library to get my projects started. I also look forward to style consistency across multiple browsers because I have had issues in the past with Safari browsers, since I program on a PC. Safari uses a completely different rendering engine the other modern browsers. 
 
 
-<img src="./demo-images/screenshot.png"/>
+<img src="./demo-images/screensho"/>
 
 # Prerequisites to run the project locally
 
