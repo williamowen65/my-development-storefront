@@ -1,5 +1,5 @@
 # My Personal eCommerceSite
-
+ 
 The purpose of this website is to get used to Bootstrap, and I have found that I really like their [examples pages](https://getbootstrap.com/docs/5.3/examples/).
 
 I use a technique to look at the DOM through dev tools and I can extract the bootstrap examples and work with them ( via copy < copy outerHTML )
