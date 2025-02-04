@@ -570,7 +570,7 @@
 
 </div>
 
-<div class="b-example-divider"></div>
+<div class="" style="height: 3rem;"></div>
 
     @* More svg def *@
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -581,7 +581,9 @@
     </defs>
 </svg>
 
-<div class="wo-body-background">
+
+<div>
+
 
     <div class="container body-section bg-body card">
 
@@ -707,12 +709,13 @@
 <div class="b-example-divider"></div>
 <div class="bd-example m-0 border-0">
     
+    <h2 class="text-center wo-body-background m-0">Testimonials</h2>
 <div id="carouselExample" class="carousel slide pointer-event">
-    <h2 class="text-center">Client Reviews</h2>
-  <div class="carousel-inner">
+  <div class="carousel-inner wo-body-background">
       <style>
           .carousel-item {
-            height: 300px;
+            height: fit-content;
+            min-height: 300px;
             width: 100%;
           }
           .carousel i {
@@ -723,26 +726,50 @@
           height: 100%}
 
       </style>
-    <div class="carousel-item active">
-      <div class="container d-flex justify-content-center align-items-center">
-          <div class="">
-                  TEST 1
+   
+  
+  <div class="carousel-item active">
+       <div class="container d-flex justify-content-center align-items-center text-center ">
+
+          <div class="d-flex flex-column align-items-center card border-info bg-none  body-section my-5" >
+              <div class="card-body wo-body-background px-5 py-3 " style="max-width:400px;" >
+
+           
+                 <div class=" mb-5 mb-md-0">
+          <div class="d-flex justify-content-center mb-4">
+  
+
+            <div id="ghost-img"></div>
+            <img src="./images/clients/ghost.jpg" class="rounded-circle img-fluid shadow-1-strong " alt="Client Image" width="130" height="130">
+          </div>
+          <h5 class="mb-3">Gig Harbor Open Studio Tour</h5>
+          <button class="btn btn-outline-info btn-sm  mb-3">Learn about this project</button>
+          <p class="px-xl-3">
+            <i class="fas fa-quote-left pe-2"></i>Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.
+          </p>
+          <ul class="list-unstyled d-flex justify-content-center mb-0">
+            <li>
+              <i class="fas fa-star fa-sm text-warning"></i>
+            </li>
+            <li>
+              <i class="fas fa-star fa-sm text-warning"></i>
+            </li>
+            <li>
+              <i class="fas fa-star fa-sm text-warning"></i>
+            </li>
+            <li>
+              <i class="fas fa-star fa-sm text-warning"></i>
+            </li>
+            <li>
+              <i class="fas fa-star-half-alt fa-sm text-warning"></i>
+            </li>
+          </ul>
+        </div>
+           </div>
           </div>
       </div>
-    </div>
-    <div class="carousel-item">
-        <div class="container d-flex justify-content-center align-items-center">
-          <div class="">
-                  TEST 2
-          </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-       <div class="container d-flex justify-content-center align-items-center">
-          <div class="">
-                  TEST 3
-          </div>
-      </div>
+
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" fdprocessedid="qvo6i6">
