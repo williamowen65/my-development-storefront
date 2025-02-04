@@ -80,3 +80,9 @@ ul.right-marker {
     background-image: url(/images/clients/ghost.jpg);
 
 }*/
+
+.dropdown-item.active, .dropdown-item:active {
+    color: var(--bs-dropdown-link-active-color);
+    text-decoration: none;
+    background-color: #05a705;
+}

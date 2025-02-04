@@ -66,24 +66,24 @@
 
     <header class="py-3  border-bottom sticky-top bg-body">
         <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none text-nowrap fw-bold">
-                Will's Development Storefront
-            </a>
-            @* <div class="dropdown"> *@
-            @*     <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false"> *@
+            @* <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none text-nowrap fw-bold"> *@
+            @*     Will's Development Storefront *@
+            @* </a> *@
+            <div class="dropdown">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false">
+                    Will's Development Storefront
+                </a>
+                <ul class="dropdown-menu text-small shadow" style="">
+                    <li><i class="dropdown-item text-center" style="pointer-events: none; font-style:italic">@ViewData["DropdownText"] </i></li>
 
-            @*         Will's Development Storefront *@
-            @*     </a> *@
-            @*     <ul class="dropdown-menu text-small shadow" style=""> *@
-            @*         <li><a class="dropdown-item active" href="#" aria-current="page">Overview</a></li> *@
-            @*         <li><a class="dropdown-item" href="#">Inventory</a></li> *@
-            @*         <li><a class="dropdown-item" href="#">Customers</a></li> *@
-            @*         <li><a class="dropdown-item" href="#">Products</a></li> *@
-            @*         <li><hr class="dropdown-divider"></li> *@
-            @*         <li><a class="dropdown-item" href="#">Reports</a></li> *@
-            @*         <li><a class="dropdown-item" href="#">Analytics</a></li> *@
-            @*     </ul> *@
-            @* </div> *@
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item @(ViewData["Page"]?.ToString() == "home" ? "active" : "")" asp-area="" asp-controller="home" asp-action="index">Landing Page</a></li>
+                    <li><a class="dropdown-item @(ViewData["Page"]?.ToString() == "projects" ? "active" : "")" asp-area="" asp-controller="projects" asp-action="index">Projects</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    @* <li><a class="dropdown-item" href="#">Analytics</a></li> *@
+                    <li><i class="dropdown-item" style="pointer-events: none; font-style:italic">Thanks for checking out my work! </i></li>
+                </ul>
+            </div>
 
             <div class="d-flex align-items-center">
                 <form class="w-100 me-3" role="search">
