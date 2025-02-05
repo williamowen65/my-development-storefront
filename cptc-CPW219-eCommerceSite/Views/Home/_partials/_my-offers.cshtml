@@ -1,0 +1,155 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+<div class="wo-body-background">
+
+    <div class="container body-section bg-body card px-0">
+        <div class="card-header">
+
+
+            <h1 class="text-center mb-1 ">My Offers</h1>
+        </div>
+
+
+
+        @* The plans for services *@
+        <div class="row text-center flex-column flex-md-row mx-0 mt-4">
+            @* Possible section to use ??  *@
+            @* <div class="container-fluid pb-3"> *@
+            @*     <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;"> *@
+            @*         <div class="bg-body-tertiary border rounded-3"> *@
+            @*             <br><br><br><br><br><br><br><br><br><br> *@
+            @*         </div> *@
+            @*         <div class="bg-body-tertiary border rounded-3"> *@
+            @*             <br><br><br><br><br><br><br><br><br><br> *@
+            @*         </div> *@
+            @*     </div> *@
+            @* </div> *@
+            <div class="col-md-5">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Work for Trade – Open to Barter!</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>I’m offering my skills in [list your skills/services, e.g., web development, graphic design, technical support, etc.] in exchange for goods or services. If you have something valuable to trade instead of cash... </li>
+
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Let’s talk!</button>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+            <div class="col-md-7">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Premium Web Services</h4>
+                    </div>
+                    <div class="card-body">
+                        <h6>What You Get:</h6>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Reliable Hosting</li>
+                            <li>Custom Features</li>
+                            <li>Priority Support</li>
+                            <li>Secure Transactions</li>
+                        </ul>
+
+                        <h2>Pricing Plans</h2>
+
+                        <form id="pricingModelForm" class="d-flex flex-column flex-md-row gap-4 py-2 align-items-center justify-content-center">
+                            <div class="list-group list-group-radio d-grid gap-2 border-0">
+                                <div class="position-relative">
+                                    <input class="form-check-input   position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid1" value="">
+                                    <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid1">
+
+                                        <strong class="fw-semibold">Hourly Rate</strong>
+                                        <span class="d-block small opacity-75 text-start">
+                                            <ul>
+                                                <li>
+                                                    Ideal for small tasks, debugging, or consulting.
+                                                    Example: $50–$100/hour (discount for bulk hours).
+                                                </li>
+                                            </ul>
+                                        </span>
+
+                                    </label>
+                                </div>
+
+                                <div class="position-relative">
+                                    <input class="form-check-input  position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid2" value="">
+                                    <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid2">
+                                        <strong class="fw-semibold">Fixed Packages (Predefined scope)</strong>
+                                        <span class="d-block small opacity-75 text-start">
+                                            <ul>
+                                                <li>Basic (e.g., simple website setup, API integration) <br /> $300 – $800</li>
+                                                <li>Standard (e.g., custom features, automation scripts) <br /> $1,000 – $3,000</li>
+                                                <li>Advanced (e.g., full-stack apps, complex systems) <br /> $3,000 – $10,000+ </li>
+                                            </ul>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <div class="position-relative">
+                                    <input class="form-check-input position-absolute top-50 end-0 me-3 fs-5" type="radio" name="listGroupRadioGrid" id="listGroupRadioGrid3" value="">
+                                    <label class="list-group-item py-3 pe-5" for="listGroupRadioGrid3">
+                                        <strong class="fw-semibold text-center d-block mx-auto">Subscription Model (Ongoing support & updates)</strong>
+                                        <span class="d-block small opacity-75 text-start">
+                                            <ul>
+                                                <li>Starter – Basic maintenance & minor tweaks <br />$100 – $300/month</li>
+                                                <li>Growth – Monthly feature updates & optimizations <br />$500 – $1,500/month</li>
+                                                <li>Premium – Full support & priority service <br />$2,000+/month</li>
+                                            </ul>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+                        <button class="btn btn-primary disabled" id="selectPriceModel">Select Pricing Model</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div>
+
+                    <button class="btn" type="button" style="box-shadow: none" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                        Programming Services Disclaimer
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <div class="collapse container px-0 card-footer" id="collapseWidthExample">
+        <div class="card card-body">
+            <ol class="w-75 mx-auto">
+                <li><b>No Guarantee of Results</b> – While I strive for high-quality work, I cannot guarantee specific outcomes due to the complexity of software development.</li>
+                <li><b>Scope & Additional Charges</b> – The agreed-upon price covers the defined scope. Any additional work beyond this scope may incur extra charges.</li>
+                <li><b>Revisions & Support</b> – Fixed packages may include a limited number of revisions. Ongoing support requires a subscription or an additional fee.</li>
+                <li><b>Liability Limitation</b> – I am not responsible for any indirect damages, security issues, or data loss resulting from the use of my services.</li>
+                <li><b>Payment Terms</b> – Deposits may be required for fixed projects. Late payments may result in project delays or additional fees.</li>
+                <li><b>Intellectual Property</b> – Ownership of the final product will be transferred upon full payment unless otherwise agreed upon.</li>
+            </ol>
+        </div>
+    </div>
+</div>
+

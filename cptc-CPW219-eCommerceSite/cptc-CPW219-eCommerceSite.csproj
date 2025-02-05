@@ -8,10 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Home\_partials\Index.cshtml.cs" />
     <Compile Remove="Views\Shared\Index.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\_partials\Index.cshtml" />
     <Content Remove="Views\Shared\svg-definitions.razor" />
     <Content Remove="Views\Shared\svg-definitons.cshtml" />
   </ItemGroup>
