@@ -103,3 +103,12 @@ ul.right-marker {
     justify-content: center
 }
 
+
+
+#iframe-bethowen-watercolors::-webkit-scrollbar {
+        display: none;
+
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none;  /* Firefox */
+
+}

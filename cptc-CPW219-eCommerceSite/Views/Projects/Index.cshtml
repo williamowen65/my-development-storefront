@@ -25,32 +25,62 @@
             </div>
         </div>
     </div>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <div id="masonry-container" class="row " data-masonry="{&quot;percentPosition&quot;: true }">
 
-    <div class="row " data-masonry="{&quot;percentPosition&quot;: true }">
-
-        <div class="col-md-6 col-12 mb-4">
+        <div class="project-card col-md-6 col-12 mb-4 ">
             <div class="card">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
                 <div class="card-body">
-                    <h5 class="card-title">Gig Harbor Open Studio Tour</h5>
+                    <img class="w-25 mx-auto d-block" src="~/images/clients/openhand.png" />
+                    <h5 class="card-title text-center mb-0">Gig Harbor Open Studio Tour</h5>
+                    <small class="text-center d-block fw-bold mb-3">Artist Portal</small>
                     <p class="card-text">Committee delegation software for organizing assets, collecting payments, and delegating roles.</p>
+                    <p class="card-text">GHOST uses this as a central hub as they prep for the upcoming tour season, and the website caters to ~ 30 - 50 individuals in this committee. </p>
+                    <p class="card-text">This software improved their workflow by acting as a hub for collecting info, but also by automating the generation of spreadsheets with GHOST member contract data.</p>
+                    <p class="card-text">Features also include being able to edit the content details in the website and delating permissions and roles.</p>
+                    <a asp-area="" asp-controller="projects" asp-action="projects" asp-route-id="gig-harbor-open-studio-tour">
 
+                        <button class="btn btn-secondary btn-sm mx-auto d-block">Take a Look</button>
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-12 mb-4">
+        <div class="project-card col-md-6 col-12 mb-4 ">
+            <div class="card">
+                <div class="card-body">
+                    <img style="" class="w-100 rounded-2 d-block mx-auto" src="./images/clients/art-website-preview.svg" alt="Beth Owen Watercolors">
+                    <a class="text-center d-block" href="https://bethowenwatercolors.com/" target="_blank">www.bethowenwatercolors.com</a>
+                    @* <h5 class="card-title text-center">Beth Owen Watercolors</h5> *@
+                    <p class="card-text"></p>
+                    <p>This art store website is the first of it's kind, built with a custom CMS that I created as a no-code solution for building websites.</p>
+                    <p>This keeps me in the code while my clients can have creative freedom.</p>
+
+                    <p class="card-text">This solution gave the client the complete control to customize their website even after I delivered on the product. They used it to build an art website, but it could be used to build any website that needs a similar storefront.</p>
+                    <p class="card-text">One of the requirements for this project was that I don't need to come in later to update content, create new pages, rearrange sections, add images, etc for this client. These are all features the client can do on their own via built-in editors.</p>
+                    <p class="card-text">Another requirement of this project which you can benefit from is that I designed this project to be plug-and-play for spinning up new sites.  </p>
+                    <a asp-area="" asp-controller="projects" asp-action="projects" asp-route-id="beth-owen-watercolors">
+                        <button class="btn btn-secondary btn-sm mx-auto d-block">Take a Look</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="project-card col-md-6 col-12 mb-4">
             <div class="card p-3">
                 <figure class="p-3 mb-0">
                     <blockquote class="blockquote">
                         <p>Atlas - The Public Think Tank</p>
                     </blockquote>
                     <i> Work in Progress </i>
-                  
+
                 </figure>
             </div>
         </div>
 
-        <div class="col-md-6 col-12 mb-4">
+        <div class="project-card col-md-6 col-12 mb-4">
             <div class="card">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
                 <div class="card-body">
@@ -61,14 +91,14 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-12 mb-4">
+        <div class="project-card col-md-6 col-12 mb-4">
             <div class="card text-center">
                 <div class="card-body">
                     <h5 class="card-title">Finance Tracker App</h5>
                     <p class="card-text">
                         A Windows Forms App to manage expenses, budgets, and financial goals.
                     </p>
-                    
+
                 </div>
             </div>
 
@@ -123,7 +153,7 @@
     @* </div> *@
 
 
- 
+
 
     @* <div class="row"> *@
     @*     <div class="col-12 mb-4"> *@
@@ -141,3 +171,22 @@
     @* </div> *@
 
 </div>
+
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+    <script>
+        window.onload = function () {
+               
+            
+
+
+            var elem = document.querySelector('#masonry-container');
+            var msnry = new Masonry(elem, {
+                // options
+                itemSelector: '.project-card',
+                percentPosition: true
+            });
+        };
+    </script>
+}
