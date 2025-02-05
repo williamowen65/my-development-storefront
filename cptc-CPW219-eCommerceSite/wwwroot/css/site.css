@@ -86,3 +86,20 @@ ul.right-marker {
     text-decoration: none;
     background-color: #05a705;
 }
+
+#hello-world-svg-mobile-container svg {
+
+    height: 100%;
+    
+
+}
+
+#hello-world-svg-mobile-container {
+    /*        margin: -112px 0;*/
+    height: 40vw;
+    max-height: 200px;
+    overflow: hidden;
+    display:flex;
+    justify-content: center
+}
+
