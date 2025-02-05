@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="wo-body-background" style="margin: -112px 0;">
+
+<div class="col-lg-4  p-0 overflow-hidden d-lg-none d-block mb-4 pb-5 " style="scale: 0.5; ">
+    @Html.Partial("./_hello-world-svg.cshtml")
+</div>
+</div>
+<div class="body-section">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center  w-100">
+        <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+            <h1 class="display-4 fw-bold lh-1 text-body-emphasis">Need a website, PC program, or mobile app? </h1>
+            <p class="lead mb-0">I build tailored solutions for your needs.</p>
+            <p class="lead">Let’s bring your idea to life with custom development.</p>
+
+            <div class="d-flex flex-column align-items-center align-items-md-start justify-content-center justify-content-md-start mb-4 mb-lg-3" id="hero-actions">
+                <button type="button" class="btn btn-primary btn-lg px-4 mb-2  fw-bold" fdprocessedid="kjn4c">Get in touch today!</button>
+                <a asp-controller="projects" asp-action="index" class="" style="width:fit-content">
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4" fdprocessedid="9lmjej">See what I can do</button>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4  p-0 overflow-hidden d-none d-lg-block mb-4 pb-5">
+            @Html.Partial("./_hello-world-svg.cshtml")
+        </div>
+    </div>
+</div>
