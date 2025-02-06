@@ -90,11 +90,10 @@
         <div class="project-card col-md-6 col-12 mb-4">
             <div class="card">
                 <style>
-                    #cloverPark{
+                    #cloverPark {
                         clip-path: polygon(3% 24%, 99% 24%, 99% 48%, 99% 48%,99% 86%, 59% 86%, 51% 75%, 3% 75%);
-                        margin-top: -69px;
-                        margin-bottom: -83px;
-                    
+                        margin-top: calc(-10%);
+                        margin-bottom: calc(-14%);
                     }
                 </style>
                 <img id="cloverPark" class="pe-3 card-img-top" src="~/images/projects/clover-park.jpg" />
@@ -141,6 +140,8 @@
             </div>
         </div>
     </div>
+
+  @Html.Partial("./_project-previews/_atlas-preview.cshtml")
 
 
     @* <div class="row"> *@
