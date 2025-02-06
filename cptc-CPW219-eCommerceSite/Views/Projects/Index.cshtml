@@ -10,7 +10,7 @@
 <div class="container mt-5">
 
     <div class="row">
-        <div class="col-12 mb-4">
+        <div class="col-12 mb-4 ff-consolas">
             <div class="card text-center p-3 border-info">
                 <figure class="mb-0">
                     <blockquote class="blockquote m-0 fw-bold">
@@ -52,31 +52,34 @@
         <div class="project-card col-md-6 col-12 mb-4 ">
             <div class="card">
                 <div class="card-body">
-                    <img style="" class="w-100 rounded-2 d-block mx-auto" src="./images/clients/art-website-preview.svg" alt="Beth Owen Watercolors">
-                    <a class="text-center d-block" href="https://bethowenwatercolors.com/" target="_blank">www.bethowenwatercolors.com</a>
-                    @* <h5 class="card-title text-center">Beth Owen Watercolors</h5> *@
-                    <p class="card-text"></p>
-                    <p>This art store website is the first of it's kind, built with a custom CMS that I created as a no-code solution for building websites.</p>
-                    <p>This keeps me in the code while my clients can have creative freedom.</p>
+                    <img style="height: 163px" class="rounded-2 d-block mx-auto" src="./images/clients/cactus-flower.svg" alt="Cactus Flower Apps Logo">
 
-                    <p class="card-text">This solution gave the client the complete control to customize their website even after I delivered on the product. They used it to build an art website, but it could be used to build any website that needs a similar storefront.</p>
-                    <p class="card-text">One of the requirements for this project was that I don't need to come in later to update content, create new pages, rearrange sections, add images, etc for this client. These are all features the client can do on their own via built-in editors.</p>
-                    <p class="card-text">Another requirement of this project which you can benefit from is that I designed this project to be plug-and-play for spinning up new sites.  </p>
-                    <a asp-area="" asp-controller="projects" asp-action="projects" asp-route-id="beth-owen-watercolors">
-                        <button class="btn btn-secondary btn-sm mx-auto d-block">Take a Look</button>
-                    </a>
+                    <p class="card-text mt-3">In what became a contract-to-hire position, I spent a year collaborating one-on-one with another entrepreneur, gaining valuable experience in product delivery. </p>
+                    <p>One key lesson I learned is the importance of structuring project resources from the start. By consolidating all assets within a dedicated Google Account, every tool, document, and integration remains centralized—making it easy to transfer ownership to the client when needed.</p>
+                    <p>
+                        Other experiences included a deep dive into Google Apps Script (GAS), which became a defining moment for me and my client. We immediately clicked, knowing this would be a great collaboration. The GAS library serves as a gateway to powerful automation tools, turning any Gmail account into a central hub for streamlining business workflows.
+                    </p>
+
+                    @* <a asp-area="" asp-controller="projects" asp-action="projects" asp-route-id="beth-owen-watercolors"> *@
+                    <button class="btn btn-secondary btn-sm mx-auto d-block">My Letter of Recommendation</button>
+                    @* </a> *@
                 </div>
             </div>
         </div>
         <div class="project-card col-md-6 col-12 mb-4">
-            <div class="card p-3">
-                <figure class="p-3 mb-0">
-                    <blockquote class="blockquote">
-                        <p>Atlas - The Public Think Tank</p>
-                    </blockquote>
-                    <i> Work in Progress </i>
-
-                </figure>
+            <div class="card">
+                <div class="card-body">
+                    <img style="" class="w-100 rounded-2 d-block mx-auto" src="./images/clients/art-website-preview-2.svg" alt="Beth Owen Watercolors">
+                    <a class="text-center d-block" href="https://bethowenwatercolors.com/" target="_blank">www.bethowenwatercolors.com</a>
+                    <p class="card-text mt-3">This "ArtStore" website is the first of its kind. I built it with a custom CMS that I designed as a no-code solution for building websites.</p>
+                    <p>The code I write empowers my clients with creative freedom.</p>
+                    <p>This solution gives the client complete control over customizing their website, even after I deliver the final product. They used it to build an art website, but it can be used to create any website that requires a similar storefront.</p>
+                    <p>One of the key requirements for this project was that I wouldn't need to step in later to update content, create new pages, rearrange sections, add images, etc. These are all features the client can manage independently through built-in editors.</p>
+                    <p>Another advantage of this project—one that you can benefit from—is that I designed it to be plug-and-play, making it easy to spin up new websites quickly.</p>
+                    <a asp-area="" asp-controller="projects" asp-action="projects" asp-route-id="beth-owen-watercolors">
+                        <button class="btn btn-secondary btn-sm mx-auto d-block">Take a Look</button>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -107,7 +110,7 @@
 
 
     <div class="row">
-        <div class="col-12 mb-4">
+        <div class="ff-consolas col-12 mb-4">
             <div class="card text-center p-3 border-info">
                 <figure class="mb-0">
                     <blockquote class="blockquote m-0 fw-bold">
@@ -177,8 +180,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
     <script>
         window.onload = function () {
-               
-            
+
+
 
 
             var elem = document.querySelector('#masonry-container');

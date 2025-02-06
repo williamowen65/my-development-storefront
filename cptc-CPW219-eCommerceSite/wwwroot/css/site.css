@@ -112,3 +112,9 @@ ul.right-marker {
         scrollbar-width: none;  /* Firefox */
 
 }
+
+.ff-consolas {
+
+    font-family: Consolas;
+
+}

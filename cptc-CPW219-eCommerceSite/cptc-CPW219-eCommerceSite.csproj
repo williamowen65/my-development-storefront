@@ -22,4 +22,8 @@
     <None Remove="Views\Shared\htmlpage.html" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\projects\art.jpg" />
+  </ItemGroup>
+
 </Project>
