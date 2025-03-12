@@ -23,24 +23,24 @@ namespace cptc_CPW219_eCommerceSite.Models
         [Required]
         [EmailAddress]
         [StringLength(100)]
-        public string Email { get; set; }
+        public string Email { get; set; } = null!;
 
         [Required]
         [Compare(nameof(Email))]
         [Display(Name = "Confirm Email")]
-        public string ConfirmEmail { get; set; }
+        public string ConfirmEmail { get; set; } = null!;
 
         [Required]
         [StringLength(75, MinimumLength = 6)]
         [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[!@#$%^&*(),.?\"":{}|<>])(?=.*[a-z])(?=.*[A-Z]).+$", ErrorMessage = "The Password must contain at least one special character, one uppercase letter, and one lowercase letter.")]
-        public string Password { get; set; }
+        public string Password { get; set; } = null!;
 
         [Required]
         [Compare(nameof(Password))]
         [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; } = null!;
     }
 
     public class LoginUserViewModel

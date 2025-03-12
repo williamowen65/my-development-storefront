@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cptc_CPW219_eCommerceSite.data;
 
@@ -10,9 +11,11 @@ using cptc_CPW219_eCommerceSite.data;
 namespace cptc_CPW219_eCommerceSite.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    partial class ECommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20250312212109_Products and Categories")]
+    partial class ProductsandCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
