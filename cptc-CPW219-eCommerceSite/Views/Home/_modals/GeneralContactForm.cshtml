@@ -1,0 +1,86 @@
+﻿@model Contact
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div id="GeneralContactForm" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <form id="contactForm" class="modal-content" method="post">
+            <div class="modal-header">
+                <h5 class="modal-title">Contact Us</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Message" class="control-label"></label>
+                    <textarea asp-for="Message" class="form-control"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById('GeneralContactForm');
+        modal.addEventListener('shown.bs.modal', () => {
+            const nameInput = document.getElementById('Name');
+            if (nameInput) {
+                nameInput.focus();
+            }
+        });
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#contactForm').submit(function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/contact/create',
+                data: $(this).serialize(),
+                success: function (response) {
+                    console.log({response})
+                    // Handle success response
+                   
+                      alert(response.message);
+                    if(response.success){
+                        $('#GeneralContactForm').modal('hide');
+                        $('#GeneralContactForm form').get(0).reset();
+                    } else {
+                        // Apply reponse.errors to form
+                        // response.errors.
+                    }
+
+
+                },
+                error: function (error) {
+                    // Handle error response
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        });
+    });
+</script>

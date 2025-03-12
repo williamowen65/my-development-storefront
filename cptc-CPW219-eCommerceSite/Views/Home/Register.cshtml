@@ -1,0 +1,51 @@
+﻿@model RegisterUserViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+<div class="row container container body-section mx-auto my-5 py-4">
+    
+    <h1>Register as a site admin</h1> 
+    <div class="col-md-4">
+        <form asp-action="Register" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmEmail" class="control-label"></label>
+                <input asp-for="ConfirmEmail" class="form-control" />
+                <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group d-flex justify-content-end">
+                <input type="submit" value="Create" class="btn btn-primary my-2" />
+            </div>
+        </form>
+        <div>
+            <a asp-action="Index">Login Page Link</a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
