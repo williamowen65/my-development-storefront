@@ -43,6 +43,13 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
+        [HttpGet]
+        [Route("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
 
         [HttpGet]
         [Route("register")]
@@ -75,6 +82,8 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
             return View(regModel);
         }
+
+
 
 
         public IActionResult Privacy()
