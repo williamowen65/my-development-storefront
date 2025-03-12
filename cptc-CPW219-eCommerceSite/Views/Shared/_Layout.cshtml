@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor _httpContext
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -71,7 +73,7 @@
             @* </a> *@
             <div class="dropdown">
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="ff-consolas d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false">
-                    Will's Development Storefront
+                    Will's Development Storefront 
                 </a>
                 <ul class="dropdown-menu text-small shadow" style="">
                     <li><i class="dropdown-item text-center" style="pointer-events: none; font-style:italic">@ViewData["DropdownText"] </i></li>
@@ -104,6 +106,20 @@
                 @* </div> *@
             </div>
         </div>
+        @{
+            string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
+
+        }
+        @if (userEmail != null)
+        {
+            <div class="d-flex justify-content-end px-2 align-items-center gap-2" style="padding-right: 27px !important;">
+                <div>Logged in as @userEmail</div>
+                <a asp-action="Logout" asp-controller="Home">Log out</a>
+            </div>
+        } else
+        {
+            @* <div>Logged out</div>     *@
+        }
     </header>
 
    

@@ -2,6 +2,7 @@ using System.Diagnostics;
 using cptc_CPW219_eCommerceSite.data;
 using cptc_CPW219_eCommerceSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Scripting;
 
 namespace cptc_CPW219_eCommerceSite.Controllers
 {
@@ -43,6 +44,34 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
+        [HttpGet]
+        [Route("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginUserViewModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Retrieve the user from the database
+                User? u = (from user in _context.Users
+                           where user.Email == loginModel.Email
+                           select user).SingleOrDefault();
+
+                if (u != null && BCrypt.Net.BCrypt.Verify(loginModel.Password, u.Password))
+                {
+                    LogUserIn(loginModel.Email);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View(loginModel);
+        }
+
 
         [HttpGet]
         [Route("register")]
@@ -59,21 +88,37 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             if (ModelState.IsValid)
             {
 
+                // Hash the password
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(regModel.Password);
+
                 // Map RegisterUserViewModel data to User object
                 User newUser = new()
                 {
                     Email = regModel.Email,
-                    Password = regModel.Password
+                    Password = hashedPassword
                 };
 
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
+                LogUserIn(newUser.Email);
 
                 return RedirectToAction("Index", "Home");
             }
 
             return View(regModel);
+        }
+
+
+        private void LogUserIn(string email)
+        {
+            HttpContext.Session.SetString("Email", email);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
 

@@ -17,6 +17,15 @@ namespace cptc_CPW219_eCommerceSite
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
+            //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddHttpContextAccessor();
+
+            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-6.0#configure-session-state
+            // Add session - Part 1 of 2
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,6 +40,9 @@ namespace cptc_CPW219_eCommerceSite
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // Add Session part 2 of 2
+            app.UseSession();
 
             app.MapStaticAssets();
             app.MapControllerRoute(
