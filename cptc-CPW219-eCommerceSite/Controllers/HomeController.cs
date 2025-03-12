@@ -51,6 +51,27 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return View();
         }
 
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginUserViewModel loginModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // Retrieve the user from the database
+                User? u = (from user in _context.Users
+                           where user.Email == loginModel.Email
+                           select user).SingleOrDefault();
+
+                if (u != null && BCrypt.Net.BCrypt.Verify(loginModel.Password, u.Password))
+                {
+                    LogUserIn(loginModel.Email);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View(loginModel);
+        }
+
 
         [HttpGet]
         [Route("register")]
@@ -94,7 +115,11 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             HttpContext.Session.SetString("Email", email);
         }
 
-
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
 
 
         public IActionResult Privacy()
