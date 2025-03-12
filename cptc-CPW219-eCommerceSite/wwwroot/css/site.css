@@ -124,3 +124,8 @@ ul.right-marker {
     margin-bottom: 5px;
 
 }
+
+.auth-form {
+
+    width: fit-content;
+}

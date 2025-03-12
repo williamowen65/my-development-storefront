@@ -6,10 +6,10 @@
 
 
 
-<div class="row container container body-section mx-auto my-5 py-4">
+<div class="d-flex flex-column justify-content-center body-section mx-auto my-5 p-4 auth-form">
     
     <h1>Register as a site admin</h1> 
-    <div class="col-md-4">
+    <div class="px-3">
         <form asp-action="Register" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -33,10 +33,10 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group d-flex justify-content-end">
-                <input type="submit" value="Create" class="btn btn-primary my-2" />
+                <input type="submit" value="Sign Up" class="btn btn-primary my-2" />
             </div>
         </form>
-        <div>
+        <div class="text-center">
             <a asp-action="Login">Login Page Link</a>
         </div>
     </div>
