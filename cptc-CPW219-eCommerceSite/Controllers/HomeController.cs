@@ -2,6 +2,7 @@ using System.Diagnostics;
 using cptc_CPW219_eCommerceSite.data;
 using cptc_CPW219_eCommerceSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Scripting;
 
 namespace cptc_CPW219_eCommerceSite.Controllers
 {
@@ -66,21 +67,31 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             if (ModelState.IsValid)
             {
 
+                // Hash the password
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(regModel.Password);
+
                 // Map RegisterUserViewModel data to User object
                 User newUser = new()
                 {
                     Email = regModel.Email,
-                    Password = regModel.Password
+                    Password = hashedPassword
                 };
 
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
+                //LogUserIn(newUser.Email);
 
                 return RedirectToAction("Index", "Home");
             }
 
             return View(regModel);
+        }
+
+
+        private void LogUserIn(string email)
+        {
+            HttpContext.Session.SetString("Email", email);
         }
 
 

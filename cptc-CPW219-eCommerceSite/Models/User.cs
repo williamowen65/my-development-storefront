@@ -7,14 +7,15 @@ namespace cptc_CPW219_eCommerceSite.Models
         [Key]
         public int UserId { get; set; }
 
+
         public string Email { get; set; } = null!;
 
+        [Required]
         public string Password { get; set; } = null!;
 
         public string? Phone { get; set; }
 
         public string? Username { get; set; }
-
     }
 
     public class RegisterUserViewModel
