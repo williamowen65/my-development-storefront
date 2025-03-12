@@ -80,7 +80,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
-                //LogUserIn(newUser.Email);
+                LogUserIn(newUser.Email);
 
                 return RedirectToAction("Index", "Home");
             }
