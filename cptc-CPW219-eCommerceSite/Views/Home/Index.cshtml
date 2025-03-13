@@ -1,4 +1,7 @@
-﻿@{
+﻿@model MerchEditorViewModel;
+@inject IHttpContextAccessor _httpContext
+
+@{
     ViewData["Title"] = "Home Page";
     ViewData["DropdownText"] = "Welcome to my website";
     ViewData["Page"] = "home";
@@ -17,7 +20,7 @@
 
 <div class="b-example-divider"></div>
 
-@Html.Partial("./_partials/_merch-store.cshtml")
+@Html.Partial("./_partials/_merch-store.cshtml", Model)
 
 <div class="b-example-divider"></div>
 

@@ -22,7 +22,10 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            return View();
+            // Get 
+            MerchEditorViewModel viewModel = _context.GetProductsViewModelData();
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -109,6 +112,14 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return View(regModel);
         }
 
+
+        public IActionResult MerchEditor()
+        {
+         
+            MerchEditorViewModel viewModel = _context.GetProductsViewModelData();
+
+            return View(viewModel);
+        }
 
         private void LogUserIn(string email)
         {

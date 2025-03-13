@@ -1,7 +1,11 @@
-﻿@*
+﻿@model MerchEditorViewModel;
+@inject IHttpContextAccessor _httpContext
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
 }
 
 <div>
@@ -9,7 +13,31 @@
 
     <div class="container body-section bg-body card">
 
-        MERCH
+        
+        @if (userEmail != null)
+        {
+            <div class="d-flex justify-content-end px-2 align-items-center gap-2" style="padding-right: 27px !important;">
+
+                <a asp-action="MerchEditor" asp-controller="Home">Merch Editor</a>
+           
+
+            </div>
+        }
+
+
+        <h2 class="text-center">Merch Store</h2>
+         <div>total: @Model.Products.Count()</div> 
+
+        <div>
+
+            @* <!-- List out the merch from the db --> *@
+            @* @foreach (var item in Model.Products) *@
+            @* { *@
+            @*     <div>@item.Description</div> *@
+
+            @* } *@
+        </div>
+        
 
 
     </div>

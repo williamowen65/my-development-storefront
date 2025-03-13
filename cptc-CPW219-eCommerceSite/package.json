@@ -1,0 +1,15 @@
+{
+  "name": "cptc-cpw219-ecommercesite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "William Owen <william.owen.dev@gmail.com>",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "node-sass": "^9.0.0"
+  }
+}
