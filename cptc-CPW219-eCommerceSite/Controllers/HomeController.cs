@@ -112,10 +112,15 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return View(regModel);
         }
 
-
+        [Route("merch-editor")]
         public IActionResult MerchEditor()
         {
-         
+            // Check session for Email to see if they are logged in
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             MerchEditorViewModel viewModel = _context.GetProductsViewModelData();
 
             return View(viewModel);
