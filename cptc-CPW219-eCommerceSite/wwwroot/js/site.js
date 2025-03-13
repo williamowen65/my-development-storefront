@@ -15,3 +15,21 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         })
 })
+
+
+// Globally available methods
+
+
+// Makes fetch request and adds element to dom
+// empties out the target element with new contents.
+function replaceContentWithPartialView(url, targetElementId, cb) {
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById(targetElementId).innerHTML = html;
+
+            cb();
+
+        })
+        .catch(error => console.error('Error fetching partial view:', error));
+}

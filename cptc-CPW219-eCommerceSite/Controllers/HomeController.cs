@@ -126,6 +126,12 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public IActionResult CreateNewMerchProductDialog()
+        {
+            return PartialView();
+        }
+
         private void LogUserIn(string email)
         {
             HttpContext.Session.SetString("Email", email);
