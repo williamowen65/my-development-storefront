@@ -10,12 +10,13 @@ namespace cptc_CPW219_eCommerceSite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ECommerceContext _context;
+        private readonly CRUDController _crudController;
 
         public HomeController(ILogger<HomeController> logger, ECommerceContext context)
         {
             _logger = logger;
             _context = context;
-
+            _crudController = new CRUDController(context);
         }
 
         [HttpGet]
@@ -23,7 +24,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         public IActionResult Index()
         {
             // Get 
-            MerchEditorViewModel viewModel = _context.GetProductsViewModelData();
+            MerchEditorViewModel viewModel = _crudController.GetProductsViewModelData();
 
             return View(viewModel);
         }
@@ -121,7 +122,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-            MerchEditorViewModel viewModel = _context.GetProductsViewModelData();
+            MerchEditorViewModel viewModel = _crudController.GetProductsViewModelData();
 
             return View(viewModel);
         }

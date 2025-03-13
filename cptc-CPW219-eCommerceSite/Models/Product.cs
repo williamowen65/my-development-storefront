@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace cptc_CPW219_eCommerceSite.Models
 {
@@ -19,6 +20,7 @@ namespace cptc_CPW219_eCommerceSite.Models
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public string ImagePath { get; set; } // New property for image path
     }
 
 
@@ -32,12 +34,16 @@ namespace cptc_CPW219_eCommerceSite.Models
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+
+        [NotMapped]
+        public IFormFile ImageFile { get; set; } // New property for image file
+
     }
 
 
     public class MerchEditorViewModel
     {
-        public ProductViewModel[] Products { get; set; }
+        public ProductViewModel[] ProductsVM { get; set; }
         //public Category[] Categories { get; set; }
     }
 }

@@ -15,25 +15,25 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Products[0].Name)
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Products[0].Description)
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Products[0].Price)
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].Price)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Products[0].CategoryId)
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].CategoryId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Products[0].CategoryName)
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].CategoryName)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Products)
+            @foreach (var item in Model.ProductsVM)
             {
                 <tr>
                     <td>
