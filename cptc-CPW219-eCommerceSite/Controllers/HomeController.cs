@@ -2,6 +2,9 @@ using System.Diagnostics;
 using cptc_CPW219_eCommerceSite.data;
 using cptc_CPW219_eCommerceSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.CodeAnalysis.Scripting;
 
 namespace cptc_CPW219_eCommerceSite.Controllers
@@ -11,12 +14,14 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ECommerceContext _context;
         private readonly CRUDController _crudController;
+        private readonly ICompositeViewEngine _viewEngine;
 
-        public HomeController(ILogger<HomeController> logger, ECommerceContext context)
+        public HomeController(ILogger<HomeController> logger, ECommerceContext context, ICompositeViewEngine viewEngine)
         {
             _logger = logger;
             _context = context;
             _crudController = new CRUDController(context);
+            _viewEngine = viewEngine;
         }
 
         [HttpGet]
@@ -129,18 +134,9 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return View(viewModel);
         }
 
-        [HttpGet]
-        [Route("merch-editor/create")]
-        public IActionResult MerchEditor_Create()
-        {
-
-            return PartialView();
-        }
-
-
         [HttpPost]
         [Route("merch-editor")]
-        public IActionResult MerchEditor_Create(ProductViewModel productVM)
+        public async Task<IActionResult> MerchEditor_Create(ProductViewModel productVM)
         {
             if (ModelState.IsValid)
             {
@@ -154,15 +150,47 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 };
 
                 _context.Products.Add(newProduct);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
+
+                // Render the partial view to a string
+                string productRowHtml = await RenderPartialViewToString("MerchEditor_DataRow", productVM);
 
                 // Return the new product data as JSON
-                return Json(new { success = true, product = newProduct });
+                return Json(new { success = true, product = newProduct, productRow = productRowHtml });
             }
 
             // Return partial view with validation errors
             return PartialView(productVM);
         }
+
+
+     
+
+
+        private async Task<string> RenderPartialViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var writer = new StringWriter())
+            {
+                var viewResult = _viewEngine.FindView(ControllerContext, viewName, false);
+                if (viewResult.View == null)
+                {
+                    throw new ArgumentNullException($"{viewName} does not match any available view");
+                }
+                var viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    ViewData,
+                    TempData,
+                    writer,
+                    new HtmlHelperOptions()
+                );
+                await viewResult.View.RenderAsync(viewContext);
+                return writer.GetStringBuilder().ToString();
+            }
+        }
+
+
 
         [HttpGet]
         [Route("merch-editor/edit/{id?}")]
