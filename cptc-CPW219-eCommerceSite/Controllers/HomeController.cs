@@ -116,7 +116,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
         [HttpGet]
         [Route("merch-editor")]
-        public IActionResult MerchEditor()
+        public IActionResult MerchEditor_Read()
         {
             // Check session for Email to see if they are logged in
             if (HttpContext.Session.GetString("Email") == null)
@@ -128,6 +128,15 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
             return View(viewModel);
         }
+
+        [HttpGet]
+        [Route("merch-editor/create")]
+        public IActionResult MerchEditor_Create()
+        {
+
+            return View();
+        }
+
 
         [HttpPost]
         [Route("merch-editor")]
@@ -148,12 +157,43 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 _context.SaveChanges();
 
                 // Return the new product data as JSON
-                //return Json(new { success = true, product = newProduct });
+                return Json(new { success = true, product = newProduct });
             }
 
-            // Return validation errors
-            //return Json(new { success = false, errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
-            return PartialView("CreateNewMerchProductDialog", productVM);
+            // Return partial view with validation errors
+            return PartialView(productVM);
+        }
+
+        [HttpGet]
+        [Route("merch-editor/edit/{id?}")]
+        public IActionResult MerchEditor_Edit(int? id)
+        {
+            // Check session for Email to see if they are logged in
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+           
+            // Look up the product by ID
+            Product? product = _context.Products.Find(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // Map the product to a ProductViewModel
+            ProductViewModel productVM = new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                ImagePath = product.ImagePath
+            };
+
+            return PartialView(productVM);
         }
 
         private string SaveImage(IFormFile imageFile)
@@ -164,15 +204,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult CreateNewMerchProductDialog()
-        {
-            return PartialView();
-        }
-
-
-
-
+ 
         private void LogUserIn(string email)
         {
             HttpContext.Session.SetString("Email", email);

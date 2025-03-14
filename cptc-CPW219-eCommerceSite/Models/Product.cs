@@ -31,6 +31,8 @@ namespace cptc_CPW219_eCommerceSite.Models
         public int ProductId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
         //public int CategoryId { get; set; }
 
@@ -40,6 +42,10 @@ namespace cptc_CPW219_eCommerceSite.Models
         [Display(Name = "Merch Image")]
         [NotMapped]
         public IFormFile ImageFile { get; set; } // New property for image file
+
+        public string ImagePath { get; set; }
+
+
 
     }
 
