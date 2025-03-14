@@ -15,12 +15,12 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
-        public MerchEditorViewModel GetProductsViewModelData()
+        public HomePageViewModel GetProductsViewModelData()
         {
             // Get all the merch items from the database
             Product[] products = _context.Products.ToArray();
             // Get all the categories from the database
-            Category[] categories = _context.Categories.ToArray();
+            //Category[] categories = _context.Categories.ToArray();
             // Convert products to ProductViewModels
             ProductViewModel[] productViewModels = products.Select(p => new ProductViewModel
             {
@@ -28,11 +28,9 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 Name = p.Name,
                 Description = p.Description,
                 Price = p.Price,
-                CategoryId = p.CategoryId,
-                CategoryName = p.Category.Name
             }).ToArray();
             // Create a view model to pass to the view
-            MerchEditorViewModel viewModel = new MerchEditorViewModel
+            HomePageViewModel viewModel = new HomePageViewModel
             {
                 ProductsVM = productViewModels,
                 //Categories = categories
@@ -40,5 +38,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
             return viewModel;
         }
+
     }
 }

@@ -18,8 +18,8 @@ namespace cptc_CPW219_eCommerceSite.Models
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        //public int CategoryId { get; set; }
+        //public Category Category { get; set; }
         public string ImagePath { get; set; } // New property for image path
     }
 
@@ -32,16 +32,19 @@ namespace cptc_CPW219_eCommerceSite.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
+        //public int CategoryId { get; set; }
 
+        //[Display(Name = "Category")]
+        //public string CategoryName { get; set; }
+
+        [Display(Name = "Merch Image")]
         [NotMapped]
         public IFormFile ImageFile { get; set; } // New property for image file
 
     }
 
 
-    public class MerchEditorViewModel
+    public class HomePageViewModel
     {
         public ProductViewModel[] ProductsVM { get; set; }
         //public Category[] Categories { get; set; }

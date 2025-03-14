@@ -1,13 +1,11 @@
 ﻿@model cptc_CPW219_eCommerceSite.Models.ProductViewModel
 
 @{
-    ViewData["Title"] = "CreateNewMerchProductDialog";
 }
-
 
 <div class="modal" tabindex="-1" id="create-modal">
     <div class="modal-dialog modal-lg">
-        <form class="modal-content" asp-action="CreateNewMerchProductDialog">
+        <form class="modal-content" id="create-merch" enctype="multipart/form-data">
             <div class="modal-header">
                 <h5 class="modal-title">Create Product for Merch Store</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -15,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <div >
+                        <div>
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
                                 <label asp-for="Name" class="control-label"></label>
@@ -32,16 +30,7 @@
                                 <input asp-for="Price" class="form-control" />
                                 <span asp-validation-for="Price" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
-                                <label asp-for="CategoryId" class="control-label"></label>
-                                <input asp-for="CategoryId" class="form-control" />
-                                <span asp-validation-for="CategoryId" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="CategoryName" class="control-label"></label>
-                                <input asp-for="CategoryName" class="form-control" />
-                                <span asp-validation-for="CategoryName" class="text-danger"></span>
-                            </div>
+                     
                             <div class="form-group">
                                 <label asp-for="ImageFile" class="control-label"></label>
                                 <input asp-for="ImageFile" type="file" class="form-control" />
@@ -58,8 +47,3 @@
         </form>
     </div>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-

@@ -24,11 +24,12 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         public IActionResult Index()
         {
             // Get 
-            MerchEditorViewModel viewModel = _crudController.GetProductsViewModelData();
+            HomePageViewModel viewModel = _crudController.GetProductsViewModelData();
 
             return View(viewModel);
         }
 
+     
         [HttpPost]
         [Route("api/contact/create")]
         public IActionResult CreateContact([FromForm] Contact contact)
@@ -113,6 +114,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return View(regModel);
         }
 
+        [HttpGet]
         [Route("merch-editor")]
         public IActionResult MerchEditor()
         {
@@ -122,16 +124,54 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-            MerchEditorViewModel viewModel = _crudController.GetProductsViewModelData();
+            HomePageViewModel viewModel = _crudController.GetProductsViewModelData();
 
             return View(viewModel);
         }
+
+        [HttpPost]
+        [Route("merch-editor")]
+        public IActionResult MerchEditor_Create(ProductViewModel productVM)
+        {
+            if (ModelState.IsValid)
+            {
+                // Save the product to the database
+                Product newProduct = new Product
+                {
+                    Name = productVM.Name,
+                    Description = productVM.Description,
+                    Price = productVM.Price,
+                    ImagePath = SaveImage(productVM.ImageFile) // Implement SaveImage method to save the image and return the path
+                };
+
+                _context.Products.Add(newProduct);
+                _context.SaveChanges();
+
+                // Return the new product data as JSON
+                //return Json(new { success = true, product = newProduct });
+            }
+
+            // Return validation errors
+            //return Json(new { success = false, errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            return PartialView("CreateNewMerchProductDialog", productVM);
+        }
+
+        private string SaveImage(IFormFile imageFile)
+        {
+            // Implement image saving logic here
+            // Return the saved image path
+            return "path/to/saved/image";
+        }
+
 
         [HttpGet]
         public IActionResult CreateNewMerchProductDialog()
         {
             return PartialView();
         }
+
+
+
 
         private void LogUserIn(string email)
         {

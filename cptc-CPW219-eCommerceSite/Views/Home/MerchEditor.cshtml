@@ -1,4 +1,4 @@
-﻿@model MerchEditorViewModel
+﻿@model HomePageViewModel
 
 @{
     ViewData["Title"] = "MerchEditor";
@@ -9,7 +9,7 @@
     <h1>Merch Editor</h1>
 
     <p>
-        <button onclick="replaceContentWithPartialView('/Home/CreateNewMerchProductDialog', 'create', () => $('#create-modal').modal('show'))">Create New</button>
+        <button onclick="replaceContentWithPartialView('/Home/CreateNewMerchProductDialog', 'create', () => window.initCreateForm())">Create New</button>
     </p>
     <table class="table">
         <thead>
@@ -23,13 +23,13 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ProductsVM[0].Price)
                 </th>
+           
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductsVM[0].CategoryId)
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].ImageFile)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductsVM[0].CategoryName)
+                    <!--Column for the controls-->
                 </th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -45,11 +45,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
+              
                     <td>
-                        @Html.DisplayFor(modelItem => item.CategoryId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CategoryName)
+                        @Html.DisplayFor(modelItem => item.ImageFile)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
@@ -67,3 +65,11 @@
 <div id="create">
     <!-- Partial View Modal gets added here -->
 </div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
