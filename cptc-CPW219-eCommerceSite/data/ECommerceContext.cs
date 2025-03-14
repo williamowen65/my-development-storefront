@@ -14,7 +14,6 @@ namespace cptc_CPW219_eCommerceSite.data
         public DbSet<Category> Categories { get; set; } = null!;
 
         public DbSet<Product> Products { get; set; } = null!;
-        public DbSet<cptc_CPW219_eCommerceSite.Models.ProductViewModel> ProductViewModel { get; set; } = default!;
    
     }
 

@@ -162,6 +162,8 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 _context.Products.Add(newProduct);
                 await _context.SaveChangesAsync();
 
+                productVM.ProductId = newProduct.ProductId;
+
                 // Render the partial view to a string
                 string productRowHtml = await RenderPartialViewToString("MerchEditor_DataRow", productVM);
 
@@ -230,6 +232,45 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 Price = product.Price,
                 ImagePath = product.ImagePath
             };
+
+            return PartialView(productVM);
+        }
+
+        [HttpPost]
+        [Route("merch-editor/edit/{id?}")]
+        public async Task<IActionResult> MerchEditor_Edit(int? id, ProductViewModel productVM)
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Look up the product by ID
+                Product? product = _context.Products.Find(id);
+
+                if (product == null)
+                {
+                    return NotFound();
+                }
+
+                // Update the product with the new values
+                product.Name = productVM.Name;
+                product.Description = productVM.Description;
+                product.Price = productVM.Price;
+                product.ImagePath = SaveImage(productVM.ImageFile); // Implement SaveImage method to save the image and return the path
+
+                _context.Products.Update(product);
+                _context.SaveChanges();
+
+
+                // Render the partial view to a string
+                string productRowHtml = await RenderPartialViewToString("MerchEditor_DataRow", productVM);
+
+                // Return the new product data as JSON
+                return Json(new { success = true, productRow = productRowHtml });
+            }
 
             return PartialView(productVM);
         }
