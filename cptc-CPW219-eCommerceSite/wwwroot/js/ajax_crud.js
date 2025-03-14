@@ -44,9 +44,7 @@
                 //    body: JSON.stringify(jsonResponse.product)
                 //}).then(res => res.text());
 
-                //$('table tbody').append(newRow);
-                console.log({jsonResponse, response})
-                debugger
+                $('table tbody').append(jsonResponse.productRow);
             } else {
                 const text = await response.text()
                 debugger

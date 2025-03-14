@@ -139,7 +139,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         public IActionResult MerchEditor_Create()
         {
 
-            return View();
+            return PartialView();
         }
 
 
