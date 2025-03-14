@@ -134,6 +134,16 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        [Route("merch-editor/create")]
+        public IActionResult MerchEditor_Create()
+        {
+
+            return View();
+        }
+
+
+
         [HttpPost]
         [Route("merch-editor")]
         public async Task<IActionResult> MerchEditor_Create(ProductViewModel productVM)
