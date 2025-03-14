@@ -5,6 +5,9 @@
 
     $('#create-merch').on('submit', async function (e) {
         e.preventDefault();
+        // disable the create button to prevent duplicates
+        $("#create-modal button[type=submit]").attr("disabled", true)
+
         var formData = new FormData(this);
 
         try {
@@ -18,36 +21,25 @@
             }
 
             const contentType = response.headers.get('Content-Type');
-            console.log({ response, contentType })
-            $("#create-modal").modal('hide')
+          
             if (contentType && contentType.includes('application/json')) {
+
                 jsonResponse = await response.json();
-                // Add the new product to the table
-                //var newRow = `<tr>
-                //        <td>${jsonResponse.product.name}</td>
-                //        <td>${jsonResponse.product.description}</td>
-                //        <td>${jsonResponse.product.price}</td>
-                //        <td>${jsonResponse.product.imagePath}</td>
-                //        <td>
-                //            <a asp-action="MerchEditor_Edit" asp-route-id="${jsonResponse.product.productId}">Edit</a> |
-                //            <a asp-action="Details" asp-route-id="${jsonResponse.product.productId}">Details</a> |
-                //            <a asp-action="Delete" asp-route-id="${jsonResponse.product.productId}">Delete</a>
-                //        </td>
-                //    </tr>`;
+              
 
-                // Get the new row html from the server @Html.Partial
-                //const newRow = fetch('/merch-editor/data-row/', {
-                //    method: 'POST',
-                //    headers: {
-                //        'Content-Type': 'application/json'
-                //    },
-                //    body: JSON.stringify(jsonResponse.product)
-                //}).then(res => res.text());
+                // Show success message
 
-                $('table tbody').append(jsonResponse.productRow);
+                $('#create-feedback').text("Success creating a new product!")
+
+                setTimeout(() => {
+                    $("#create-modal").modal('hide')
+                    // Add the new product to the table
+                    $('table tbody').append(jsonResponse.productRow);
+                }, 3000)
+
             } else {
+                $("#create-modal").modal('hide')
                 const text = await response.text()
-                debugger
                 // replace html, with field validation errors populated
                 $("#create").get(0).innerHTML = text;
                 $("#create-modal").modal('show')
