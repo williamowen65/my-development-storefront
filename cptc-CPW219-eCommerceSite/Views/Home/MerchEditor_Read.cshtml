@@ -23,7 +23,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ProductsVM[0].Price)
                 </th>
-           
+
                 <th>
                     @Html.DisplayNameFor(model => model.ProductsVM[0].ImageFile)
                 </th>
@@ -33,29 +33,35 @@
             </tr>
         </thead>
         <tbody>
+
             @foreach (var item in Model.ProductsVM)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-              
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ImagePath)
-                    </td>
-                    <td>
-                        <button onclick="replaceContentWithPartialView('merch-editor/edit/'+ @item.ProductId.ToString(), 'edit', () => window.initEditForm())">Edit</button> |
-                        <a asp-action="Details" asp-route-id="@item.ProductId"  >Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-                    </td>
-                </tr>
+                @Html.Partial("./MerchEditor_DataRow.cshtml", item)
             }
+
+            @* @foreach (var item in Model.ProductsVM) *@
+            @* { *@
+            @*     <tr> *@
+            @*         <td> *@
+            @*             @Html.DisplayFor(modelItem => item.Name) *@
+            @*         </td> *@
+            @*         <td> *@
+            @*             @Html.DisplayFor(modelItem => item.Description) *@
+            @*         </td> *@
+            @*         <td> *@
+            @*             @Html.DisplayFor(modelItem => item.Price) *@
+            @*         </td> *@
+              
+            @*         <td> *@
+            @*             @Html.DisplayFor(modelItem => item.ImagePath) *@
+            @*         </td> *@
+            @*         <td> *@
+            @*             <button onclick="replaceContentWithPartialView('merch-editor/edit/'+ @item.ProductId.ToString(), 'edit', () => window.initEditForm())">Edit</button> | *@
+            @*             <a asp-action="Details" asp-route-id="@item.ProductId"  >Details</a> | *@
+            @*             <a asp-action="Delete" asp-route-id="@item.ProductId">Delete</a> *@
+            @*         </td> *@
+            @*     </tr> *@
+            @* } *@
         </tbody>
     </table>
 
