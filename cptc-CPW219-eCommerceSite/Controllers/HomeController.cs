@@ -269,7 +269,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 string productRowHtml = await RenderPartialViewToString("MerchEditor_DataRow", productVM);
 
                 // Return the new product data as JSON
-                return Json(new { success = true, productRow = productRowHtml });
+                return Json(new { success = true, productId = product.ProductId, productRow = productRowHtml });
             }
 
             return PartialView(productVM);

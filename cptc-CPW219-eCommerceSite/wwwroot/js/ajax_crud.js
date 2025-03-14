@@ -94,6 +94,7 @@ function initEditForm() {
 
                 setTimeout(() => {
                     $("#edit-modal").modal('hide')
+                    console.log({ jsonResponse })
                     // Add the new product to the table
                     $('table tbody').find(`tr[data-product-id="${jsonResponse.productId}"]`).replaceWith(jsonResponse.productRow);
                 }, 3000)
