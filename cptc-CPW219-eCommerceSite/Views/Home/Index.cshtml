@@ -1,11 +1,14 @@
-﻿@{
+﻿@model HomePageViewModel;
+@inject IHttpContextAccessor _httpContext
+
+@{
     ViewData["Title"] = "Home Page";
     ViewData["DropdownText"] = "Welcome to my website";
     ViewData["Page"] = "home";
 }
 
 @section Scripts {
-    <script src="~/js/PricingChart.js"></script>
+    @* <script src="~/js/PricingChart.js"></script> *@
 }
 
 @Html.Partial("./_modals/GeneralContactForm.cshtml")
@@ -14,6 +17,10 @@
 <div class="b-example-divider"></div>
 
 @Html.Partial("./_partials/_hero.cshtml")
+
+<div class="b-example-divider"></div>
+
+@Html.Partial("./_partials/_merch-store.cshtml", Model)
 
 <div class="b-example-divider"></div>
 

@@ -15,3 +15,84 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         })
 })
+
+
+// Globally available methods
+
+
+// Makes fetch request and adds element to dom
+// empties out the target element with new contents.
+function replaceContentWithPartialView(url, targetElementId, cb) {
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById(targetElementId).innerHTML = html;
+
+            cb();
+
+        })
+        .catch(error => console.error('Error fetching partial view:', error));
+}
+
+
+function setupTooltip(productId) {
+    const button = document.querySelector(`#tooltip-button-${productId}`)
+    const tooltip = document.querySelector(`#tooltip-${productId}`)
+
+    const events = [
+        //['mouseenter', showTooltip],
+        //['mouseleave', hideTooltip],
+        //['focus', showTooltip],
+        ['blur', hideTooltip],
+        ['click', showTooltip]
+    ]
+
+     events.forEach(([event, listener]) => {
+         button.addEventListener(event, () => {
+             // close existing tool tips
+             Array.from(document.querySelectorAll('.tooltip2')).forEach(el => {
+                 el.style.display = 'none'
+             })
+             listener();
+         });
+        });
+ 
+    function update() {
+        FloatingUIDOM.computePosition(button, tooltip).then(({ x, y }) => {
+            Object.assign(tooltip.style, {
+                left: `${x}px`,
+                top: `${y}px`,
+            });
+        });
+
+    }
+
+    function showTooltip() {
+        tooltip.style.display = 'block';
+        update();
+    }
+
+    function hideTooltip() {
+        tooltip.style.display = '';
+    }
+}
+
+
+
+
+function updateImagePreview() {
+    const newImageInput = document.querySelector('#new-image-input');
+    const imgEl = document.querySelector('#edit-current-image');
+    const fileNameEl = document.querySelector("#edit-current-image-file-name");
+
+
+    const file = newImageInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imgEl.src = e.target.result;
+            fileNameEl.textContent = file.name;
+        };
+        reader.readAsDataURL(file);
+    }
+}

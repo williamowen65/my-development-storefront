@@ -7,12 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Will's Development Storefront</title>
     <script type="importmap"></script>
+
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/cptc_CPW219_eCommerceSite.styles.css" asp-append-version="true" />
+
+ 
+
+    @* <link rel="stylesheet" href="~/cptc_CPW219_eCommerceSite.styles.css" asp-append-version="true" /> *@
     <link rel="stylesheet" href="./css/list-groups.css">
     <script src="https://kit.fontawesome.com/16aebb51db.js" crossorigin="anonymous"></script>
-
+    <script src="~/js/ajax_crud.js"></script>
 </head>
 <body>
 
@@ -73,7 +78,7 @@
             @* </a> *@
             <div class="dropdown">
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="ff-consolas d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false">
-                    Will's Development Storefront 
+                    Will's Development Storefront
                 </a>
                 <ul class="dropdown-menu text-small shadow" style="">
                     <li><i class="dropdown-item text-center" style="pointer-events: none; font-style:italic">@ViewData["DropdownText"] </i></li>
@@ -108,7 +113,6 @@
         </div>
         @{
             string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
-
         }
         @if (userEmail != null)
         {
@@ -116,13 +120,10 @@
                 <div>Logged in as @userEmail</div>
                 <a asp-action="Logout" asp-controller="Home">Log out</a>
             </div>
-        } else
-        {
-            @* <div>Logged out</div>     *@
         }
     </header>
 
-   
+
     <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -148,7 +149,14 @@
     <script src="~/js/color-modes.js" asp-append-version="true"></script>
     <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@@floating-ui/core@1.6.9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@floating-ui/dom@1.6.13"></script>
+
+   
+  
 
     @await RenderSectionAsync("Scripts", required: false)
+
+  
 </body>
 </html>

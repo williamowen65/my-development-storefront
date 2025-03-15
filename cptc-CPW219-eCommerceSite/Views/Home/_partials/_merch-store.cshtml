@@ -1,0 +1,50 @@
+﻿@model HomePageViewModel;
+@inject IHttpContextAccessor _httpContext
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
+    int count = @Model.ProductsVM.Count();
+    // int rowCol = count % 3;
+}
+
+<div class="wo-body-background">
+
+
+    <div class="container body-section bg-body card">
+
+        
+        @if (userEmail != null)
+        {
+            <div class="d-flex justify-content-end px-2 align-items-center gap-2" style="padding-right: 27px !important;">
+                <a asp-action="MerchEditor_Read" asp-controller="Home">Merch Editor</a>
+            </div>
+        }
+
+
+        <h2 class="text-center ff-consolas">Merch Store</h2>
+         @* <div>total: @Model.ProductsVM.Count()</div>  *@
+
+        <div class="row">
+
+            @* <!-- List out the merch from the db --> *@
+            @foreach (var item in Model.ProductsVM) 
+            {
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+
+               @Html.Partial("../MerchItem.cshtml", item)
+                </div>
+
+             }
+        </div>
+        
+
+
+    </div>
+
+
+
+
+</div>

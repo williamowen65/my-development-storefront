@@ -1,0 +1,37 @@
+﻿@model ProductViewModel;
+
+<tr data-product-id="@Model.ProductId">
+    <td>@Model.Name</td>
+    <td style="width:50%">@Model.Description</td>
+    <td>@Html.DisplayFor(m => m.Price)</td>
+    <td style="width: 100%;">
+        <img src="@Model.ImagePath"  height="100px;"/>
+    </td>
+    <td style="white-space: nowrap;">
+        <button class="btn btn-sm btn-secondary" 
+            onclick="replaceContentWithPartialView('merch-editor/edit/'+ @Model.ProductId.ToString(), 'edit', () => window.initEditForm())"
+         >Edit</button> |
+        <button class="btn btn-danger btn-sm"
+            onclick="removeMerchItem(@Model.ProductId.ToString())"
+        >Delete</button>
+
+        @* <button class="btn btn-danger btn-sm" id="tooltip-button-@Model.ProductId">Delete</button> *@
+        
+        @* The WIP below was an attempt to make a BS confirmation  *@
+        @* <button class="btn btn-danger btn-sm" id="tooltip-button-@Model.ProductId">Delete</button> *@
+        @* <div id="tooltip-@Model.ProductId" class="tooltip2" role="tooltip"> *@
+        @*     Tooltip content *@
+        @* </div> *@
+    </td>
+</tr>
+
+
+<script>
+
+    @* The WIP below was an attempt to make a BS confirmation  *@
+   // setTimeout(() => {
+   //  setupTooltip(@Model.ProductId);
+   // }, 1000)
+
+</script>
+

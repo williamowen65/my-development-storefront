@@ -1,0 +1,17 @@
+﻿@model ProductViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="card mb-4 rounded-3 shadow-sm border-primary">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-baseline ff-consolas">
+            <h1 class="card-title ff-consolas">@Html.DisplayFor(m => m.Name)</h1>
+            @Html.DisplayFor(m => m.Price)
+        </div>
+        <img class="w-100" src="@Url.Content(Model.ImagePath)" alt="Image of @Html.DisplayFor(m => m.Name)">
+        <div>@Model.Description</div>
+        <button type="button" class="d-block m-auto btn btn-sm btn-primary ff-consolas">Add to Cart</button>
+    </div>
+</div>

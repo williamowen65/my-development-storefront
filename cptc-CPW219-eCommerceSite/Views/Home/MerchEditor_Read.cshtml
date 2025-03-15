@@ -1,0 +1,61 @@
+﻿@model HomePageViewModel
+
+@{
+    ViewData["Title"] = "MerchEditor";
+}
+
+<div class="mt-5 container card body-section bg-body py-3">
+
+    <div class="d-flex justify-content-between align-items-center ">
+    <h1>Merch Editor</h1>
+
+        <button class="btn btn-primary" onclick="replaceContentWithPartialView('merch-editor/create', 'create', () => window.initCreateForm())">Create New</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].Price)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductsVM[0].ImageFile)
+                </th>
+                <th>
+                    <!--Column for the controls-->
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.ProductsVM)
+            {
+                @Html.Partial("./MerchEditor_DataRow.cshtml", item)
+            }
+            @* New row from create action are added via JS/AJAX *@
+            @* Rows that are edited are updated via JS/AJAX *@
+            @* See the file #ajax_crud.js *@
+
+        </tbody>
+    </table>
+
+
+</div>
+
+<div id="create">
+    <!-- Partial View Modal gets added here -->
+</div>
+
+<div id="edit">
+    <!-- Partial View Modal gets added here -->
+</div>
+
+
+
+
