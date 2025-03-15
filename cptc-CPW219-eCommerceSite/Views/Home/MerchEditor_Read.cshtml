@@ -38,6 +38,9 @@
             {
                 @Html.Partial("./MerchEditor_DataRow.cshtml", item)
             }
+            @* New row from create action are added via JS/AJAX *@
+            @* Rows that are edited are updated via JS/AJAX *@
+            @* See the file #ajax_crud.js *@
 
         </tbody>
     </table>

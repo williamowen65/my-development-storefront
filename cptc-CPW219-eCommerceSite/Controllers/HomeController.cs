@@ -164,6 +164,8 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
                 productVM.ProductId = newProduct.ProductId;
 
+                productVM.ImagePath = newProduct.ImagePath;
+
                 // Render the partial view to a string
                 string productRowHtml = await RenderPartialViewToString("MerchEditor_DataRow", productVM);
 
@@ -266,6 +268,8 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
                 _context.Products.Update(product);
                 _context.SaveChanges();
+
+                productVM.ImagePath = product.ImagePath;
 
 
                 // Render the partial view to a string
