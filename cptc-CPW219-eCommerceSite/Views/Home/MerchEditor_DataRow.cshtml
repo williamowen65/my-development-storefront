@@ -5,7 +5,20 @@
     <td style="width: 100%;">@Model.ImagePath</td>
     <td style="white-space: nowrap;">
         <button class="btn btn-sm btn-secondary" onclick="replaceContentWithPartialView('merch-editor/edit/'+ @Model.ProductId.ToString(), 'edit', () => window.initEditForm())">Edit</button> |
-        <a asp-action="Details" asp-route-id="@Model.ProductId">Details</a> |
-        <a asp-action="Delete" asp-route-id="@Model.ProductId">Delete</a>
+        @* <a asp-action="Delete" asp-route-id="@Model.ProductId">Delete</a> *@
+        <button class="btn btn-danger btn-sm" id="tooltip-button-@Model.ProductId">Delete</button>
+        <div id="tooltip-@Model.ProductId" class="tooltip2" role="tooltip">
+            Tooltip content
+        </div>
     </td>
 </tr>
+
+
+<script>
+
+   setTimeout(() => {
+    setupTooltip(@Model.ProductId);
+   }, 1000)
+
+</script>
+

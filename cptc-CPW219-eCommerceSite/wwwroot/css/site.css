@@ -92,3 +92,16 @@ ul.right-marker {
 
 .auth-form {
   width: fit-content; }
+
+.tooltip2 {
+  width: max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #222;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 90%;
+  display: none; }

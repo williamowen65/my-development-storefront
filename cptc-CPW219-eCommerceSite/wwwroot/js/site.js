@@ -33,3 +33,41 @@ function replaceContentWithPartialView(url, targetElementId, cb) {
         })
         .catch(error => console.error('Error fetching partial view:', error));
 }
+
+
+function setupTooltip(productId) {
+    const button = document.querySelector(`#tooltip-button-${productId}`)
+    const tooltip = document.querySelector(`#tooltip-${productId}`)
+
+    const events = [
+        ['mouseenter', showTooltip],
+        ['mouseleave', hideTooltip],
+        ['focus', showTooltip],
+        ['blur', hideTooltip],
+    ]
+
+     events.forEach(([event, listener]) => {
+            button.addEventListener(event, listener);
+        });
+ 
+    function update() {
+        FloatingUIDOM.computePosition(button, tooltip).then(({ x, y }) => {
+            Object.assign(tooltip.style, {
+                left: `${x}px`,
+                top: `${y}px`,
+            });
+        });
+
+    }
+
+    function showTooltip() {
+        tooltip.style.display = 'block';
+        update();
+    }
+
+    function hideTooltip() {
+        tooltip.style.display = '';
+    }
+}
+
+
