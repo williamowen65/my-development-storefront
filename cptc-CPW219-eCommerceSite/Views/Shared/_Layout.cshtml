@@ -111,16 +111,22 @@
                 @* </div> *@
             </div>
         </div>
-        @{
-            string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
-        }
-        @if (userEmail != null)
-        {
-            <div class="d-flex justify-content-end px-2 align-items-center gap-2" style="padding-right: 27px !important;">
-                <div>Logged in as @userEmail</div>
-                <a asp-action="Logout" asp-controller="Home">Log out</a>
-            </div>
-        }
+        <div class="container d-flex justify-content-center">
+            <div id="cart-details"></div>
+
+            @{
+                string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
+            }
+            @if (userEmail != null)
+            {
+                <div class="d-flex justify-content-end px-2 align-items-center gap-2" style="">
+                    <div>Logged in as @userEmail</div>
+                    <a asp-action="Logout" asp-controller="Home">Log out</a>
+                </div>
+            }
+
+        </div>
+
     </header>
 
 
@@ -152,9 +158,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@@floating-ui/core@1.6.9"></script>
     <script src="https://cdn.jsdelivr.net/npm/@@floating-ui/dom@1.6.13"></script>
 
+    <script>
+        displayCart();
+    </script>
    
-  
-
     @await RenderSectionAsync("Scripts", required: false)
 
   

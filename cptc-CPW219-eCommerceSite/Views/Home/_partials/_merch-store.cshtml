@@ -32,7 +32,7 @@
             @* <!-- List out the merch from the db --> *@
             @foreach (var item in Model.ProductsVM) 
             {
-                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="col-6 col-lg-4 col-xl-3">
 
                @Html.Partial("../MerchItem.cshtml", item)
                 </div>

@@ -12,6 +12,7 @@
         </div>
         <img class="w-100" src="@Url.Content(Model.ImagePath)" alt="Image of @Html.DisplayFor(m => m.Name)">
         <div>@Model.Description</div>
-        <button type="button" class="d-block m-auto btn btn-sm btn-primary ff-consolas">Add to Cart</button>
+        @* The single quotes onclick are important for the following line b/c JSON uses double quotes *@
+        <button onclick='addItemToCart(@Html.Raw(Json.Serialize(Model)))' type="button" class="d-block m-auto btn btn-sm btn-primary ff-consolas">Add to Cart</button>
     </div>
 </div>

@@ -96,3 +96,64 @@ function updateImagePreview() {
         reader.readAsDataURL(file);
     }
 }
+
+const cookieName = 'merch-cart'
+
+function addItemToCart(data) {
+    console.log("to add to cart", { data });
+
+    // Retrieve the current cart from cookies
+    let cart = JSON.parse(getCookie(cookieName) || "[]");
+
+    // Only save the data that matters in order to keep a low data footprint on cookies 4kb limit.
+    // Add the new item to the cart
+    cart.push({
+        ProductId: data.ProductId,
+        Price: data.Price,
+    });
+
+    // Save the updated cart back to cookies
+    setCookie(cookieName, JSON.stringify(cart), 7);
+
+    displayCart();
+}
+
+// Helper function to set a cookie
+function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+// Helper function to get a cookie
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+
+// Displays cart if there are contents in it
+function displayCart() {
+
+    // Retrieve the current cart from cookies
+    let cart = JSON.parse(getCookie(cookieName) || "[]");
+
+    // Check if the cart is empty
+    if (cart.length === 0) {
+        console.log("The cart is empty.");
+    } else {
+        // Mention cart details on nav bar
+        //"Cart: # pending items"
+        const targetEl = document.querySelector('#cart-details');
+        targetEl.innerHTML = `<a class="btn btn-primary btn-sm">Cart: ${cart.length} pending items</a>`;
+    }
+}
+
+
