@@ -112,3 +112,30 @@ function initEditForm() {
         }
     });
 }
+
+
+function removeMerchItem(productId) {
+    if (!confirm('Are you sure you want to delete this item?')) {
+        return;
+    }
+
+    fetch('/merch-editor/delete/' + productId, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(jsonResponse => {
+        // Show success message
+        $('#delete-feedback').text("Success deleting the product!");
+
+        // Remove the product from the table
+        $('table tbody').find(`tr[data-product-id="${productId}"]`).remove();
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}

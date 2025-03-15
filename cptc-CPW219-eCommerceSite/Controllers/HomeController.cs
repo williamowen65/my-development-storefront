@@ -275,6 +275,38 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return PartialView(productVM);
         }
 
+
+        [HttpDelete]
+        [Route("merch-editor/delete/{id}")]
+        public async Task<IActionResult> MerchEditor_Delete(int? id)
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Look up the product by ID
+            Product? product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+        }
+
+
+
         private string SaveImage(IFormFile imageFile)
         {
             // Implement image saving logic here

@@ -6,6 +6,8 @@
 *@
 @{
     string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
+    int count = @Model.ProductsVM.Count();
+    // int rowCol = count % 3;
 }
 
 <div class="wo-body-background">
@@ -23,16 +25,19 @@
 
 
         <h2 class="text-center">Merch Store</h2>
-         <div>total: @Model.ProductsVM.Count()</div> 
+         @* <div>total: @Model.ProductsVM.Count()</div>  *@
 
-        <div>
+        <div class="row">
 
             @* <!-- List out the merch from the db --> *@
-            @* @foreach (var item in Model.Products) *@
-            @* { *@
-            @*     <div>@item.Description</div> *@
+            @foreach (var item in Model.ProductsVM) 
+            {
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
 
-            @* } *@
+               @Html.Partial("../MerchItem.cshtml", item)
+                </div>
+
+             }
         </div>
         
 

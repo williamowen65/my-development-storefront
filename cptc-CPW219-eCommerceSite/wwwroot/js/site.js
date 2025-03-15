@@ -40,14 +40,21 @@ function setupTooltip(productId) {
     const tooltip = document.querySelector(`#tooltip-${productId}`)
 
     const events = [
-        ['mouseenter', showTooltip],
-        ['mouseleave', hideTooltip],
-        ['focus', showTooltip],
+        //['mouseenter', showTooltip],
+        //['mouseleave', hideTooltip],
+        //['focus', showTooltip],
         ['blur', hideTooltip],
+        ['click', showTooltip]
     ]
 
      events.forEach(([event, listener]) => {
-            button.addEventListener(event, listener);
+         button.addEventListener(event, () => {
+             // close existing tool tips
+             Array.from(document.querySelectorAll('.tooltip2')).forEach(el => {
+                 el.style.display = 'none'
+             })
+             listener();
+         });
         });
  
     function update() {
