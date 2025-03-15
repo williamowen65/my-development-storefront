@@ -264,7 +264,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 product.Name = productVM.Name;
                 product.Description = productVM.Description;
                 product.Price = productVM.Price;
-                product.ImagePath = SaveImage(productVM.ImageFile); // Implement SaveImage method to save the image and return the path
+                product.ImagePath = productVM.ImageFile != null ? SaveImage(productVM.ImageFile) : product.ImagePath; // Implement SaveImage method to save the image and return the path
 
                 _context.Products.Update(product);
                 _context.SaveChanges();

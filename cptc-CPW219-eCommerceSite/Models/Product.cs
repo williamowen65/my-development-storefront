@@ -41,7 +41,7 @@ namespace cptc_CPW219_eCommerceSite.Models
 
         [Display(Name = "Merch Image")]
         [NotMapped]
-        public IFormFile ImageFile { get; set; } // New property for image file
+        public IFormFile? ImageFile { get; set; } // New property for image file
 
         public string? ImagePath { get; set; }
 
