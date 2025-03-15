@@ -28,6 +28,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 Name = p.Name,
                 Description = p.Description,
                 Price = p.Price,
+                ImagePath = p.ImagePath
             }).ToArray();
             // Create a view model to pass to the view
             HomePageViewModel viewModel = new HomePageViewModel

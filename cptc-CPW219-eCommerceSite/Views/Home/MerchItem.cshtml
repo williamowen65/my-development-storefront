@@ -10,7 +10,7 @@
             <h1 class="card-title ff-consolas">@Html.DisplayFor(m => m.Name)</h1>
             @Html.DisplayFor(m => m.Price)
         </div>
-        <img class="w-100" src="https://placehold.co/600x400" alt="#">
+        <img class="w-100" src="@Url.Content(Model.ImagePath)" alt="Image of @Html.DisplayFor(m => m.Name)">
         <div>@Model.Description</div>
         <button type="button" class="d-block m-auto btn btn-sm btn-primary ff-consolas">Add to Cart</button>
     </div>

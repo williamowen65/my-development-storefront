@@ -309,9 +309,34 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
         private string SaveImage(IFormFile imageFile)
         {
-            // Implement image saving logic here
-            // Return the saved image path
-            return "path/to/saved/image";
+            if (imageFile == null || imageFile.Length == 0)
+            {
+                return null;
+            }
+
+            // Generate a unique file name
+            var fileName = Path.GetFileNameWithoutExtension(imageFile.FileName);
+            var extension = Path.GetExtension(imageFile.FileName);
+            var uniqueFileName = $"{fileName}_{Guid.NewGuid()}{extension}";
+
+            // Define the path to save the image
+            var imagePath = Path.Combine("wwwroot", "images", "products", uniqueFileName);
+
+            // Ensure the directory exists
+            var directory = Path.GetDirectoryName(imagePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            // Save the image file
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                imageFile.CopyTo(fileStream);
+            }
+
+            // Return the saved image path without 'wwwroot' and with '/' instead of '\'
+            return imagePath.Replace("wwwroot", "").Replace("\\", "/");
         }
 
 
