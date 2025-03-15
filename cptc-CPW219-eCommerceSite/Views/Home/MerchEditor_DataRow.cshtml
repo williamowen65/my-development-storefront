@@ -4,7 +4,9 @@
     <td>@Model.Name</td>
     <td style="width:50%">@Model.Description</td>
     <td>@Html.DisplayFor(m => m.Price)</td>
-    <td style="width: 100%;">@Model.ImagePath</td>
+    <td style="width: 100%;">
+        <img src="@Model.ImagePath"  height="100px;"/>
+    </td>
     <td style="white-space: nowrap;">
         <button class="btn btn-sm btn-secondary" 
             onclick="replaceContentWithPartialView('merch-editor/edit/'+ @Model.ProductId.ToString(), 'edit', () => window.initEditForm())"

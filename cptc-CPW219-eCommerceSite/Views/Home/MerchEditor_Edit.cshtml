@@ -35,9 +35,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="ImageFile" class="control-label"></label>
-                                <input asp-for="ImageFile" type="file" class="form-control" value="@Model.ImageFile" />
-                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                <div class="form-group">
+                                    <label asp-for="ImageFile" class="control-label"></label>
+                                    <div class="d-flex">
+                                        <img src="@Model.ImagePath" id="edit-current-image" alt="Current Image" style="max-width: 100px; max-height: 100px;" />
+                                        <div id="edit-current-image-file-name">@Model.ImageFile.FileName</div>
+                                    </div>
+                                    <input id="new-image-input" asp-for="ImageFile" type="file" class="form-control" onchange="updateImagePreview()"/>
+                                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -52,3 +58,5 @@
         </form>
     </div>
 </div>
+
+

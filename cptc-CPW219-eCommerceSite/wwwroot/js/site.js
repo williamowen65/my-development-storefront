@@ -78,3 +78,21 @@ function setupTooltip(productId) {
 }
 
 
+
+
+function updateImagePreview() {
+    const newImageInput = document.querySelector('#new-image-input');
+    const imgEl = document.querySelector('#edit-current-image');
+    const fileNameEl = document.querySelector("#edit-current-image-file-name");
+
+
+    const file = newImageInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imgEl.src = e.target.result;
+            fileNameEl.textContent = file.name;
+        };
+        reader.readAsDataURL(file);
+    }
+}

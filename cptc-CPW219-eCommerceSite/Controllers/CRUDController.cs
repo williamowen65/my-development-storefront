@@ -14,7 +14,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             _context = context;
         }
 
-
         public HomePageViewModel GetProductsViewModelData()
         {
             // Get all the merch items from the database
@@ -28,7 +27,8 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 Name = p.Name,
                 Description = p.Description,
                 Price = p.Price,
-                ImagePath = p.ImagePath
+                ImagePath = p.ImagePath,
+                ImageFile = GetFormFileFromPath(p.ImagePath)
             }).ToArray();
             // Create a view model to pass to the view
             HomePageViewModel viewModel = new HomePageViewModel
@@ -40,5 +40,26 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return viewModel;
         }
 
+        public IFormFile GetFormFileFromPath(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
+            // Remove leading slash if present
+            if (path.StartsWith("/"))
+            {
+                path = path.TrimStart('/');
+            }
+
+            var relativePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", path);
+            var fileStream = new FileStream(relativePath, FileMode.Open, FileAccess.Read);
+            return new FormFile(fileStream, 0, fileStream.Length, null, Path.GetFileName(relativePath))
+            {
+                Headers = new HeaderDictionary(),
+                ContentType = "application/octet-stream"
+            };
+        }
     }
 }

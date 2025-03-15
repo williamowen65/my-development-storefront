@@ -223,6 +223,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 return NotFound();
             }
 
+
             // Map the product to a ProductViewModel
             ProductViewModel productVM = new ProductViewModel
             {
@@ -230,7 +231,9 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 Name = product.Name,
                 Description = product.Description,
                 Price = product.Price,
-                ImagePath = product.ImagePath
+                ImagePath = product.ImagePath,
+                ImageFile = _crudController.GetFormFileFromPath(product.ImagePath)
+
             };
 
             return PartialView(productVM);
