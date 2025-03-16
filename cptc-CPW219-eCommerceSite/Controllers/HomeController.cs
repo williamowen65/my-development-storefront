@@ -347,7 +347,33 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
- 
+        [HttpGet]
+        [Route("merch-cart")]
+        public IActionResult MerchCart()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult GetCartItem([FromBody] CartItemViewModel item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { success = false, message = "Invalid item data.", errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+
+            // Process the item as needed, for example, retrieve item details from the database
+            var product = _context.Products.Find(item.ProductId);
+            if (product == null)
+            {
+                return NotFound(new { success = false, message = "Product not found." });
+            }
+
+            // Return the product details as JSON
+            return Json(new { success = true, product });
+        }
+
+
         private void LogUserIn(string email)
         {
             HttpContext.Session.SetString("Email", email);
@@ -370,5 +396,9 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+     
+
     }
 }

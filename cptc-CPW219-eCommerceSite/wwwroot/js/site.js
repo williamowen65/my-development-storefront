@@ -108,8 +108,8 @@ function addItemToCart(data) {
     // Only save the data that matters in order to keep a low data footprint on cookies 4kb limit.
     // Add the new item to the cart
     cart.push({
-        ProductId: data.ProductId,
-        Price: data.Price,
+        ProductId: data.productId,
+        Price: data.price,
     });
 
     // Save the updated cart back to cookies
@@ -152,7 +152,7 @@ function displayCart() {
         // Mention cart details on nav bar
         //"Cart: # pending items"
         const targetEl = document.querySelector('#cart-details');
-        targetEl.innerHTML = `<a class="btn btn-primary btn-sm">Cart: ${cart.length} pending items</a>`;
+        targetEl.innerHTML = `<a href="merch-cart" class="btn btn-primary btn-sm">Merch Cart: ${cart.length} Pending Items</a>`;
     }
 }
 

@@ -1,0 +1,10 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+
+### Test POST Home GetCartItem
+POST https://localhost:7122/Home/GetCartItem
+Content-Type: application/json
+
+{
+  "productId": 30
+}

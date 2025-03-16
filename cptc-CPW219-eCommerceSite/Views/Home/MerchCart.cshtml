@@ -1,0 +1,40 @@
+﻿@section Scripts{
+<script>
+
+    // get items from cookie
+
+         let cart = JSON.parse(getCookie(cookieName) || "[]");
+
+         console.log({cart})
+
+         if(cart.length == 0 ){
+            // redirect home
+                window.location.href = "";
+         }
+         else {
+                const cartEl = document.querySelector("#cart-container")
+                    cart.forEach(item => {
+                        const merchItem = document.createElement("div");
+                        merchItem.classList.add("col-6", "col-lg-4", "col-xl-3")
+                        
+                        // make a post request for cart item details and html
+                            fetch('/Home/GetCartItem', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(item)
+                        })
+                        .then(response => response.text())
+                        .then(data => {
+                            merchItem.innerHTML = data;
+                            // add item to dom
+                            cartEl.appendChild(merchItem);
+                        })
+                        .catch(error => console.error('Error:', error));
+                    })
+
+         }
+</script>
+
+}

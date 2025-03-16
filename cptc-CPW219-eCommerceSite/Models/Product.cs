@@ -44,9 +44,11 @@ namespace cptc_CPW219_eCommerceSite.Models
         public IFormFile? ImageFile { get; set; } // New property for image file
 
         public string? ImagePath { get; set; }
+    }
 
-
-
+    public class CartItemViewModel
+    {
+        public required string ProductId;
     }
 
 
