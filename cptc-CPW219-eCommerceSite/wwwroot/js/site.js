@@ -152,7 +152,7 @@ function displayCart() {
         // Mention cart details on nav bar
         //"Cart: # pending items"
         const targetEl = document.querySelector('#cart-details');
-        targetEl.innerHTML = `<a href="merch-cart" class="btn btn-primary btn-sm">Merch Cart: ${cart.length} Pending Items</a>`;
+        targetEl.innerHTML = `<a href="merch-cart" class="btn btn-primary btn-sm mt-2" title="Your cart is stored in local cookies">Merch Cart: ${cart.length} Pending Items</a>`;
     }
 }
 
