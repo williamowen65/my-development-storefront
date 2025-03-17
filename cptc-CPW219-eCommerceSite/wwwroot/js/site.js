@@ -99,23 +99,21 @@ function updateImagePreview() {
 
 const cookieName = 'merch-cart'
 
+
+ // Set the cookie on the server side
 function addItemToCart(data) {
-    console.log("to add to cart", { data });
+    const jsonPayload = JSON.stringify({
+        ProductId: data.productId
+    })
+    console.log("to add to cart", { data, jsonPayload });
 
-    // Retrieve the current cart from cookies
-    let cart = JSON.parse(getCookie(cookieName) || "[]");
-
-    // Only save the data that matters in order to keep a low data footprint on cookies 4kb limit.
-    // Add the new item to the cart
-    cart.push({
-        ProductId: data.productId,
-        Price: data.price,
-    });
-
-    // Save the updated cart back to cookies
-    setCookie(cookieName, JSON.stringify(cart), 7);
-
-    displayCart();
+    fetch('/api/add-item-to-cart/' + data.productId)
+    .then(response => response.json())
+    .then(result => {
+        console.log('Item added to cart:', result);
+        displayCart();
+    })
+    .catch(error => console.error('Error adding item to cart:', error));
 }
 
 // Helper function to set a cookie
@@ -138,10 +136,8 @@ function getCookie(name) {
     return null;
 }
 
-
 // Displays cart if there are contents in it
 function displayCart() {
-
     // Retrieve the current cart from cookies
     let cart = JSON.parse(getCookie(cookieName) || "[]");
 
@@ -155,5 +151,6 @@ function displayCart() {
         targetEl.innerHTML = `<a href="merch-cart" class="btn btn-primary btn-sm mt-2" title="Your cart is stored in local cookies">Merch Cart: ${cart.length} Pending Items</a>`;
     }
 }
+
 
 

@@ -1,5 +1,7 @@
 using cptc_CPW219_eCommerceSite.data;
+using cptc_CPW219_eCommerceSite.Filter;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace cptc_CPW219_eCommerceSite
 {
@@ -11,10 +13,11 @@ namespace cptc_CPW219_eCommerceSite
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<ValidateCartFilter>();
 
             // Register the DbContext with the connection string
             builder.Services.AddDbContext<ECommerceContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); 
 
 
             //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

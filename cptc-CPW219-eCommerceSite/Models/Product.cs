@@ -48,7 +48,7 @@ namespace cptc_CPW219_eCommerceSite.Models
 
     public class CartItemViewModel
     {
-        public required string ProductId;
+        public required int ProductId;
     }
 
 

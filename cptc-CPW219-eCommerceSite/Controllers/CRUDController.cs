@@ -16,8 +16,12 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
         public HomePageViewModel GetProductsViewModelData()
         {
+
+            Console.WriteLine("about to fetch data");
             // Get all the merch items from the database
             Product[] products = _context.Products.ToArray();
+
+            Console.WriteLine("fetched data");
             // Get all the categories from the database
             //Category[] categories = _context.Categories.ToArray();
             // Convert products to ProductViewModels
