@@ -131,7 +131,10 @@ function getCookie(name) {
     for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        if (c.indexOf(nameEQ) == 0) {
+            const decodedValue = decodeURIComponent(c.substring(nameEQ.length, c.length));
+            return decodedValue;
+        }
     }
     return null;
 }
@@ -140,7 +143,7 @@ function getCookie(name) {
 function displayCart() {
     // Retrieve the current cart from cookies
     let cart = JSON.parse(getCookie(cookieName) || "[]");
-
+    console.log("display cart ",{cart, cookieName})
     // Check if the cart is empty
     if (cart.length === 0) {
         console.log("The cart is empty.");

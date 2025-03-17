@@ -20,17 +20,14 @@ namespace cptc_CPW219_eCommerceSite.Filter
             var cookies = context.HttpContext.Request.Cookies;
             Console.WriteLine("WOULD VALIDATE COOKIE");
 
-            //if (cookies.ContainsKey("merch-cart"))
-            //{
-            //    var cartItemsJson = cookies["merch-cart"];
-            //    var cartItems = JsonSerializer.Deserialize<List<int>>(cartItemsJson);
-
-            //    // print the cart items to the console
-            //    Console.WriteLine("Cart items: " + string.Join(", ", cartItems));
-
-            //}
-
-         
+            // Print cookie values
+            foreach (var cookie in cookies)
+            {
+                if (cookie.Key == "merch-cart") { 
+               
+                Console.WriteLine($"\nCookie Name: {cookie.Key}, Cookie Value: {cookie.Value}\n");
+                }
+            }
         }
 
         public void OnActionExecuted(ActionExecutedContext context)

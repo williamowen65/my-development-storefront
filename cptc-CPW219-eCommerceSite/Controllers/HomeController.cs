@@ -416,7 +416,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.Now.AddDays(7),
-                HttpOnly = true,
+                //HttpOnly = true // This is off so the cookie is accessible to JavaScript
                 Secure = true
             };
             Response.Cookies.Append(cookieName, JsonConvert.SerializeObject(cartItems), cookieOptions);
