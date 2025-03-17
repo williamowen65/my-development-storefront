@@ -364,8 +364,21 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             // Get the products
             List<Product> products = _context.Products.Where(p => cartItems.Contains(p.ProductId)).ToList();
 
+            // Create a dictionary to store product quantities
+            Dictionary<int, int> productQuantities = cartItems.GroupBy(id => id).ToDictionary(g => g.Key, g => g.Count());
+
+            List<CartItemViewModel> cartProducts = products.Select(p => new CartItemViewModel
+            {
+                ProductId = p.ProductId,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Quantity = productQuantities[p.ProductId], // Set quantity based on the count in the cookie
+                ImagePath = p.ImagePath
+            }).ToList();
+
             // Send the product to the view
-            return View(products);
+            return View(cartProducts);
         }
 
 
