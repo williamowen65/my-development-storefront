@@ -8,23 +8,21 @@
 
 
 
-<tr data-product-id="@Model.ProductId">
+<tr class="cart-item" data-product-id="@Model.ProductId">
     <td>@Model.Name</td>
     <td style="width:50%">@Model.Description</td>
     <td>@Html.DisplayFor(m => m.Price)</td>
     <td style="width: 100%; text-align: center">
         <img src="@Model.ImagePath" height="100px;" />
     </td>
-    <td>
+    <td class="quantity">
         @Html.DisplayFor(model => model.Quantity)
     </td>
     <td style="white-space: nowrap;">
-        <button class="btn btn-sm btn-secondary"
-                onclick="replaceContentWithPartialView('merch-editor/edit/'+ @Model.ProductId.ToString(), 'edit', () => window.initEditForm())">
+        <button class="btn btn-sm btn-secondary">
             Edit
         </button> |
-        <button class="btn btn-danger btn-sm"
-                onclick="removeMerchItem(@Model.ProductId.ToString())">
+        <button class="btn btn-danger btn-sm" onclick="deleteCartItem(event, @Model.ProductId)">
             Delete
         </button>
     </td>

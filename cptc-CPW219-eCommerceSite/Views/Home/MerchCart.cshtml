@@ -1,5 +1,14 @@
 ﻿@model List<CartItemViewModel>
 
+
+<style>
+    #empty-merch-cart {
+        padding: 36px !important;
+        text-align: center !important;
+        font-weight: bolder;
+    }
+</style>
+
 <div class="mt-5 container card body-section bg-body py-3">
     <div class="d-flex justify-content-between align-items-center">
         <h1>Merch Cart</h1>
@@ -25,10 +34,15 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="merch-cart-body">
             @foreach (CartItemViewModel product in Model)
             {
                 @Html.Partial("MerchStore_CartItem.cshtml", product)
+            }
+
+            @if (Model.Count == 0)
+            {
+                <td colspan="6" id="empty-merch-cart">Your cart is empty</td>    
             }
         </tbody>
     </table>
