@@ -356,28 +356,20 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         [Route("merch-cart")]
         public IActionResult MerchCart()
         {
-            return View();
+            // Read the merch-cart cookie
+            string cookieName = "merch-cart";
+            var existingCart = Request.Cookies[cookieName];
+            List<int> cartItems = string.IsNullOrEmpty(existingCart) ? new List<int>() : JsonConvert.DeserializeObject<List<int>>(existingCart);
+
+            // Get the products
+            List<Product> products = _context.Products.Where(p => cartItems.Contains(p.ProductId)).ToList();
+
+            // Send the product to the view
+            return View(products);
         }
 
-        [HttpPost]
-        public IActionResult GetCartItem([FromBody] CartItemViewModel item)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new { success = false, message = "Invalid item data.", errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
-            }
 
-            // Process the item as needed, for example, retrieve item details from the database
-            var product = _context.Products.Find(item.ProductId);
-            if (product == null)
-            {
-                return NotFound(new { success = false, message = "Product not found." });
-            }
-
-            // Return the product details as JSON
-            return Json(new { success = true, product });
-        }
-
+        
         [HttpGet]
         [Route("api/add-item-to-cart/{productId?}")]
         public JsonResult AddItemToCart(int? productId)
