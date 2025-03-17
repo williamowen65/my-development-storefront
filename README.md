@@ -1,4 +1,6 @@
 # My Personal eCommerceSite
+
+> See my Merch Store update below all of this
  
 The purpose of this website is to get used to Bootstrap, and I have found that I really like their [examples pages](https://getbootstrap.com/docs/5.3/examples/).
 
@@ -24,3 +26,6 @@ I am really happy about the Bootstrap break through, and will use this technique
 
 - VS and the ASP.NET MVC Workload
   
+# Merch Store Demo
+
+<img src="./demo-images/merch-demo.gif"/>
