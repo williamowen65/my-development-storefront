@@ -1,14 +1,19 @@
 using System.Diagnostics;
 using cptc_CPW219_eCommerceSite.data;
+using cptc_CPW219_eCommerceSite.Filter;
 using cptc_CPW219_eCommerceSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Newtonsoft.Json;
 
 namespace cptc_CPW219_eCommerceSite.Controllers
 {
+
+    [ServiceFilter(typeof(ValidateCartFilter))]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -347,9 +352,86 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
- 
-        private void LogUserIn(string email)
+        [HttpGet]
+        [Route("merch-cart")]
+        public IActionResult MerchCart()
         {
+            // Read the merch-cart cookie
+            string cookieName = "merch-cart";
+            var existingCart = Request.Cookies[cookieName];
+            List<int> cartItems = string.IsNullOrEmpty(existingCart) ? new List<int>() : JsonConvert.DeserializeObject<List<int>>(existingCart);
+
+            // Get the products
+            List<Product> products = _context.Products.Where(p => cartItems.Contains(p.ProductId)).ToList();
+
+            // Create a dictionary to store product quantities
+            Dictionary<int, int> productQuantities = cartItems.GroupBy(id => id).ToDictionary(g => g.Key, g => g.Count());
+
+            List<CartItemViewModel> cartProducts = products.Select(p => new CartItemViewModel
+            {
+                ProductId = p.ProductId,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Quantity = productQuantities[p.ProductId], // Set quantity based on the count in the cookie
+                ImagePath = p.ImagePath
+            }).ToList();
+
+            // Send the product to the view
+            return View(cartProducts);
+        }
+
+
+        
+        [HttpGet]
+        [Route("api/add-item-to-cart/{productId?}")]
+        public JsonResult AddItemToCart(int? productId)
+        {
+            if (productId == null)
+            {
+                return Json(new { success = false, message = "Product ID is required." });
+            }
+
+            // Validate item is a product in the db
+            var product = _context.Products.Find(productId);
+            if (product == null)
+            {
+                return Json(new { success = false, message = "Product not found." });
+            }
+
+            // Set cookie on client
+            string cookieName = "merch-cart";
+
+            // Get existing merch cart cookie data or create an array if it doesn't exist
+            List<int> cartItems;
+            var existingCart = Request.Cookies[cookieName];
+            if (string.IsNullOrEmpty(existingCart))
+            {
+                cartItems = new List<int>();
+            }
+            else
+            {
+                cartItems = JsonConvert.DeserializeObject<List<int>>(existingCart);
+            }
+
+            // Add new productId
+            cartItems.Add(product.ProductId);
+
+            // Save cookie on client
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(7),
+                //HttpOnly = true // This is off so the cookie is accessible to JavaScript
+                Secure = true
+            };
+            Response.Cookies.Append(cookieName, JsonConvert.SerializeObject(cartItems), cookieOptions);
+
+            return Json(new { success = true, message = "Item added to cart." });
+        }
+
+
+        private void LogUserIn(string email)
+        { 
             HttpContext.Session.SetString("Email", email);
         }
 
@@ -369,6 +451,24 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+     
+
+    }
+
+    public static class SessionExtensions
+    {
+        public static void SetObjectAsJson(this ISession session, string key, object value)
+        {
+            session.SetString(key, JsonConvert.SerializeObject(value));
+        }
+
+        public static T GetObjectFromJson<T>(this ISession session, string key)
+        {
+            var value = session.GetString(key);
+            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
         }
     }
 }

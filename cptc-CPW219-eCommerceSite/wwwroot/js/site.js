@@ -96,3 +96,105 @@ function updateImagePreview() {
         reader.readAsDataURL(file);
     }
 }
+
+const cookieName = 'merch-cart'
+
+
+ // Set the cookie on the server side
+function addItemToCart(data) {
+    const jsonPayload = JSON.stringify({
+        ProductId: data.productId
+    })
+    console.log("to add to cart", { data, jsonPayload });
+
+    fetch('/api/add-item-to-cart/' + data.productId)
+    .then(response => response.json())
+    .then(result => {
+        console.log('Item added to cart:', result);
+        displayCart();
+    })
+    .catch(error => console.error('Error adding item to cart:', error));
+}
+
+function deleteCartItem(event, productId) {
+    // Retrieve the current cart from cookies
+    let cart = JSON.parse(getCookie(cookieName) || "[]");
+
+    // Remove the productId from the cart array
+    const index = cart.indexOf(productId);
+    if (index !== -1) {
+        cart.splice(index, 1);
+    }
+    // Update the cookie with the new cart array
+    setCookie(cookieName, JSON.stringify(cart), 7);
+
+    // Update the cart display
+    displayCart();
+
+    const cartItemEl = event.target.closest(".cart-item")
+    const quantityEl = cartItemEl.querySelector('.quantity')
+
+    const quantity = Number(quantityEl.innerText);
+
+    if (quantity > 1) {
+        // decrement
+        quantityEl.innerText = quantity - 1;
+    } else {
+        // remove element
+        cartItemEl.remove()
+
+        const merchCartBody = document.querySelector('.merch-cart-body')
+
+        if (merchCartBody.innerHTML.trim() == "") {
+            merchCartBody.innerHTML = '<td colspan="6" id="empty-merch-cart">Your cart is empty</td>';
+        }
+        
+    }
+
+
+
+       
+}
+
+// Helper function to set a cookie
+function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+}
+
+// Helper function to get a cookie
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) {
+            const decodedValue = decodeURIComponent(c.substring(nameEQ.length, c.length));
+            return decodedValue;
+        }
+    }
+    return null;
+}
+
+// Displays cart if there are contents in it
+function displayCart() {
+    // Retrieve the current cart from cookies
+    let cart = JSON.parse(getCookie(cookieName) || "[]");
+    console.log("display cart ", { cart, cookieName })
+    const targetEl = document.querySelector('#cart-details');
+    // Check if the cart is empty
+    if (cart.length === 0) {
+        console.log("The cart is empty.");
+        targetEl.innerHTML = ""
+    } else {
+        // Mention cart details on nav bar
+        //"Cart: # pending items"
+        targetEl.innerHTML = `<a href="merch-cart" class="btn btn-primary btn-sm mt-2" title="Your cart is stored in local cookies">Merch Cart: ${cart.length} Pending Items</a>`;
+    }
+}
+
+
+
