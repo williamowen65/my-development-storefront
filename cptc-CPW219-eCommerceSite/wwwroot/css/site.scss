@@ -22,6 +22,8 @@
     }
 }
 
+$color-mode-type: data;
+
 :root {  
    --wo-background-color: rgba(0, 0, 0, .1);  
    --bs-blue-rgb: 0, 123, 255; /* Added variable for blue color */  
@@ -72,7 +74,6 @@ body {
 
 .body-section {
     box-shadow: 0 .5em 1.5em rgba(0, 0, 0, .1), 0 .125em .5em rgba(0, 0, 0, .15);
-   
 }
 
 .wo-body-background {
@@ -171,7 +172,7 @@ ul.right-marker {
 
 
 
-$color-mode-type: data;
+
 
 @include color-mode(dark) {
     .underglow {
