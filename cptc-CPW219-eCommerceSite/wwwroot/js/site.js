@@ -107,8 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Update Breadcrumb
                 breadcrumb.innerHTML = `
-              <li class="breadcrumb-item">My Offers</li>
-    <li class="breadcrumb-item active" aria-current="page" data-option-type="${accordianItem}">${link}</li>
+              <li class="breadcrumb-item fs-5">My Offers</li>
+    <li class="breadcrumb-item active fs-5" aria-current="page" data-option-type="${accordianItem}">${link}</li>
                 `
 
 
