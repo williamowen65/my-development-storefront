@@ -68,6 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     behavior: 'smooth'
                 });
 
+
+            // Alter text seen in the dom per setting, over a back button.
+            // (Back button) My Offers > Premium Web Servic
+
+            const accordianItem = e.target.closest('.accordion-item').getAttribute("data-item-type")
+            alert(accordianItem)
           
 
 
