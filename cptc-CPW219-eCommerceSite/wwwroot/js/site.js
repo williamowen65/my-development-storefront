@@ -93,12 +93,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Optional: Add a "selected" class for styling
                 clickedOption.classList.add("selected-option");
 
-                const link = accordianItem
+                let link;
+                switch (accordianItem) {
+                    case 'premium':
+                        link = "Premium Services"
+                        break;
+                    case 'barter':
+                        link = "Barter"
+                        break
+                    default: 
+                        link ="no link text"
+                }
 
                 // Update Breadcrumb
                 breadcrumb.innerHTML = `
               <li class="breadcrumb-item">My Offers</li>
-    <li class="breadcrumb-item active" aria-current="page">${accordianItem}</li>
+    <li class="breadcrumb-item active" aria-current="page" data-option-type="${accordianItem}">${link}</li>
                 `
 
 
