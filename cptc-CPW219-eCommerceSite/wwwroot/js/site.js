@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Offers section listener on ".option-level-1"
     document.body.addEventListener('click', (e) => {
-        if (e.target.closest(".option-level-1")) {
+        if (e.target.closest(".option-level-1 .accordion-button")) {
             // Show the selected option at col 12 and hide the other .option-level-1
             // Show the selected option at col 12 and hide the other .option-level-1
             const clickedOption = e.target.closest(".option-level-1");
@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Are we opening or closing?
             const isOpening = !clickedOption.classList.contains("selected-option");
-
 
             if (isOpening) {
 
@@ -57,6 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     option.style.display = "";
                 });
             }
+
+            const container = e.target.closest('.body-section')
+
+                // Get the position of the top of the container
+                const containerTop = container.getBoundingClientRect().top + window.scrollY - 90;
+
+                // Scroll to place it at the top of the view
+                window.scrollTo({
+                    top: containerTop,
+                    behavior: 'smooth'
+                });
+
+          
+
 
         }     
     })
