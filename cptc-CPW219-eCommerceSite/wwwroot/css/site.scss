@@ -193,3 +193,12 @@ ul.right-marker {
     }
 }
 
+.breadcrumb-item:not(.active) {
+    border-bottom: 4px solid white;
+    cursor: pointer;
+
+    &:hover {
+        color: blue;
+        border-bottom: 4px solid blue;
+    }
+}

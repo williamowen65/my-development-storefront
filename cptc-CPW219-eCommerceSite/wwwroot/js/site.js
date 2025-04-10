@@ -15,6 +15,48 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         })
 
+    document.querySelector('#offers').addEventListener("click", (e) => {
+
+        if (e.target.closest(".breadcrumb") && e.target.closest('.breadcrumb-item:not(.active)')) {
+            // navigate back to part of other offers
+            resetOffers()
+        }
+    })
+
+    function resetOffers() {
+
+        const breadcrumb = document.querySelector("#offers .breadcrumb")
+        const allOptions = document.querySelectorAll(".option-level-1");
+        // Show all options again
+        allOptions.forEach(option => {
+            option.style.display = "";
+        // Restore the column width class
+        option.classList.remove("col-md-12");
+            option.classList.add("col-md-6");
+
+            // Make sure both options are closed
+            option.querySelector('.accordion-collapse').classList.remove("show")
+
+        // Remove the selected class
+        option.classList.remove("selected-option");
+            // Update Breadcrumb
+            breadcrumb.innerHTML = `
+              <li class="breadcrumb-item active">My Offers</li>
+                `
+
+            const container = document.querySelector('#offers')
+
+            //// Get the position of the top of the container
+            const containerTop = container.getBoundingClientRect().top + window.scrollY - 90;
+
+            // Scroll to place it at the top of the view
+            window.scrollTo({
+                top: containerTop,
+                behavior: 'smooth'
+            });
+
+        });
+    }
 
     // Offers section listener on ".option-level-1"
     document.body.addEventListener('click', (e) => {
@@ -23,6 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
             // Show the selected option at col 12 and hide the other .option-level-1
             const clickedOption = e.target.closest(".option-level-1");
             const allOptions = document.querySelectorAll(".option-level-1");
+
+
+            // Alter text seen in the dom per setting, over a back button.
+            // (Back button) My Offers > Premium Web Services
+            const accordianItem = e.target.closest('.accordion-item').getAttribute("data-item-type")
+
+            const breadcrumb = document.querySelector("#offers .breadcrumb")
+
 
             // Are we opening or closing?
             const isOpening = !clickedOption.classList.contains("selected-option");
@@ -42,39 +92,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Optional: Add a "selected" class for styling
                 clickedOption.classList.add("selected-option");
+
+                const link = accordianItem
+
+                // Update Breadcrumb
+                breadcrumb.innerHTML = `
+              <li class="breadcrumb-item">My Offers</li>
+    <li class="breadcrumb-item active" aria-current="page">${accordianItem}</li>
+                `
+
+
            
             } else {
-                // Restore the column width class
-                clickedOption.classList.remove("col-md-12");
-                clickedOption.classList.add("col-md-6");
-
-                // Remove the selected class
-                clickedOption.classList.remove("selected-option");
-
-                // Show all options again
-                allOptions.forEach(option => {
-                    option.style.display = "";
-                });
+                resetOffers()
             }
 
-            const container = e.target.closest('.body-section')
-
-                // Get the position of the top of the container
-                const containerTop = container.getBoundingClientRect().top + window.scrollY - 90;
-
-                // Scroll to place it at the top of the view
-                window.scrollTo({
-                    top: containerTop,
-                    behavior: 'smooth'
-                });
+       
 
 
-            // Alter text seen in the dom per setting, over a back button.
-            // (Back button) My Offers > Premium Web Servic
-
-            const accordianItem = e.target.closest('.accordion-item').getAttribute("data-item-type")
-            alert(accordianItem)
-          
+            
 
 
         }     
