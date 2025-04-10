@@ -44,7 +44,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return viewModel;
         }
 
-        public IFormFile GetFormFileFromPath(string path)
+        public IFormFile? GetFormFileFromPath(string path)
         {
             if (string.IsNullOrEmpty(path))
             {
@@ -58,12 +58,27 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             }
 
             var relativePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", path);
-            var fileStream = new FileStream(relativePath, FileMode.Open, FileAccess.Read);
-            return new FormFile(fileStream, 0, fileStream.Length, null, Path.GetFileName(relativePath))
+
+            try
             {
-                Headers = new HeaderDictionary(),
-                ContentType = "application/octet-stream"
-            };
+                var fileStream = new FileStream(relativePath, FileMode.Open, FileAccess.Read);
+                return new FormFile(fileStream, 0, fileStream.Length, null, Path.GetFileName(relativePath))
+                {
+                    Headers = new HeaderDictionary(),
+                    ContentType = "application/octet-stream"
+                };
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine($"File not found: {relativePath}");
+                return null; // Return null if the file is not found
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while accessing the file: {ex.Message}");
+                throw; // Re-throw the exception for unexpected errors
+            }
         }
+
     }
 }
