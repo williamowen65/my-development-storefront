@@ -14,6 +14,52 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.querySelector("#selectPriceModel").classList.remove("disabled")
             })
         })
+
+
+    // Offers section listener on ".option-level-1"
+    document.body.addEventListener('click', (e) => {
+        if (e.target.closest(".option-level-1")) {
+            // Show the selected option at col 12 and hide the other .option-level-1
+            // Show the selected option at col 12 and hide the other .option-level-1
+            const clickedOption = e.target.closest(".option-level-1");
+            const allOptions = document.querySelectorAll(".option-level-1");
+
+            // Are we opening or closing?
+            const isOpening = !clickedOption.classList.contains("selected-option");
+
+
+            if (isOpening) {
+
+                // Hide all other options
+                allOptions.forEach(option => {
+                    if (option !== clickedOption) {
+                        option.style.display = "none";
+                    }
+                });
+
+                // Make the selected option full width
+                clickedOption.classList.remove("col-md-6"); // Remove any existing column classes
+                clickedOption.classList.add("col-md-12"); // Add full width class
+
+                // Optional: Add a "selected" class for styling
+                clickedOption.classList.add("selected-option");
+           
+            } else {
+                // Restore the column width class
+                clickedOption.classList.remove("col-md-12");
+                clickedOption.classList.add("col-md-6");
+
+                // Remove the selected class
+                clickedOption.classList.remove("selected-option");
+
+                // Show all options again
+                allOptions.forEach(option => {
+                    option.style.display = "";
+                });
+            }
+
+        }     
+    })
 })
 
 
