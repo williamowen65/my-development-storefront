@@ -42,8 +42,8 @@
     <Folder Include="wwwroot\images\products\" />
   </ItemGroup>
 
-  <Target Name="CompileSass" BeforeTargets="Build">
-    <Exec Command="npx node-sass wwwroot/css/site.scss wwwroot/css/site.css" />
-  </Target>
+	<Target Name="CompileSass" BeforeTargets="Build">
+		<Exec Command="npx node-sass wwwroot/css/site.scss wwwroot/css/site.css" />
+	</Target>
 
 </Project>

@@ -1,8 +1,34 @@
 // Add your SASS styles here
 
-:root {
-    --wo-background-color: rgba(0, 0, 0, .1);
+@mixin color-mode($mode: light, $root: false) {
+    @if $color-mode-type == "media-query" {
+        @if $root == true {
+            @media (prefers-color-scheme: $mode) {
+                :root {
+                    @content;
+                }
+            }
+        }
+        @else {
+            @media (prefers-color-scheme: $mode) {
+                @content;
+            }
+        }
+    }
+    @else {
+        [data-bs-theme="#{$mode}"] {
+            @content;
+        }
+    }
 }
+
+:root {  
+   --wo-background-color: rgba(0, 0, 0, .1);  
+   --bs-blue-rgb: 0, 123, 255; /* Added variable for blue color */  
+   --bs-green-rgb: 40, 167, 69; /* Added variable for green color */  
+}
+
+
 
 html {
   font-size: 14px;
@@ -24,7 +50,6 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -90,10 +115,7 @@ ul.right-marker {
 }
 
 #hello-world-svg-mobile-container svg {
-
     height: 100%;
-    
-
 }
 
 #hello-world-svg-mobile-container {
@@ -147,4 +169,19 @@ ul.right-marker {
     display: none;
 }
 
+
+
+$color-mode-type: data;
+
+@include color-mode(dark) {
+    .underglow {
+        //box-shadow: 0 0 5px rgba(var(--bs-green-rgb), 0.5), 0 0 10px rgba(var(--bs-green-rgb), 0.4), 0 0 15px rgba(var(--bs-green-rgb), 0.3), 0 0 20px rgba(var(--bs-green-rgb), 0.2);
+        box-shadow: 0 0 5px rgba(var(--bs-blue-rgb), 0.5), 0 0 10px rgba(var(--bs-blue-rgb), 0.4), 0 0 15px rgba(var(--bs-blue-rgb), 0.3), 0 0 20px rgba(var(--bs-blue-rgb), 0.2);
+    }
+}
+@include color-mode(light) {
+    .underglow {
+        box-shadow: 0 0 5px rgba(var(--bs-green-rgb), 0.5), 0 0 10px rgba(var(--bs-green-rgb), 0.4), 0 0 15px rgba(var(--bs-green-rgb), 0.3), 0 0 20px rgba(var(--bs-green-rgb), 0.2);
+    }
+}
 
