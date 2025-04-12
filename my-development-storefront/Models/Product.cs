@@ -70,6 +70,7 @@ namespace cptc_CPW219_eCommerceSite.Models
     public class HomePageViewModel
     {
         public ProductViewModel[] ProductsVM { get; set; }
+        public GeneralContact GeneralContact { get; set; }
         //public Category[] Categories { get; set; }
     }
-}
+} 

@@ -42,14 +42,14 @@ namespace cptc_CPW219_eCommerceSite.Controllers
      
         [HttpPost]
         [Route("api/contact/create")]
-        public IActionResult CreateContact([FromForm] Contact contact)
+        public IActionResult CreateContact([FromForm] GeneralContact contact)
         {
             if (ModelState.IsValid)
             {
                 // Save the contact data to the database or process it as needed
                 // For example:
-                // _context.Contacts.Add(contact);
-                // _context.SaveChanges();
+                 //_context.Contacts.Add(contact);
+                 //_context.SaveChanges();
 
                 return Json(new { success = true, message = "Message sent successfully!" });
             }

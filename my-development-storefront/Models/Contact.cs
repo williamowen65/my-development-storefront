@@ -17,4 +17,9 @@ namespace cptc_CPW219_eCommerceSite.Models
         [Required]
         public string Message { get; set; }
     }
+
+    public class GeneralContact : Contact
+    {
+        public string type = "GeneralContact";
+    }
 }
