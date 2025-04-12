@@ -206,3 +206,8 @@ ul.right-marker {
 .accordion-item {
     border: none;
 }
+
+
+.modal-header > div:first-of-type {
+    flex-grow: 1;
+}
