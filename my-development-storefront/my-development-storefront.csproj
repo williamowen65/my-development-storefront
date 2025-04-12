@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\ProjectsController.cs" />
     <Compile Remove="Views\Home\_partials\Index.cshtml.cs" />
     <Compile Remove="Views\Shared\Index.cshtml.cs" />
   </ItemGroup>
