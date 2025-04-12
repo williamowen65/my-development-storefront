@@ -2,8 +2,15 @@
 
 <form id="GeneralContactForm" class="modal-content" method="post" action="api/contact/create">
     <div class="modal-header card-header bg-primary text-white rounded-top">
+        <div>
+
         <h5 class="modal-title fw-bold">Contact Form</h5>
+            <div class="d-flex">
+                Other forms: <div  class="ms-3" open-sesame="createPremiumContactForm"> Premium Consultation Form</div></div>
+         
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        
     </div>
     <div class="modal-body p-4">
         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
