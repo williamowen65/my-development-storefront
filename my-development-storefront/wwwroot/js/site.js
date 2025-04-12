@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         })
 
+
     document.querySelector('#offers').addEventListener("click", (e) => {
 
         if (e.target.closest(".breadcrumb") && e.target.closest('.breadcrumb-item:not(.active)')) {
@@ -22,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
             resetOffers()
         }
     })
-
     function resetOffers() {
 
         const breadcrumb = document.querySelector("#offers .breadcrumb")
@@ -30,15 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
         // Show all options again
         allOptions.forEach(option => {
             option.style.display = "";
-        // Restore the column width class
-        option.classList.remove("col-md-12");
+            // Restore the column width class
+            option.classList.remove("col-md-12");
             option.classList.add("col-md-6");
 
             // Make sure both options are closed
             option.querySelector('.accordion-collapse').classList.remove("show")
 
-        // Remove the selected class
-        option.classList.remove("selected-option");
+            // Remove the selected class
+            option.classList.remove("selected-option");
             // Update Breadcrumb
             breadcrumb.innerHTML = `
               <li class="breadcrumb-item active">My Offers</li>
@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+  
     // Offers section listener on ".option-level-1"
     document.body.addEventListener('click', (e) => {
         if (e.target.closest(".option-level-1 .accordion-button")) {
@@ -124,7 +125,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         }     
+
+     
     })
+
+
+    // Create an "on modal open event"
+    // IF there is form content in the modal confirm the user wants to close the modal and lose data.
+    // Modal form change tracking and confirmation on close
+    const modals = document.querySelectorAll('.modal');
+    Array.from(modals).forEach(modal => {
+          // Check if the modal has inputs
+          modal.addEventListener("hide.bs.modal", (e) => {
+              const hasInputs = modal.querySelectorAll('input, textarea, select').length > 0;
+              if (hasInputs) {
+                  const userConfirmed = confirm("Do you wish to close the contact form?");
+                  if (!userConfirmed) {
+                      e.preventDefault(); // Prevent the modal from closing
+                  }
+              }
+        })
+    })
+    console.log({modals})
+
 })
 
 
