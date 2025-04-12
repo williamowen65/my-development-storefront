@@ -62,6 +62,21 @@
 
         }
     }
+
+
+    //const modals = document.querySelectorAll('.modal');
+    //Array.from(modals).forEach(modal => {
+    //    // Check if the modal has inputs
+    //    modal.addEventListener("hide.bs.modal", (e) => {
+    //        const hasInputs = modal.querySelectorAll('input, textarea, select').length > 0;
+    //        if (hasInputs) {
+    //            const userConfirmed = confirm("Do you wish to close the contact form?");
+    //            if (!userConfirmed) {
+    //                e.preventDefault(); // Prevent the modal from closing
+    //            }
+    //        }
+    //    })
+    //})
  
       
 });

@@ -119,10 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 resetOffers()
             }
 
-       
-
-
-            
 
 
         }     
@@ -130,23 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
      
     })
 
-
-    // Create an "on modal open event"
-    // IF there is form content in the modal confirm the user wants to close the modal and lose data.
-    // Modal form change tracking and confirmation on close
-    const modals = document.querySelectorAll('.modal');
-    Array.from(modals).forEach(modal => {
-          // Check if the modal has inputs
-          modal.addEventListener("hide.bs.modal", (e) => {
-              const hasInputs = modal.querySelectorAll('input, textarea, select').length > 0;
-              if (hasInputs) {
-                  const userConfirmed = confirm("Do you wish to close the contact form?");
-                  if (!userConfirmed) {
-                      e.preventDefault(); // Prevent the modal from closing
-                  }
-              }
-        })
-    })
 })
 
 

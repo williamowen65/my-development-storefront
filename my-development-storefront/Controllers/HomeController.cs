@@ -46,6 +46,14 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return PartialView("_modals/GeneralContactForm", new GeneralContact());
         }
 
+        [HttpGet]
+        [Route("createPremiumContactForm")]
+        public IActionResult CreatePremiumContact()
+        {
+            return PartialView("_modals/PremiumContactForm", new PremiumContact());
+        }
+
+
         [HttpPost]
         [Route("api/contact/create")]
         public IActionResult CreateContact([FromForm] GeneralContact contact)
@@ -57,6 +65,18 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
             return Json(new { success = true });
         }
+        [HttpPost]
+        [Route("api/contact/create-premium")]
+        public IActionResult CreatePremiumContact([FromForm] PremiumContact contact)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_modals/PremiumContactForm", contact);
+            }
+
+            return Json(new { success = true });
+        }
+
 
 
         [HttpGet]
