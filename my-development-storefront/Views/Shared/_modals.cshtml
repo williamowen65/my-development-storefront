@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+
+    This file is simply a few of empty modals
+
+    I imagine at most, we won't have more than 3 modals up at any given time.
+
+
+    When the modals are closed, they are emptied.
+
+    When the modals are used, the modal content is fetched from the server
+
+    This content could be FORMS
+
+    But a requirement is to use ASP.NET validation with all forms, including ones in modals (without a page load).
+
+    The AJAX logic is delegated to the elements via modal-crud.js 
+    and that is where ASP.NET validation gets inserted into the DOM.
+
+*@
+@{
+}
+
+
+
+<div id="modal-1" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="modal-1-content">
+            <!-- Form content loads here -->
+        </div>
+    </div>
+</div>
+
+<div id="modal-2" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal-2-content">
+            <!-- Form content loads here -->
+        </div>
+    </div>
+</div>
+
+<div id="modal-3" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal-3-content">
+            <!-- Form content loads here -->
+        </div>
+    </div>
+</div>

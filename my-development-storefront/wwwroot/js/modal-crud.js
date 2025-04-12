@@ -1,26 +1,67 @@
 ﻿$(document).ready(function () {
-    $('#createGeneralContactBtn').click(function () {
-        $.get('/Home/CreateContact', function (data) {
-            $('#modalContent').html(data);
-            $('#formModal').modal('show');
+    $('*[open-sesame]').click(function (e) {
+        const target = e.target.getAttribute('open-sesame')
+        $.get(target, function (data) {
+            const modal = $("#modal-1");
+            const modalContent = modal.find('#modal-1-content');
+            if (modalContent.length) {
+                modalContent.html(data); // Set the child content
+                // Use Bootstrap's shown.bs.modal event instead of setTimeout
+                modal.one('shown.bs.modal', function () {
+                    const inputs = modal.find('input, textarea, select');
+                    const firstInput = inputs.get(0);
+                    // focus the first input
+                    if (firstInput) {
+                        firstInput.focus();
+                    }
+
+                    setFormSubmissionListener(modal)
+                });
+
+                modal.modal('show'); // Show the modal
+              
+            } else {
+                console.error("Modal content element not found!");
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            // Error handler
+            console.error("Request failed:", textStatus, errorThrown);
         });
     });
 
-    //$(document).on('submit', '#yourForm', function (e) {
-    //    e.preventDefault();
-    //    var form = $(this);
-    //    $.ajax({
-    //        type: form.attr('method'),
-    //        url: form.attr('action'),
-    //        data: form.serialize(),
-    //        success: function (res) {
-    //            if (res.success) {
-    //                $('#formModal').modal('hide');
-    //            } else {
-    //                $('#modalContent').html(res);
-    //                $.validator.unobtrusive.parse('#yourForm');
-    //            }
-    //        }
-    //    });
-    //});
+    function setFormSubmissionListener(modal) {
+
+        const form = modal.find('form').get(0)
+        console.log({form})
+        if (form) {
+            // Set lisetner
+            $(form).on('submit', function(e) {
+
+                e.preventDefault();
+
+                var form = $(this)
+                const data = form.serialize()
+                console.log({ form, data })
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function (res) {
+                        if (res.success) {
+
+                            alert("successs")
+                            modal.modal('hide');
+                        } else {
+                            modal.find('.modal-content').html(res);
+                        }
+                    }
+                });
+
+             
+            })
+
+        }
+    }
+ 
+      
 });

@@ -1,48 +1,34 @@
-﻿@model HomePageViewModel
+﻿@model GeneralContact
+
+<form id="GeneralContactForm" class="modal-content" method="post" action="api/contact/create">
+    <div class="modal-header card-header bg-primary text-white rounded-top">
+        <h5 class="modal-title fw-bold">Contact Form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body p-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Name" class="form-label fw-semibold"></label>
+            <input asp-for="@Model.Name" class="form-control form-control-lg rounded-3 border-secondary-subtle" placeholder="Your name" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Email" class="form-label fw-semibold"></label>
+            <input asp-for="@Model.Email" class="form-control form-control-lg rounded-3 border-secondary-subtle" placeholder="Your email address" />
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Message" class="form-label fw-semibold"></label>
+            <textarea asp-for="@Model.Message" class="form-control form-control-lg rounded-3 border-secondary-subtle" rows="5" placeholder="How can I help you?"></textarea>
+            <span asp-validation-for="@Model.Message" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal" tabindex="-1">Close</button>
+        <button type="submit" class="btn btn-primary px-4 fw-bold">Send Message</button>
+    </div>
+</form>
 
 
-<div id="GeneralContactModal" class="modal" tabindex="-1">
-   <div class="modal-dialog modal-lg">
-       <form id="GeneralContactForm" class="modal-content" method="post">
-            <div class="modal-header card-header bg-primary text-white rounded-top">
-                <h5 class="modal-title fw-bold">Contact Form</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4">
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-                <div class="form-group mb-3">
-                    <label asp-for="GeneralContact.Name" class="form-label fw-semibold"></label>
-                    <input asp-for="GeneralContact.Name" class="form-control form-control-lg rounded-3 border-secondary-subtle" placeholder="Your name" />
-                    <span asp-validation-for="GeneralContact.Name" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="GeneralContact.Email" class="form-label fw-semibold"></label>
-                    <input asp-for="GeneralContact.Email" class="form-control form-control-lg rounded-3 border-secondary-subtle" placeholder="Your email address" />
-                    <span asp-validation-for="GeneralContact.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group mb-3">
-                    <label asp-for="GeneralContact.Message" class="form-label fw-semibold"></label>
-                    <textarea asp-for="GeneralContact.Message" class="form-control form-control-lg rounded-3 border-secondary-subtle" rows="5" placeholder="How can I help you?"></textarea>
-                    <span asp-validation-for="GeneralContact.Message" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal" tabindex="-1">Close</button>
-                <button type="submit" class="btn btn-primary px-4 fw-bold">Send Message</button>
-            </div>
-       </form>
-   </div>
-</div>
-<script>
-   document.addEventListener("DOMContentLoaded", () => {
-       const modal = document.getElementById('GeneralContactModal');
-       modal.addEventListener('shown.bs.modal', () => {
-           const nameInput = document.getElementById('GeneralContact_Name');
-           if (nameInput) {
-               nameInput.focus();
-           }
-       });
-   });
-</script>
 

@@ -40,9 +40,10 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
         [HttpGet]
+        [Route("createContactForm")]
         public IActionResult CreateContact()
         {
-            return PartialView("_GeneralContactForm", new GeneralContact());
+            return PartialView("_modals/GeneralContactForm", new GeneralContact());
         }
 
         [HttpPost]
@@ -51,7 +52,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("_GeneralContactForm", contact);
+                return PartialView("_modals/GeneralContactForm", contact);
             }
 
             return Json(new { success = true });
