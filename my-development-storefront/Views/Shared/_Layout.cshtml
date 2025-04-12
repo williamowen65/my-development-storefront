@@ -11,8 +11,12 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/select2.css">
 
- 
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/select2.js"></script>
 
     @* <link rel="stylesheet" href="~/cptc_CPW219_eCommerceSite.styles.css" asp-append-version="true" /> *@
     <link rel="stylesheet" href="./css/list-groups.css">
@@ -21,7 +25,6 @@
 </head>
 <body>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // set the data-theme on the html
             // Set initial theme based on stored preference or default to dark
@@ -86,10 +89,10 @@
 
     <header class="py-3  border-bottom sticky-top bg-body">
         <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="ff-consolas  align-items-center fs-4 text-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none  fw-bold" >
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="ff-consolas  align-items-center fs-4 text-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none  fw-bold">
                 Will's Development Storefront
             </a>
-       
+
 
             <div class="d-flex align-items-center">
                 <form class="w-100 me-3" role="search">
@@ -151,9 +154,9 @@
     <script>
         displayCart();
     </script>
-   
+
     @await RenderSectionAsync("Scripts", required: false)
 
-  
+
 </body>
 </html>
