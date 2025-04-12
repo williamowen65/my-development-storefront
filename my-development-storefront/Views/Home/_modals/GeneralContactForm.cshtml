@@ -1,9 +1,9 @@
 ﻿@model HomePageViewModel
 
 
-<div id="GeneralContactForm" class="modal" tabindex="-1">
+<div id="GeneralContactModal" class="modal" tabindex="-1">
    <div class="modal-dialog modal-lg">
-       <form id="contactForm" class="modal-content" method="post">
+       <form id="GeneralContactForm" class="modal-content" method="post">
             <div class="modal-header card-header bg-primary text-white rounded-top">
                 <h5 class="modal-title fw-bold">Contact Form</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -36,7 +36,7 @@
 </div>
 <script>
    document.addEventListener("DOMContentLoaded", () => {
-       const modal = document.getElementById('GeneralContactForm');
+       const modal = document.getElementById('GeneralContactModal');
        modal.addEventListener('shown.bs.modal', () => {
            const nameInput = document.getElementById('GeneralContact_Name');
            if (nameInput) {
@@ -46,41 +46,3 @@
    });
 </script>
 
-<script>
-    $(document).ready(function () {
-        $('#contactForm').submit(function (event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // Create a formatted object from form data
-            var formData = {
-                Name: $('#GeneralContact_Name').val(),
-                Email: $('#GeneralContact_Email').val(),
-                Message: $('#GeneralContact_Message').val()
-            };
-
-            $.ajax({
-                type: 'POST',
-                url: '/api/contact/create',
-                data: formData,
-                success: function (response) {
-                    console.log({response})
-                    // Handle success response
-
-                      alert(response.message);
-                    if(response.success){
-                        $('#GeneralContactForm').modal('hide');
-                        $('#GeneralContactForm form').get(0).reset();
-                    } else {
-                        // Apply response.errors to form
-                        // response.errors.
-                    }
-                },
-                error: function (error) {
-                    // Handle error response
-                    console.log({error})
-                    alert('An error occurred. Please try again.');
-                }
-            });
-        });
-    });
-</script>

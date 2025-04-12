@@ -22,4 +22,9 @@ namespace cptc_CPW219_eCommerceSite.Models
     {
         public string type = "GeneralContact";
     }
+
+    public class PremiumContact : Contact
+    {
+        public string type = "PremiumContact";
+    }
 }

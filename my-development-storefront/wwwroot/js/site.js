@@ -3,6 +3,7 @@
 
 // Write your JavaScript code.
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
     Array.from(document.querySelectorAll('#pricingModelForm input'))

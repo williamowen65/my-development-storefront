@@ -71,6 +71,7 @@ namespace cptc_CPW219_eCommerceSite.Models
     {
         public ProductViewModel[] ProductsVM { get; set; }
         public GeneralContact GeneralContact { get; set; }
+        public PremiumContact PremiumContact { get; set; }
         //public Category[] Categories { get; set; }
     }
 } 
