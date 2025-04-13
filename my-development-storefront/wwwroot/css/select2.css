@@ -170,6 +170,10 @@ ul.right-marker {
   border-radius: 7px 7px 0px 0px;
 }
 
+.select2-search--hide + .select2-results ul > li:first-child {
+  border-radius: 4px 4px 0px 0px;
+}
+
 .select2-container {
   box-sizing: border-box;
   display: inline-block;

@@ -1,4 +1,11 @@
-﻿<select class="js-example-basic-single text-body-emphasis" name="state" style="width: 100%" >
+﻿
+<style>
+    #modal-1 #select2-state-w0-result-z0bw-general {
+        display:none;
+    }
+</style>
+
+<select class="js-example-basic-single text-body-emphasis" name="state" style="width: 100%" >
     <option></option>
     <option value="general">Ask a General Question</option>
     <option value="consultation">Schedule a Consultation</option>
@@ -14,7 +21,16 @@
        $('.js-example-basic-single').select2({
            dropdownParent: $('#modal-1'),
             placeholder:"Select another contact form",
-            width: "100%"
+            width: "100%",
+            minimumResultsForSearch: Infinity
+            //   Template for results in dropdown
+            // templateResult: formatOption,
+            // Template for selected option
+            // templateSelection: formatOptionSelection,
+            // Escape HTML in the data
+            // escapeMarkup: function(markup) {
+            //     return markup;
+            // }
        });
 
        // These two lines are a work around to help the select2 get oriented in space (it was offset by scroll bar width)
