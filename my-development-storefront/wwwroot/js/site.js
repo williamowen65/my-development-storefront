@@ -17,13 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
         })
 
 
-    document.querySelector('#offers').addEventListener("click", (e) => {
+    const offerSection = document.querySelector('#offers')
+    if (offerSection) {
 
+    offerSection.addEventListener("click", (e) => {
         if (e.target.closest(".breadcrumb") && e.target.closest('.breadcrumb-item:not(.active)')) {
             // navigate back to part of other offers
             resetOffers()
         }
     })
+    }
     function resetOffers() {
 
         const breadcrumb = document.querySelector("#offers .breadcrumb")
