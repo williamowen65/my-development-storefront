@@ -23,6 +23,9 @@ $select2-border-color: #aaa;
     }
 }
 
+.select2-search__field{
+    outline: none;
+}
 .select2-search.select2-search--dropdown {
     border-radius: 7px 7px 0px 0px;
 }
