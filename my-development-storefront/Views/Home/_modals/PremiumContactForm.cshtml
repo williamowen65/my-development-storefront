@@ -27,7 +27,9 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal" tabindex="-1">Close</button>
+        <div class="flex-grow-1">
+            @Html.Partial("../_partials/_select2-forms.cshtml")
+        </div>
         <button type="submit" class="btn btn-primary px-4 fw-bold">Send Message</button>
     </div>
 </form>
