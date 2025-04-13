@@ -2,7 +2,7 @@
 @use 'site' as *;
 
 
-$select2-border-radius: 4px;
+$select2-border-radius: 7px;
 $select2-border-color: #aaa;
 
 
@@ -23,6 +23,9 @@ $select2-border-color: #aaa;
     }
 }
 
+.select2-search.select2-search--dropdown {
+    border-radius: 7px 7px 0px 0px;
+}
 // Core container styles
 // --------------------
 .select2-container {

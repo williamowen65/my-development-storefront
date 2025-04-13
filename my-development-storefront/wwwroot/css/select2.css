@@ -162,6 +162,10 @@ ul.right-marker {
   background-color: var(--bs-primary-bg-subtle);
 }
 
+.select2-search.select2-search--dropdown {
+  border-radius: 7px 7px 0px 0px;
+}
+
 .select2-container {
   box-sizing: border-box;
   display: inline-block;
@@ -233,7 +237,7 @@ ul.right-marker {
 
 .select2-dropdown {
   border: 1px solid #aaa;
-  border-radius: 4px;
+  border-radius: 7px;
   box-sizing: border-box;
   display: block;
   position: absolute;
@@ -321,7 +325,7 @@ ul.right-marker {
 
 .select2-container--default .select2-selection--single {
   border: 1px solid #aaa;
-  border-radius: 4px;
+  border-radius: 7px;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   line-height: 34px;
@@ -376,7 +380,7 @@ ul.right-marker {
 }
 .select2-container--default .select2-selection--multiple {
   border: 1px solid #aaa;
-  border-radius: 4px;
+  border-radius: 7px;
   cursor: text;
   padding-bottom: 5px;
   padding-right: 5px;
@@ -398,7 +402,7 @@ ul.right-marker {
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
   background-color: #e4e4e4;
   border: 1px solid #aaa;
-  border-radius: 4px;
+  border-radius: 7px;
   box-sizing: border-box;
   display: inline-block;
   margin-left: 5px;
@@ -421,8 +425,8 @@ ul.right-marker {
   background-color: transparent;
   border: none;
   border-right: 1px solid #aaa;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
   color: #999;
   cursor: pointer;
   font-size: 1em;
@@ -450,8 +454,8 @@ ul.right-marker {
   border-right: none;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
 .select2-container--default[dir=rtl] .select2-selection--multiple .select2-selection__clear {
   float: left;
@@ -538,7 +542,7 @@ ul.right-marker {
 .select2-container--classic .select2-selection--single {
   background-color: #f7f7f7;
   border: 1px solid #aaa;
-  border-radius: 4px;
+  border-radius: 7px;
   outline: 0;
   background-image: -webkit-linear-gradient(top, white 50%, #eeeeee 100%);
   background-image: -o-linear-gradient(top, white 50%, #eeeeee 100%);
@@ -566,8 +570,8 @@ ul.right-marker {
   background-color: #ddd;
   border: none;
   border-left: 1px solid #aaa;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
   height: 26px;
   position: absolute;
   top: 1px;
@@ -598,8 +602,8 @@ ul.right-marker {
   border: none;
   border-right: 1px solid #aaa;
   border-radius: 0;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
   left: 1px;
   right: auto;
 }
@@ -636,7 +640,7 @@ ul.right-marker {
 }
 .select2-container--classic .select2-selection--multiple {
   border: 1px solid #aaa;
-  border-radius: 4px;
+  border-radius: 7px;
   cursor: text;
   outline: 0;
   padding-bottom: 5px;
@@ -651,7 +655,7 @@ ul.right-marker {
 .select2-container--classic .select2-selection--multiple .select2-selection__choice {
   background-color: #e4e4e4;
   border: 1px solid #aaa;
-  border-radius: 4px;
+  border-radius: 7px;
   display: inline-block;
   margin-left: 5px;
   margin-top: 5px;
@@ -665,8 +669,8 @@ ul.right-marker {
 .select2-container--classic .select2-selection--multiple .select2-selection__choice__remove {
   background-color: transparent;
   border: none;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
   color: #888;
   cursor: pointer;
   font-size: 1em;
@@ -688,8 +692,8 @@ ul.right-marker {
 .select2-container--classic[dir=rtl] .select2-selection--multiple .select2-selection__choice__remove {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
 .select2-container--classic.select2-container--open .select2-selection--multiple {
   border: 1px solid #5897fb;
