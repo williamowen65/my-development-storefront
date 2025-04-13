@@ -13,7 +13,14 @@
    $(document).ready(function() {
        $('.js-example-basic-single').select2({
            dropdownParent: $('#modal-1'),
-            placeholder:"Select another contact form"
+            placeholder:"Select another contact form",
+            width: "100%"
        });
+
+       // These two lines are a work around to help the select2 get oriented in space (it was offset by scroll bar width)
+        $('.js-example-basic-single').select2('open')
+         $('.js-example-basic-single').select2('close')
+
+       
    });
 </script>
