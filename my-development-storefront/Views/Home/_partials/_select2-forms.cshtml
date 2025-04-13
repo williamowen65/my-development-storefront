@@ -23,19 +23,23 @@
             placeholder:"Select another contact form",
             width: "100%",
             minimumResultsForSearch: Infinity
-            //   Template for results in dropdown
-            // templateResult: formatOption,
-            // Template for selected option
-            // templateSelection: formatOptionSelection,
-            // Escape HTML in the data
-            // escapeMarkup: function(markup) {
-            //     return markup;
-            // }
        });
 
        // These two lines are a work around to help the select2 get oriented in space (it was offset by scroll bar width)
         $('.js-example-basic-single').select2('open')
-         $('.js-example-basic-single').select2('close')
+        $('.js-example-basic-single').select2('close')
+
+             $('.js-example-basic-single').on('select2:select', function(e) {
+               var data = e.params.data;
+                const formType = data.id
+
+                if(formType == "consultation"){
+                    // open-seasme the consultiation
+                     openSesame('createPremiumContactForm')
+                } else if (formType == "general"){
+                    openSesame("createContactForm")
+                }
+            })
 
        
    });

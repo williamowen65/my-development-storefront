@@ -1,7 +1,15 @@
 ﻿$(document).ready(function () {
-    // Use proper event delegation with on() method
-    $(document).on('click', '*[open-sesame]', function (e) {
-        const target = e.currentTarget.getAttribute('open-sesame');
+    
+    window.openSesame = function(e) {
+        let target;
+
+        console.log(e, );
+        if (e.originalEvent) {
+            target = e.currentTarget.getAttribute('open-sesame');
+        } else if (typeof e === "string") {
+            target = e;
+        }
+
         $.get(target, function (data) {
             const modal = $("#modal-1");
             const modalContent = modal.find('#modal-1-content');
@@ -43,8 +51,13 @@
             // Error handler
             console.error("Request failed:", textStatus, errorThrown);
         });
-    });
+    }
 
+
+    // Use proper event delegation with on() method
+    $(document).on('click', '*[open-sesame]', openSesame);
+
+    
     function setFormSubmissionListener(modal) {
         const form = modal.find('form').get(0);
         console.log({ form });
