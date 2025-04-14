@@ -27,4 +27,15 @@ namespace cptc_CPW219_eCommerceSite.Models
     {
         public string type = "PremiumContact";
     }
+
+    public class BarterContact : Contact
+    {
+        public string type = "BarterContact";
+        
+        [Required]
+        public string ProjectDescription { get; set; }
+        
+        [Required]
+        public string SkillsOffered { get; set; }
+    }
 }

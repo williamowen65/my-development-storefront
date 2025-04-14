@@ -1,5 +1,4 @@
-﻿
-<style>
+﻿<style>
     #modal-1 #select2-state-w0-result-z0bw-general {
         display:none;
     }
@@ -34,10 +33,12 @@
                 const formType = data.id
 
                 if(formType == "consultation"){
-                    // open-seasme the consultiation
+                    // open-sesme the consultiation
                      openSesame('createPremiumContactForm')
                 } else if (formType == "general"){
                     openSesame("createContactForm")
+                } else if(formType == "barter"){
+                    openSesame("createBarterContactForm")
                 }
             })
 

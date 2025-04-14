@@ -1,0 +1,45 @@
+@model BarterContact
+
+<form id="BarterContactForm" class="modal-content" method="post" action="api/contact/create-barter">
+    <div class="modal-header card-header bg-primary text-white rounded-top">
+        <div class="flex-grow-1">
+            <h5 class="modal-title fw-bold">Barter Project Form</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body p-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Name" class="form-label fw-semibold"></label>
+            <input asp-for="@Model.Name" class="form-control form-control-lg rounded-3 border-secondary-subtle" placeholder="Your name" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Email" class="form-label fw-semibold"></label>
+            <input asp-for="@Model.Email" class="form-control form-control-lg rounded-3 border-secondary-subtle" placeholder="Your email address" />
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.ProjectDescription" class="form-label fw-semibold">Project Description</label>
+            <textarea asp-for="@Model.ProjectDescription" class="form-control form-control-lg rounded-3 border-secondary-subtle" rows="3" placeholder="Describe your project idea in detail"></textarea>
+            <span asp-validation-for="@Model.ProjectDescription" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.SkillsOffered" class="form-label fw-semibold">Skills/Services You Offer</label>
+            <textarea asp-for="@Model.SkillsOffered" class="form-control form-control-lg rounded-3 border-secondary-subtle" rows="3" placeholder="Describe the skills or services you can offer in exchange"></textarea>
+            <span asp-validation-for="@Model.SkillsOffered" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Message" class="form-label fw-semibold">Additional Information</label>
+            <textarea asp-for="@Model.Message" class="form-control form-control-lg rounded-3 border-secondary-subtle" rows="3" placeholder="Any additional details or questions"></textarea>
+            <span asp-validation-for="@Model.Message" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="flex-grow-1">
+            @Html.Partial("../_partials/_select2-forms.cshtml")
+        </div>
+        <button type="submit" class="btn btn-primary px-4 fw-bold">Submit Proposal</button>
+    </div>
+</form>

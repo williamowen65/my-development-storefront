@@ -53,6 +53,12 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return PartialView("_modals/PremiumContactForm", new PremiumContact());
         }
 
+        [HttpGet]
+        [Route("createBarterContactForm")]
+        public IActionResult CreateBarterContact()
+        {
+            return PartialView("_modals/BarterContactForm", new BarterContact());
+        }
 
         [HttpPost]
         [Route("api/contact/create")]
@@ -65,6 +71,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
             return Json(new { success = true });
         }
+
         [HttpPost]
         [Route("api/contact/create-premium")]
         public IActionResult CreatePremiumContact([FromForm] PremiumContact contact)
@@ -77,7 +84,17 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return Json(new { success = true });
         }
 
+        [HttpPost]
+        [Route("api/contact/create-barter")]
+        public IActionResult CreateBarterContact([FromForm] BarterContact contact)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_modals/BarterContactForm", contact);
+            }
 
+            return Json(new { success = true });
+        }
 
         [HttpGet]
         [Route("login")]
