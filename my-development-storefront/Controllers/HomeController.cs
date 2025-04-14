@@ -199,79 +199,11 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
         [HttpGet]
-        [Route("consultation-editor")]
-        public IActionResult ConsultationEditor_Read()
-        {
-            // Check session for Email to see if they are logged in
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
-            // Get all premium contacts
-            var consultations = _context.Set<PremiumContact>().ToList();
-
-            return View(consultations);
-        }
-
-        [HttpGet]
-        [Route("consultations/{id}")]
-        public IActionResult ConsultationDetails(int id)
-        {
-            // Check session for Email to see if they are logged in
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
-            // Get the specific consultation
-            var consultation = _context.Set<PremiumContact>().FirstOrDefault(c => c.Id == id);
-
-            if (consultation == null)
-            {
-                return NotFound();
-            }
-
-            return PartialView(consultation);
-        }
-
-        [HttpDelete]
-        [Route("consultations/delete/{id}")]
-        public async Task<IActionResult> DeleteConsultation(int id)
-        {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
-                return Unauthorized();
-            }
-
-            var consultation = await _context.Set<PremiumContact>().FindAsync(id);
-
-            if (consultation == null)
-            {
-                return NotFound();
-            }
-
-            try
-            {
-                _context.Remove(consultation);
-                await _context.SaveChangesAsync();
-                return Json(new { success = true });
-            }
-            catch
-            {
-                return Json(new { success = false });
-            }
-        }
-
-        [HttpGet]
         [Route("merch-editor/create")]
         public IActionResult MerchEditor_Create()
         {
-
             return PartialView();
         }
-
-
 
         [HttpPost]
         [Route("merch-editor")]
@@ -306,9 +238,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return PartialView(productVM);
         }
 
-
-
-
         private async Task<string> RenderPartialViewToString(string viewName, object model)
         {
             ViewData.Model = model;
@@ -331,8 +260,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 return writer.GetStringBuilder().ToString();
             }
         }
-
-
 
         [HttpGet]
         [Route("merch-editor/edit/{id?}")]
@@ -440,8 +367,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             }
         }
 
-
-
         private string SaveImage(IFormFile imageFile)
         {
             if (imageFile == null || imageFile.Length == 0)
@@ -474,7 +399,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return imagePath.Replace("wwwroot", "").Replace("\\", "/");
         }
 
-
         [HttpGet]
         [Route("merch-cart")]
         public IActionResult MerchCart()
@@ -504,8 +428,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return View(cartProducts);
         }
 
-
-        
         [HttpGet]
         [Route("api/add-item-to-cart/{productId?}")]
         public JsonResult AddItemToCart(int? productId)
@@ -668,9 +590,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
-     
 
     }
 
