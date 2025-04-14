@@ -14,6 +14,9 @@
             const modal = $("#modal-1");
             const modalContent = modal.find('#modal-1-content');
             if (modalContent.length) {
+
+                // TODO: Update html without destroying select2
+
                 modalContent.html(data); // Set the child content
 
                 // Use Bootstrap's shown.bs.modal event
