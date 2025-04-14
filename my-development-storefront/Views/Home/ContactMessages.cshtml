@@ -8,7 +8,7 @@
     <h2>Contact Messages</h2>
     
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 z-2">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="list-group list-group-flush message-list">
+                <div class="list-group list-group-flush message-list mx-md-0">
                     @foreach (var message in Model)
                     {
                         <a href="#" class="list-group-item list-group-item-action message-item @(message.IsRead ? "" : "fw-bold")" 
