@@ -139,7 +139,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 if (u != null && BCrypt.Net.BCrypt.Verify(loginModel.Password, u.Password))
                 {
                     LogUserIn(loginModel.Email);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AdminDashboard", "Home");
                 }
             }
 
@@ -566,6 +566,19 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             {
                 return Json(new { success = false });
             }
+        }
+
+        [HttpGet]
+        [Route("admin")]
+        public IActionResult AdminDashboard()
+        {
+            // Check session for Email to see if they are logged in
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            return View();
         }
 
         private void LogUserIn(string email)

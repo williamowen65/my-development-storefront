@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4">Admin Dashboard</h1>
+            <p class="lead">Welcome to your administration panel.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Messages</h5>
+                </div>
+                <div class="card-body">
+                    <p>View and manage contact messages from customers.</p>
+                    <a asp-action="ContactMessages" asp-controller="Home" class="btn btn-outline-primary">Manage Messages</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Products</h5>
+                </div>
+                <div class="card-body">
+                    <p>Add, edit, and remove products from your store.</p>
+                    <a asp-action="MerchEditor_Read" asp-controller="Home" class="btn btn-outline-success">Manage Products</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Website Settings</h5>
+                </div>
+                <div class="card-body">
+                    <p>Configure your website settings.</p>
+                    <a href="#" class="btn btn-outline-info disabled">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-warning">
+                    <h5 class="mb-0">Recent Activity</h5>
+                </div>
+                <div class="card-body">
+                    <p>No recent activity to display.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Quick Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <p>Statistics dashboard coming soon.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

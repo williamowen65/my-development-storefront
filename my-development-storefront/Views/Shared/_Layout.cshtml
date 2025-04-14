@@ -16,7 +16,6 @@
 
     <link href="~/css/select2.css" rel="stylesheet" />
 
- 
 
     @* <link rel="stylesheet" href="~/cptc_CPW219_eCommerceSite.styles.css" asp-append-version="true" /> *@
     <link rel="stylesheet" href="./css/list-groups.css">
@@ -110,7 +109,7 @@
             @if (userEmail != null)
             {
                 <div class="d-flex justify-content-end px-2 align-items-center gap-2" style="">
-                    <div>Logged in as @userEmail</div>
+                    <div>Logged in as <a asp-controller="Home" asp-action="AdminDashboard" class="text-decoration-underline">@userEmail</a></div>
                     <a asp-action="Logout" asp-controller="Home">Log out</a>
                 </div>
             }
