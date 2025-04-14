@@ -81,6 +81,10 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 return PartialView("_modals/PremiumContactForm", contact);
             }
 
+            // Here you would save the contact to the database
+            _context.Add(contact);
+            _context.SaveChanges();
+
             return Json(new { success = true });
         }
 
@@ -177,6 +181,71 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
         [HttpGet]
+        [Route("consultation-editor")]
+        public IActionResult ConsultationEditor_Read()
+        {
+            // Check session for Email to see if they are logged in
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Get all premium contacts
+            var consultations = _context.Set<PremiumContact>().ToList();
+
+            return View(consultations);
+        }
+
+        [HttpGet]
+        [Route("consultations/{id}")]
+        public IActionResult ConsultationDetails(int id)
+        {
+            // Check session for Email to see if they are logged in
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Get the specific consultation
+            var consultation = _context.Set<PremiumContact>().FirstOrDefault(c => c.Id == id);
+
+            if (consultation == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView(consultation);
+        }
+
+        [HttpDelete]
+        [Route("consultations/delete/{id}")]
+        public async Task<IActionResult> DeleteConsultation(int id)
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return Unauthorized();
+            }
+
+            var consultation = await _context.Set<PremiumContact>().FindAsync(id);
+
+            if (consultation == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _context.Remove(consultation);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+        }
+
+        [HttpGet]
         [Route("merch-editor/create")]
         public IActionResult MerchEditor_Create()
         {
@@ -220,7 +289,6 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
-     
 
 
         private async Task<string> RenderPartialViewToString(string viewName, object model)
@@ -258,7 +326,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-           
+
             // Look up the product by ID
             Product? product = _context.Products.Find(id);
 

@@ -14,7 +14,13 @@ namespace cptc_CPW219_eCommerceSite.data
         public DbSet<Category> Categories { get; set; } = null!;
 
         public DbSet<Product> Products { get; set; } = null!;
-   
+
+        public DbSet<GeneralContact> generalContacts { get; set; } = null!;
+
+            public DbSet<PremiumContact> premiumContacts { get; set; } = null!;
+        public DbSet<BarterContact> barterContacts { get; set; } = null!;
+
+
     }
 
 }

@@ -1,0 +1,179 @@
+@model List<PremiumContact>
+@{
+    ViewData["Title"] = "Consultation Management";
+}
+
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="fw-bold mb-0">Consultation Management</h1>
+            <p class="text-muted">Manage consultation requests from clients</p>
+        </div>
+        <div class="col-auto">
+            <button id="refreshBtn" class="btn btn-outline-secondary me-2">
+                <i class="bi bi-arrow-repeat me-1"></i> Refresh
+            </button>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">Consultation Requests</h5>
+            <div class="input-group input-group-sm w-auto">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search consultations...">
+                <span class="input-group-text bg-white border-start-0">
+                    <i class="bi bi-search"></i>
+                </span>
+            </div>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Company</th>
+                        <th>Type</th>
+                        <th>Budget</th>
+                        <th>Scheduled</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="consultationTableBody">
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var consultation in Model)
+                        {
+                            <tr id="consultation-row-@consultation.Id">
+                                <td>@consultation.PreferredDate.ToShortDateString()</td>
+                                <td>
+                                    <div class="fw-bold">@consultation.Name</div>
+                                    <div class="small text-muted">@consultation.Email</div>
+                                </td>
+                                <td>@consultation.CompanyName</td>
+                                <td>@consultation.ConsultationType</td>
+                                <td>@consultation.Budget</td>
+                                <td>
+                                    <div>@consultation.PreferredDate.ToShortDateString()</div>
+                                    <div class="small text-muted">@consultation.PreferredTime.ToString(@"hh\:mm")</div>
+                                </td>
+                                <td>
+                                    @if(consultation.IsUrgent)
+                                    {
+                                        <span class="badge bg-danger">Urgent</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Normal</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="#" class="btn btn-outline-primary view-consultation"
+                                           data-consultation-id="@consultation.Id">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <button class="btn btn-outline-danger delete-consultation"
+                                                data-consultation-id="@consultation.Id">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center py-4 text-muted">
+                                <i class="bi bi-calendar3 fs-2 mb-2 d-block"></i>
+                                <div>No consultation requests found.</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="consultationViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-primary text-white border-0">
+                <h5 class="modal-title fw-bold">Consultation Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="consultationViewContent" class="modal-body p-4">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // View consultation request
+            $(document).on("click", ".view-consultation", function (e) {
+                e.preventDefault();
+                const id = $(this).data("consultation-id");
+                
+                // In a real implementation, this would fetch data from server
+                $("#consultationViewContent").html("Loading...");
+                $("#consultationViewModal").modal("show");
+                
+                fetch(`/consultations/${id}`)
+                    .then(response => response.text())
+                    .then(html => {
+                        $("#consultationViewContent").html(html);
+                    })
+                    .catch(error => {
+                        console.error("Error loading consultation:", error);
+                        $("#consultationViewContent").html("Error loading consultation details.");
+                    });
+            });
+            
+            // Delete consultation request
+            $(document).on("click", ".delete-consultation", function (e) {
+                e.preventDefault();
+                const id = $(this).data("consultation-id");
+                
+                if (confirm("Are you sure you want to delete this consultation request?")) {
+                    fetch(`/consultations/delete/${id}`, {
+                        method: "DELETE"
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                $(`#consultation-row-${id}`).fadeOut(300, function () {
+                                    $(this).remove();
+                                });
+                            } else {
+                                alert("Failed to delete consultation request.");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error deleting consultation:", error);
+                            alert("An error occurred while deleting the consultation request.");
+                        });
+                }
+            });
+            
+            // Search functionality
+            $("#searchInput").on("keyup", function () {
+                const value = $(this).val().toLowerCase();
+                $("#consultationTableBody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+            
+            // Refresh button
+            $("#refreshBtn").click(function() {
+                location.reload();
+            });
+        });
+    </script>
+}

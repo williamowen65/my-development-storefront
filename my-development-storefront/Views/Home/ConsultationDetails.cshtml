@@ -1,0 +1,100 @@
+@model PremiumContact
+
+<div class="consultation-details">
+    <div class="row">
+        <div class="col-md-6">
+            <h5 class="fw-bold border-bottom pb-2 mb-3">Client Information</h5>
+            <div class="mb-3">
+                <label class="form-label text-muted">Full Name</label>
+                <div class="fw-medium">@Model.Name</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted">Email Address</label>
+                <div class="fw-medium">@Model.Email</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted">Phone Number</label>
+                <div class="fw-medium">@Model.PhoneNumber</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted">Company</label>
+                <div class="fw-medium">@Model.CompanyName</div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <h5 class="fw-bold border-bottom pb-2 mb-3">Consultation Details</h5>
+            <div class="mb-3">
+                <label class="form-label text-muted">Consultation Type</label>
+                <div class="fw-medium">
+                    @{
+                        var consultationType = Model.ConsultationType switch
+                        {
+                            "WebDevelopment" => "Web Development",
+                            "MobileApp" => "Mobile App Development",
+                            "ECommerce" => "E-commerce Solutions",
+                            "SEO" => "SEO Optimization",
+                            "UXDesign" => "UX/UI Design",
+                            "Other" => "Other",
+                            _ => Model.ConsultationType
+                        };
+                    }
+                    @consultationType
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted">Budget Range</label>
+                <div class="fw-medium">
+                    @{
+                        var budget = Model.Budget switch
+                        {
+                            "Under5k" => "Under $5,000",
+                            "5kTo10k" => "$5,000 - $10,000",
+                            "10kTo25k" => "$10,000 - $25,000",
+                            "25kTo50k" => "$25,000 - $50,000",
+                            "50kPlus" => "$50,000+",
+                            _ => Model.Budget
+                        };
+                    }
+                    @budget
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted">Preferred Date/Time</label>
+                <div class="fw-medium">@Model.PreferredDate.ToString("MMMM d, yyyy") at @Model.PreferredTime.ToString(@"hh\:mm tt")</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted">Priority</label>
+                <div>
+                    @if(Model.IsUrgent)
+                    {
+                        <span class="badge bg-danger">Urgent</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Normal</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <h5 class="fw-bold border-bottom pb-2 mb-3">Project Details</h5>
+        <div class="card card-body bg-light">
+            <p class="mb-0">@Model.Message</p>
+        </div>
+    </div>
+    
+    <div class="mt-4 d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <div>
+            <button id="scheduleConsultation" class="btn btn-success me-2">
+                <i class="bi bi-calendar-check me-1"></i> Schedule
+            </button>
+            <button id="sendResponse" class="btn btn-primary">
+                <i class="bi bi-reply me-1"></i> Respond
+            </button>
+        </div>
+    </div>
+</div>
