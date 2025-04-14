@@ -26,6 +26,27 @@ namespace cptc_CPW219_eCommerceSite.Models
     public class PremiumContact : Contact
     {
         public string type = "PremiumContact";
+        
+        [Required]
+        public string CompanyName { get; set; }
+        
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+        
+        [Required]
+        public string ConsultationType { get; set; }
+        
+        [Required]
+        public string Budget { get; set; }
+        
+        [DataType(DataType.Date)]
+        public DateTime PreferredDate { get; set; }
+        
+        [DataType(DataType.Time)]
+        public TimeSpan PreferredTime { get; set; }
+        
+        public bool IsUrgent { get; set; }
     }
 
     public class BarterContact : Contact
