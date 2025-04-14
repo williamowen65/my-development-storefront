@@ -1,0 +1,173 @@
+@model ContactMessage
+
+<div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Message from @Model.Name</h5>
+    <div>
+        <div class="dropdown d-inline-block me-2">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Status: @(Model.Status ?? "New")
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+                <li><a class="dropdown-item status-item" href="#" data-status="New">New</a></li>
+                <li><a class="dropdown-item status-item" href="#" data-status="In Progress">In Progress</a></li>
+                <li><a class="dropdown-item status-item" href="#" data-status="Completed">Completed</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-sm btn-danger delete-message" data-id="@Model.Id">Delete</button>
+    </div>
+</div>
+
+<div class="card-body">
+    <div class="mb-3">
+        <span class="badge @GetBadgeClass(Model.ContactType)">@Model.ContactType</span>
+        <small class="text-muted ms-2">@Model.CreatedAt.ToString("MMM d, yyyy h:mm tt")</small>
+    </div>
+    
+    <div class="mb-3">
+        <h6>Contact Information:</h6>
+        <p><strong>Email:</strong> <a href="mailto:@Model.Email">@Model.Email</a></p>
+        
+        @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+        {
+            <p><strong>Phone:</strong> <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a></p>
+        }
+    </div>
+    
+    <div class="mb-3">
+        <h6>Message:</h6>
+        <p>@Model.Message</p>
+    </div>
+    
+    @if (Model.ContactType == "Premium")
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Premium Consultation Details
+                @if (Model.IsUrgent)
+                {
+                    <span class="badge bg-danger ms-2">URGENT</span>
+                }
+            </div>
+            <div class="card-body">
+                <p><strong>Company:</strong> @Model.CompanyName</p>
+                <p><strong>Consultation Type:</strong> @Model.ConsultationType</p>
+                <p><strong>Budget:</strong> @Model.Budget</p>
+                @if (Model.PreferredDate.HasValue)
+                {
+                    <p><strong>Preferred Date/Time:</strong> @Model.PreferredDate?.ToShortDateString() at @Model.PreferredTime?.ToString(@"hh\:mm")</p>
+                }
+            </div>
+        </div>
+    }
+    
+    @if (Model.ContactType == "Barter")
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Barter Proposal
+            </div>
+            <div class="card-body">
+                <p><strong>Project Description:</strong> @Model.ProjectDescription</p>
+                <p><strong>Skills Offered:</strong> @Model.SkillsOffered</p>
+            </div>
+        </div>
+    }
+    
+    <div class="mt-4">
+        <h6>Reply:</h6>
+        <div class="mb-3">
+            <textarea class="form-control" id="replyMessage" rows="3" placeholder="Type your reply..."></textarea>
+        </div>
+        <button class="btn btn-primary" id="sendReply" data-email="@Model.Email">Send Reply</button>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Update status
+        $('.status-item').on('click', function(e) {
+            e.preventDefault();
+            
+            const status = $(this).data('status');
+            const messageId = @Model.Id;
+            
+            $.ajax({
+                url: '/messages/' + messageId + '/status',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ status: status }),
+                success: function() {
+                    // Update the dropdown button text
+                    $('#statusDropdown').text('Status: ' + status);
+                    
+                    // Update the message list item status
+                    $('.message-item[data-id="' + messageId + '"]').attr('data-status', status);
+                    $('.message-item[data-id="' + messageId + '"] small.text-muted').text('Status: ' + status);
+                },
+                error: function() {
+                    alert('Error updating status');
+                }
+            });
+        });
+        
+        // Delete message
+        $('.delete-message').on('click', function() {
+            if (!confirm('Are you sure you want to delete this message?')) {
+                return;
+            }
+            
+            const messageId = $(this).data('id');
+            
+            $.ajax({
+                url: '/messages/' + messageId,
+                method: 'DELETE',
+                success: function(response) {
+                    if (response.success) {
+                        // Remove the message from the list
+                        $('.message-item[data-id="' + messageId + '"]').remove();
+                        
+                        // Clear the detail panel
+                        $('.message-detail-panel').html(`
+                            <div class="card-body text-center text-muted">
+                                <p class="mt-5">Message deleted</p>
+                            </div>
+                        `);
+                    } else {
+                        alert('Error deleting message');
+                    }
+                },
+                error: function() {
+                    alert('Error deleting message');
+                }
+            });
+        });
+        
+        // Send reply
+        $('#sendReply').on('click', function() {
+            const email = $(this).data('email');
+            const message = $('#replyMessage').val().trim();
+            
+            if (!message) {
+                alert('Please enter a reply message');
+                return;
+            }
+            
+            // This is simplified - in a real application, you would send this to your backend
+            const mailtoLink = 'mailto:' + email + '?subject=Re: Your message&body=' + encodeURIComponent(message);
+            window.location.href = mailtoLink;
+        });
+    });
+</script>
+
+@functions {
+    public string GetBadgeClass(string contactType)
+    {
+        return contactType switch
+        {
+            "General" => "bg-secondary",
+            "Premium" => "bg-primary",
+            "Barter" => "bg-success",
+            _ => "bg-secondary"
+        };
+    }
+}

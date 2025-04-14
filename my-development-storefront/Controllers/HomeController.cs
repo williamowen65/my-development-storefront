@@ -43,46 +43,56 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         [Route("createContactForm")]
         public IActionResult CreateContact()
         {
-            return PartialView("_modals/GeneralContactForm", new GeneralContact());
+            return PartialView("_modals/GeneralContactForm", new ContactMessage { ContactType = "General" });
         }
 
         [HttpGet]
         [Route("createPremiumContactForm")]
         public IActionResult CreatePremiumContact()
         {
-            return PartialView("_modals/PremiumContactForm", new PremiumContact());
+            return PartialView("_modals/PremiumContactForm", new ContactMessage { ContactType = "Premium" });
         }
 
         [HttpGet]
         [Route("createBarterContactForm")]
         public IActionResult CreateBarterContact()
         {
-            return PartialView("_modals/BarterContactForm", new BarterContact());
+            return PartialView("_modals/BarterContactForm", new ContactMessage { ContactType = "Barter" });
         }
 
         [HttpPost]
         [Route("api/contact/create")]
-        public IActionResult CreateContact([FromForm] GeneralContact contact)
+        public IActionResult CreateContact([FromForm] ContactMessage contact)
         {
             if (!ModelState.IsValid)
             {
                 return PartialView("_modals/GeneralContactForm", contact);
             }
 
+            contact.ContactType = "General";
+            contact.CreatedAt = DateTime.Now;
+            
+            _context.ContactMessages.Add(contact);
+            _context.SaveChanges();
+
             return Json(new { success = true });
         }
 
         [HttpPost]
         [Route("api/contact/create-premium")]
-        public IActionResult CreatePremiumContact([FromForm] PremiumContact contact)
+        public IActionResult CreatePremiumContact([FromForm] ContactMessage contact)
         {
             if (!ModelState.IsValid)
             {
                 return PartialView("_modals/PremiumContactForm", contact);
             }
 
-            // Here you would save the contact to the database
-            _context.Add(contact);
+            // Set type and creation time
+            contact.ContactType = "Premium";
+            contact.CreatedAt = DateTime.Now;
+            
+            // Save to database
+            _context.ContactMessages.Add(contact);
             _context.SaveChanges();
 
             return Json(new { success = true });
@@ -90,12 +100,20 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
         [HttpPost]
         [Route("api/contact/create-barter")]
-        public IActionResult CreateBarterContact([FromForm] BarterContact contact)
+        public IActionResult CreateBarterContact([FromForm] ContactMessage contact)
         {
             if (!ModelState.IsValid)
             {
                 return PartialView("_modals/BarterContactForm", contact);
             }
+
+            // Set type and creation time
+            contact.ContactType = "Barter";
+            contact.CreatedAt = DateTime.Now;
+            
+            // Save to database
+            _context.ContactMessages.Add(contact);
+            _context.SaveChanges();
 
             return Json(new { success = true });
         }
@@ -534,6 +552,99 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return Json(new { success = true, message = "Item added to cart." });
         }
 
+        [HttpGet]
+        [Route("messages")]
+        public IActionResult ContactMessages()
+        {
+            // Check session for Email to see if they are logged in
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Get all contact messages
+            var messages = _context.ContactMessages.OrderByDescending(c => c.CreatedAt).ToList();
+
+            return View(messages);
+        }
+
+        [HttpGet]
+        [Route("messages/{id}")]
+        public IActionResult MessageDetails(int id)
+        {
+            // Check session for Email to see if they are logged in
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Get the specific message
+            var message = _context.ContactMessages.FirstOrDefault(c => c.Id == id);
+
+            if (message == null)
+            {
+                return NotFound();
+            }
+
+            // Mark the message as read
+            if (!message.IsRead)
+            {
+                message.IsRead = true;
+                _context.SaveChanges();
+            }
+
+            return PartialView(message);
+        }
+
+        [HttpPost]
+        [Route("messages/{id}/status")]
+        public async Task<IActionResult> UpdateMessageStatus(int id, [FromBody] MessageStatusUpdate statusUpdate)
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return Unauthorized();
+            }
+
+            var message = await _context.ContactMessages.FindAsync(id);
+
+            if (message == null)
+            {
+                return NotFound();
+            }
+
+            message.Status = statusUpdate.Status;
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true });
+        }
+
+        [HttpDelete]
+        [Route("messages/{id}")]
+        public async Task<IActionResult> DeleteMessage(int id)
+        {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return Unauthorized();
+            }
+
+            var message = await _context.ContactMessages.FindAsync(id);
+
+            if (message == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _context.ContactMessages.Remove(message);
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+            catch
+            {
+                return Json(new { success = false });
+            }
+        }
 
         private void LogUserIn(string email)
         { 

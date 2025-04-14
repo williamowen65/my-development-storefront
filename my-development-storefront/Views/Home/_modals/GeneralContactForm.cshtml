@@ -1,48 +1,67 @@
-﻿@model GeneralContact
+﻿@model ContactMessage
 
-<form id="GeneralContactForm" class="modal-content" method="post" action="api/contact/create">
-    <div class="modal-header card-header bg-primary text-white rounded-top">
-        <div class="flex-grow-1">
-
-        <h5 class="modal-title fw-bold">Contact Form</h5>
-            
-
-
-            @* <div class="d-flex"> *@
-            @*     Other forms: <div  class="ms-3" open-sesame="createPremiumContactForm"> Premium Consultation Form</div></div> *@
-         
+<div class="modal-header">
+    <h5 class="modal-title">Contact Us</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<form id="generalContactForm" asp-action="CreateContact" asp-controller="Home" method="post">
+    <div class="modal-body">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Your Name</label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        
-    </div>
-    <div class="modal-body p-4">
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-        <div class="form-group mb-3">
-            <label asp-for="@Model.Name" class="form-label fw-semibold"></label>
-            <input asp-for="@Model.Name" class="form-control form-control-lg rounded-3 border-secondary-subtle" placeholder="Your name" />
-            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email Address</label>
+            <input asp-for="Email" class="form-control" type="email" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-        <div class="form-group mb-3">
-            <label asp-for="@Model.Email" class="form-label fw-semibold"></label>
-            <input asp-for="@Model.Email" class="form-control form-control-lg rounded-3 border-secondary-subtle" placeholder="Your email address" />
-            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        <div class="mb-3">
+            <label asp-for="Message" class="form-label">Message</label>
+            <textarea asp-for="Message" class="form-control" rows="5" required></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
         </div>
-        <div class="form-group mb-3">
-            <label asp-for="@Model.Message" class="form-label fw-semibold"></label>
-            <textarea asp-for="@Model.Message" class="form-control form-control-lg rounded-3 border-secondary-subtle" rows="5" placeholder="How can I help you?"></textarea>
-            <span asp-validation-for="@Model.Message" class="text-danger"></span>
-        </div>
+        <input type="hidden" asp-for="ContactType" value="General" />
     </div>
     <div class="modal-footer">
-        <div class="flex-grow-1">
-        @Html.Partial("../_partials/_select2-forms.cshtml")
-        </div>
-
-        @* <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal" tabindex="-1">Close</button> *@
-        <button type="submit" class="btn btn-primary px-4 fw-bold">Send Message</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Send Message</button>
     </div>
 </form>
+
+<script>
+    $(document).ready(function () {
+        $('#generalContactForm').on('submit', function (e) {
+            e.preventDefault();
+            
+            var formData = $(this).serialize();
+            
+            $.ajax({
+                url: '/api/contact/create',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        // Close modal
+                        $('#contactModal').modal('hide');
+                        
+                        // Show success message
+                        alert('Thank you for your message! We will get back to you soon.');
+                        
+                        // Reset form
+                        $('#generalContactForm')[0].reset();
+                    } else {
+                        // Show error message
+                        alert('There was an error sending your message. Please try again later.');
+                    }
+                },
+                error: function () {
+                    alert('There was an error sending your message. Please try again later.');
+                }
+            });
+        });
+    });
+</script>
 
 
 

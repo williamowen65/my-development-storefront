@@ -1,0 +1,129 @@
+@model List<ContactMessage>
+
+@{
+    ViewData["Title"] = "Contact Messages";
+}
+
+<div class="container mt-4">
+    <h2>Contact Messages</h2>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Messages</span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filter
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                                <li><a class="dropdown-item filter-item" href="#" data-filter="all">All</a></li>
+                                <li><a class="dropdown-item filter-item" href="#" data-filter="General">General</a></li>
+                                <li><a class="dropdown-item filter-item" href="#" data-filter="Premium">Premium</a></li>
+                                <li><a class="dropdown-item filter-item" href="#" data-filter="Barter">Barter</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item filter-item" href="#" data-filter="New">Status: New</a></li>
+                                <li><a class="dropdown-item filter-item" href="#" data-filter="In Progress">Status: In Progress</a></li>
+                                <li><a class="dropdown-item filter-item" href="#" data-filter="Completed">Status: Completed</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group list-group-flush message-list">
+                    @foreach (var message in Model)
+                    {
+                        <a href="#" class="list-group-item list-group-item-action message-item @(message.IsRead ? "" : "fw-bold")" 
+                           data-id="@message.Id" 
+                           data-type="@message.ContactType"
+                           data-status="@message.Status">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1">@message.Name</h6>
+                                <small>@message.CreatedAt.ToString("MMM d")</small>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-1 text-truncate">@message.Message</p>
+                                <span class="badge @GetBadgeClass(message.ContactType)">@message.ContactType</span>
+                            </div>
+                            @if (!string.IsNullOrEmpty(message.Status))
+                            {
+                                <small class="text-muted">Status: @message.Status</small>
+                            }
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card message-detail-panel">
+                <div class="card-body text-center text-muted">
+                    <p class="mt-5">Select a message to view details</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Load a message when clicked
+            $('.message-item').on('click', function(e) {
+                e.preventDefault();
+                
+                const messageId = $(this).data('id');
+                
+                // Remove bold from message once clicked
+                $(this).removeClass('fw-bold');
+                
+                // Load message details
+                $.ajax({
+                    url: '/messages/' + messageId,
+                    method: 'GET',
+                    success: function(response) {
+                        $('.message-detail-panel').html(response);
+                    },
+                    error: function() {
+                        $('.message-detail-panel').html(`
+                            <div class="card-body text-center text-danger">
+                                <p class="mt-5">Error loading message details</p>
+                            </div>
+                        `);
+                    }
+                });
+            });
+            
+            // Filter messages
+            $('.filter-item').on('click', function(e) {
+                e.preventDefault();
+                
+                const filter = $(this).data('filter');
+                
+                if (filter === 'all') {
+                    $('.message-item').show();
+                } else if (filter.startsWith('Status:')) {
+                    const status = filter.replace('Status: ', '');
+                    $('.message-item').hide();
+                    $('.message-item[data-status="' + status + '"]').show();
+                } else {
+                    $('.message-item').hide();
+                    $('.message-item[data-type="' + filter + '"]').show();
+                }
+            });
+        });
+    </script>
+}
+
+@functions {
+    public string GetBadgeClass(string contactType)
+    {
+        return contactType switch
+        {
+            "General" => "bg-secondary",
+            "Premium" => "bg-primary",
+            "Barter" => "bg-success",
+            _ => "bg-secondary"
+        };
+    }
+}

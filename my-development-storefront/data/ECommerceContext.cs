@@ -15,12 +15,10 @@ namespace cptc_CPW219_eCommerceSite.data
 
         public DbSet<Product> Products { get; set; } = null!;
 
-        public DbSet<GeneralContact> generalContacts { get; set; } = null!;
+        // New unified contact messages table
+        public DbSet<ContactMessage> ContactMessages { get; set; } = null!;
 
-            public DbSet<PremiumContact> premiumContacts { get; set; } = null!;
-        public DbSet<BarterContact> barterContacts { get; set; } = null!;
-
-
+        // Keep these for backward compatibility during migration
+        public DbSet<Contact> Contacts { get; set; } = null!;
     }
-
 }
