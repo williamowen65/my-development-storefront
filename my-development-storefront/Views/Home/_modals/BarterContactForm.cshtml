@@ -34,7 +34,9 @@
         <input type="hidden" asp-for="ContactType" value="Barter" />
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <div class="flex-grow-1">
+             @Html.Partial("../_partials/_select2-forms.cshtml")
+         </div>
         <button type="submit" class="btn btn-primary">Submit Proposal</button>
     </div>
 </form>
