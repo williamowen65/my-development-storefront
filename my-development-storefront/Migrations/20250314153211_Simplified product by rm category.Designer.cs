@@ -10,7 +10,7 @@ using cptc_CPW219_eCommerceSite.data;
 
 namespace cptc_CPW219_eCommerceSite.Migrations
 {
-    [DbContext(typeof(ECommerceContext))]
+    [DbContext(typeof(data.AppContext))]
     [Migration("20250314153211_Simplified product by rm category")]
     partial class Simplifiedproductbyrmcategory
     {

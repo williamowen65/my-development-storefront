@@ -6,11 +6,11 @@
       "connectionId": "ConnectionStrings:DefaultConnection"
     },
     "mssql1": {
-      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.Web/sites/my-development-storefront-web-app/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsDatabaseConnection_C1487CDB84",
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.Web/sites/my-development-storefront-web-app/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsDefaultConnection_22156510E6",
       "secretStore": "AzureAppSettings",
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/my-development-storefrontdbserver/databases/my-development-storefront_db",
       "type": "mssql.azure",
-      "connectionId": "ConnectionStrings:DatabaseConnection"
+      "connectionId": "ConnectionStrings:DefaultConnection"
     }
   }
 }

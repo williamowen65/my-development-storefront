@@ -8,9 +8,9 @@ namespace cptc_CPW219_eCommerceSite.Filter
 
     public class ValidateCartFilter : IActionFilter
     {
-        private readonly ECommerceContext _context;
+        private readonly data.AppContext _context;
 
-        public ValidateCartFilter(ECommerceContext context)
+        public ValidateCartFilter(data.AppContext context)
         {
             _context = context;
         }

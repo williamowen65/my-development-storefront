@@ -17,11 +17,11 @@ namespace cptc_CPW219_eCommerceSite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ECommerceContext _context;
+        private readonly data.AppContext _context;
         private readonly CRUDController _crudController;
         private readonly ICompositeViewEngine _viewEngine;
 
-        public HomeController(ILogger<HomeController> logger, ECommerceContext context, ICompositeViewEngine viewEngine)
+        public HomeController(ILogger<HomeController> logger, data.AppContext context, ICompositeViewEngine viewEngine)
         {
             _logger = logger;
             _context = context;
@@ -147,41 +147,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
-        [HttpGet]
-        [Route("register")]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Route("register")]
-
-        public async Task<IActionResult> Register(RegisterUserViewModel regModel)
-        {
-            if (ModelState.IsValid)
-            {
-
-                // Hash the password
-                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(regModel.Password);
-
-                // Map RegisterUserViewModel data to User object
-                User newUser = new()
-                {
-                    Email = regModel.Email,
-                    Password = hashedPassword
-                };
-
-                _context.Users.Add(newUser);
-                await _context.SaveChangesAsync();
-
-                LogUserIn(newUser.Email);
-
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View(regModel);
-        }
+       
 
         [HttpGet]
         [Route("merch-editor")]

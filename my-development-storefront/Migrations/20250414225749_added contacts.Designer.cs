@@ -11,7 +11,7 @@ using cptc_CPW219_eCommerceSite.data;
 
 namespace cptc_CPW219_eCommerceSite.Migrations
 {
-    [DbContext(typeof(ECommerceContext))]
+    [DbContext(typeof(data.AppContext))]
     [Migration("20250414225749_added contacts")]
     partial class addedcontacts
     {

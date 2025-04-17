@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace cptc_CPW219_eCommerceSite.data
 {
-    public partial class ECommerceContext
+    public partial class AppContext
     {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

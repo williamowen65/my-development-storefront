@@ -10,7 +10,7 @@ using cptc_CPW219_eCommerceSite.data;
 
 namespace cptc_CPW219_eCommerceSite.Migrations
 {
-    [DbContext(typeof(ECommerceContext))]
+    [DbContext(typeof(data.AppContext))]
     [Migration("20250313210111_Added ImagePath")]
     partial class AddedImagePath
     {
