@@ -15,9 +15,10 @@ namespace cptc_CPW219_eCommerceSite
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<ValidateCartFilter>();
 
-            // Register the DbContext with the connection string
+ 
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ECommerceContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); 
+                options.UseSqlServer(connectionString));
 
 
             //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
