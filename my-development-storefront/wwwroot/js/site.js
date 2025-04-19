@@ -6,6 +6,11 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Set card header position based on website-header
+    updateCardHeaderPosition();
+    // Update on window resize to maintain correct positioning
+    window.addEventListener('resize', updateCardHeaderPosition);
+
     Array.from(document.querySelectorAll('#pricingModelForm input'))
         .forEach(e => {
 
@@ -308,6 +313,16 @@ function displayCart() {
         // Mention cart details on nav bar
         //"Cart: # pending items"
         targetEl.innerHTML = `<a href="merch-cart" class="btn btn-primary btn-sm mt-2" title="Your cart is stored in local cookies">Merch Cart: ${cart.length} Pending Items</a>`;
+    }
+}
+
+// Updates card-header top position dynamically based on website-header height
+function updateCardHeaderPosition() {
+    const websiteHeader = document.querySelector('#website-header');
+    const cardHeader = document.querySelector('#offers-card-header');
+    if (websiteHeader && cardHeader) {
+        const headerHeight = websiteHeader.offsetHeight;
+        cardHeader.style.top = `${headerHeight}px`;
     }
 }
 
