@@ -10,6 +10,11 @@
             target = e;
         }
 
+        // Ensure the target is an absolute path by adding a leading slash if it doesn't have one
+        if (target && !target.startsWith('/') && !target.startsWith('http')) {
+            target = '/' + target;
+        }
+
         $.get(target, function (data) {
             const modal = $("#modal-1");
             const modalContent = modal.find('#modal-1-content');
