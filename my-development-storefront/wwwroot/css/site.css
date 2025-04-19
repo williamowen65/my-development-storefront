@@ -128,3 +128,29 @@ ul.right-marker {
 
 .modal-header > div:first-of-type {
   flex-grow: 1; }
+
+/* Pricing tabs horizontal scrolling */
+.nav-tabs-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.nav-tabs-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.nav-tabs-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.nav-tabs-wrapper .nav-tabs {
+    flex-wrap: nowrap;
+    min-width: max-content;
+}
+
+.nav-tabs-wrapper .nav-item {
+    white-space: nowrap;
+}
