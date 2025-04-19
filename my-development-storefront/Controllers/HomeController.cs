@@ -559,6 +559,7 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();
