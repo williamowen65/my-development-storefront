@@ -345,9 +345,28 @@ function updateCardHeaderPosition() {
 function scrollToPremiumOffers() {
     const offersSection = document.querySelector('#offers');
     if (!offersSection) return;
+    
+    // First check if we need to reset the view
+    const activeSection = offersSection.querySelector('.selected-option');
+    const breadcrumbItem = offersSection.querySelector('.breadcrumb-item:not(.active)');
+    
+    // If another section is open (not premium) or if barter section is open
+    if (activeSection && activeSection.querySelector('.accordion-item[data-item-type="barter"]')) {
+        // Click on the "My Offers" breadcrumb to reset the view
+        if (breadcrumbItem) {
 
-    // Scroll to offers section first
-    setTimeout(() => {
+            // NOTE: This element has its own scroll behavior
+            breadcrumbItem.click(); // we don't want that, but we quickly jump into a different scroll 
+            continueToShowPremium(); // don't need to wait for the reset, just continue to show premium
+        } else {
+            continueToShowPremium();
+        }
+    } else {
+        continueToShowPremium();
+    }
+    
+    function continueToShowPremium() {
+        // Scroll to offers section
         const premiumButton = document.querySelector('.accordion-item[data-item-type="premium"] .accordion-button');
         if (premiumButton && !premiumButton.closest('.option-level-1').classList.contains('selected-option')) {
             premiumButton.click();
@@ -359,12 +378,12 @@ function scrollToPremiumOffers() {
             if (pricingPlanTitle) {
                 const elementPosition = pricingPlanTitle.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({
-                    top: elementPosition - 150, // Apply -200px offset
+                    top: elementPosition - 150, // Apply offset for better viewing
                     behavior: 'smooth'
                 });
             }
         }, 500); // Delay to allow premium section to open
-    }, 500); // Delay to allow scrolling to complete
+    }
 }
 
 
