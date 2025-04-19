@@ -130,8 +130,21 @@
 
     <footer class="my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-            <li class="nav-item pricing"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+            <li class="nav-item"><a asp-controller="Home" asp-action="Index" class="nav-link px-2 text-body-secondary">Home</a></li>
+            @{
+                bool isHomePage = Context.Request.Path.Value == "/" || Context.Request.Path.Value == "/Home" || Context.Request.Path.Value == "/Home/Index";
+            }
+                @if (isHomePage)
+                {
+                     <li class="nav-item pricing">
+                    <a href="#pricing" class="nav-link px-2 text-body-secondary pricing">Pricing</a>
+                    </li>   
+                }
+                else
+                {   <li class="nav-item">
+                    <a asp-controller="Home" asp-action="Index" asp-route-section="pricing-plans" class="nav-link px-2 text-body-secondary not-on-home-page">Pricing</a>
+                     </li>
+                }
             <li class="nav-item faq"><a asp-controller="Home" asp-action="FAQ" class="nav-link px-2 text-body-secondary">FAQs</a></li>
             <li class="nav-item"><a asp-controller="Home" asp-action="About" class="nav-link px-2 text-body-secondary">About</a></li>
         </ul>

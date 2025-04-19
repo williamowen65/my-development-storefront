@@ -19,6 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollToPremiumOffers();
         });
     }
+    
+    // Check URL for pricing-plans query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('section') && urlParams.get('section') === 'pricing-plans') {
+        scrollToPremiumOffers();
+    }
 
     Array.from(document.querySelectorAll('#pricingModelForm input'))
         .forEach(e => {
