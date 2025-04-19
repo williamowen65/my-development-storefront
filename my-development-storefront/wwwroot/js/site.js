@@ -16,32 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (footerPricingLink) {
         footerPricingLink.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            // Find the offers section and premium accordion
-            const offersSection = document.querySelector('#offers');
-            if (!offersSection) return;
-            
-            // Scroll to offers section first
-            
-            // Find and click the premium option button to open it
-            setTimeout(() => {
-                const premiumButton = document.querySelector('.accordion-item[data-item-type="premium"] .accordion-button');
-                if (premiumButton && !premiumButton.closest('.option-level-1').classList.contains('selected-option')) {
-                    premiumButton.click();
-                }
-                
-                // After premium section is open, scroll to pricing plan title
-                setTimeout(() => {
-                    const pricingPlanTitle = document.querySelector('.pricing-plan-title');
-                    if (pricingPlanTitle) {
-                        const elementPosition = pricingPlanTitle.getBoundingClientRect().top + window.pageYOffset;
-                        window.scrollTo({
-                            top: elementPosition - 150, // Apply -200px offset
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 500); // Delay to allow premium section to open
-            }, 500); // Delay to allow scrolling to complete
+            scrollToPremiumOffers();
         });
     }
 
@@ -358,6 +333,32 @@ function updateCardHeaderPosition() {
         const headerHeight = websiteHeader.offsetHeight;
         cardHeader.style.top = `${headerHeight}px`;
     }
+}
+
+// Scrolls to premium offers section and opens the premium accordion
+function scrollToPremiumOffers() {
+    const offersSection = document.querySelector('#offers');
+    if (!offersSection) return;
+
+    // Scroll to offers section first
+    setTimeout(() => {
+        const premiumButton = document.querySelector('.accordion-item[data-item-type="premium"] .accordion-button');
+        if (premiumButton && !premiumButton.closest('.option-level-1').classList.contains('selected-option')) {
+            premiumButton.click();
+        }
+
+        // After premium section is open, scroll to pricing plan title
+        setTimeout(() => {
+            const pricingPlanTitle = document.querySelector('.pricing-plan-title');
+            if (pricingPlanTitle) {
+                const elementPosition = pricingPlanTitle.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: elementPosition - 150, // Apply -200px offset
+                    behavior: 'smooth'
+                });
+            }
+        }, 500); // Delay to allow premium section to open
+    }, 500); // Delay to allow scrolling to complete
 }
 
 
