@@ -129,11 +129,6 @@ ul.right-marker {
   display: none;
 }
 
-.tech-stack {
-  width: 50px;
-  height: 50px;
-}
-
 [data-bs-theme=dark] .underglow {
   box-shadow: 0 0 5px rgba(var(--bs-blue-rgb), 0.5), 0 0 10px rgba(var(--bs-blue-rgb), 0.4), 0 0 15px rgba(var(--bs-blue-rgb), 0.3), 0 0 20px rgba(var(--bs-blue-rgb), 0.2);
 }
