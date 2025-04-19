@@ -558,6 +558,11 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Route("about")]
+        public IActionResult About()
+        {
+            return View();
+        }
 
         [Route("privacy")]
         public IActionResult Privacy()
