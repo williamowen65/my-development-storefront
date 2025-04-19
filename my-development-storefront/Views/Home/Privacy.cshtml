@@ -1,6 +1,147 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<style>
+
+    .icon-box{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="privacy-policy-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg border-0 rounded-lg">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h1 class="display-5 fw-bold mb-0">@ViewData["Title"]</h1>
+                    </div>
+                    <div class="card-body p-5">
+                        <div class="mb-5 text-center">
+                            <div class="privacy-icon mb-3">
+                                <i class="fa fa-shield-heart fa-3x" style="color:green"></i>
+                            </div>
+                            <h2 class="fw-bold text-primary">Your Privacy Is Important To Me</h2>
+                            <p class="lead">
+                                At My Development Storefront, I am committed to protecting your privacy and ensuring the security of your personal information.
+                            </p>
+                            <hr class="my-4">
+                        </div>
+
+                        <div class="privacy-section mb-5">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-light rounded-circle p-3 me-3">
+                                    <i class="fa fa-file-text text-primary"></i>
+                                </div>
+                                <h3 class="fw-bold mb-0">Information I Collect</h3>
+                            </div>
+                            <p class="ms-5">
+                                I only collect information that is necessary to provide you with my services, such as:
+                            </p>
+                            <ul class="list-group list-group-flush ms-5 mb-3">
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>Contact information (name, email address, phone number)</li>
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>Shipping and billing addresses</li>
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>Order information</li>
+                            </ul>
+                        </div>
+
+                        <div class="privacy-section mb-5">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-light rounded-circle p-3 me-3">
+                                    <i class="fa fa-cog text-primary"></i>
+                                </div>
+                                <h3 class="fw-bold mb-0">How I Use Your Information</h3>
+                            </div>
+                            <p class="ms-5">
+                                I use your information solely for the purpose of:
+                            </p>
+                            <ul class="list-group list-group-flush ms-5 mb-3">
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>Processing and fulfilling your orders</li>
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>Communicating with you about your orders</li>
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>Providing customer support</li>
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>Improving my website and services</li>
+                            </ul>
+                        </div>
+
+                        <div class="privacy-section mb-5">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-light rounded-circle p-3 me-3">
+                                    <i class="fa fa-share-alt text-primary"></i>
+                                </div>
+                                <h3 class="fw-bold mb-0">Information Sharing</h3>
+                            </div>
+                            <div class="alert alert-info ms-5 mb-3">
+                                <p class="mb-0">
+                                    <strong class="fs-5">I will not share your personal information with any third parties for marketing purposes.</strong>
+                                </p>
+                                <p class="mb-0">
+                                    Your information is strictly used for processing your orders and providing you with my services.
+                                </p>
+                            </div>
+                            <p class="ms-5">
+                                I may only share information in the following limited circumstances:
+                            </p>
+                            <ul class="list-group list-group-flush ms-5 mb-3">
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>With service providers who help me operate my business (e.g., payment processors, shipping companies)</li>
+                                <li class="list-group-item bg-transparent"><i class="fa fa-check-circle text-success me-2"></i>When required by law or to protect my legal rights</li>
+                            </ul>
+                        </div>
+
+                        <div class="privacy-section mb-5">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-light rounded-circle p-3 me-3">
+                                    <i class="fa fa-lock text-primary"></i>
+                                </div>
+                                <h3 class="fw-bold mb-0">Data Security</h3>
+                            </div>
+                            <p class="ms-5">
+                                I implement appropriate security measures to protect your personal information from unauthorized access,
+                                alteration, disclosure, or destruction.
+                            </p>
+                        </div>
+
+                        <div class="privacy-section">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-light rounded-circle p-3 me-3">
+                                    <i class="fa fa-envelope text-primary"></i>
+                                </div>
+                                <h3 class="fw-bold mb-0">Contact Me</h3>
+                            </div>
+                            <p class="ms-5">
+                                If you have any questions about my privacy policy or practices, please contact me through my website.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer py-3 text-center">
+                        <p class="text-muted mb-0">Last updated: April 19, 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add a simple fade-in animation to the privacy sections
+            const sections = document.querySelectorAll('.privacy-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 300 + (index * 150));
+            });
+        });
+    </script>
+}
