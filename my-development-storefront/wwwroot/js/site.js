@@ -6,6 +6,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    setUpAccordionListener();
     // Set card header position based on website-header
     updateCardHeaderPosition();
     // Update on window resize to maintain correct positioning
@@ -82,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function setUpAccordionListener(){
+
   
     // Offers section listener on ".option-level-1"
     document.body.addEventListener('click', (e) => {
@@ -148,6 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
      
     })
+}
+
 
 })
 
