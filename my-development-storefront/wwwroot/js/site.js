@@ -46,13 +46,14 @@ function initBrandingLogo() {
         }
     });
 
+    const isMobile = window.innerWidth <= 768; // Adjust the breakpoint as needed
 
     function start() {
         gsap.set(".branding-logo", {
             // middle of the screen
             left: "50vw",
             // x: "-50%"
-            translate: "-190% 0"
+            translate: isMobile ?"-170% 0" :"-190% 0"
         })
     }
     function finish() {
