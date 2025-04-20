@@ -24,28 +24,51 @@ function initBrandingLogo() {
         scrollTrigger: {
             trigger: element,
             start: "top bottom-=1",
-            end: "bottom top+=350",
+            end: "bottom top+=1",
+            // end: "bottom top+=350",
+            // scrub: true,
             onEnter: function() {
+                start();
                 document.getElementById('website-header').classList.add('animation-trigger');
             },
             onLeave: function() {
+                finish();
                 document.getElementById('website-header').classList.remove('animation-trigger');
             },
             onEnterBack: function() {
+                start();
                 document.getElementById('website-header').classList.add('animation-trigger');
             },
             onLeaveBack: function() {
+                finish();
                 document.getElementById('website-header').classList.remove('animation-trigger');
             }
         }
     });
 
 
+    function start() {
+        gsap.set(".branding-logo", {
+            // middle of the screen
+            left: "50vw",
+            // x: "-50%"
+            translate: "-200% 0"
+        })
+    }
+    function finish() {
+        gsap.set(".branding-logo", {
+            left: "0vw",
+            translate: "0% 0"
+        })
+    }
+   
+
     // logoTl.from('.branding-logo', {
-    //     x: "50%"
-    // }).to('.branding-logo', {
-    //     x: "0%",
+    //     left: "0vw",
+    //     translate: "0% 0",
     // })
+
+  
 
 }
 
