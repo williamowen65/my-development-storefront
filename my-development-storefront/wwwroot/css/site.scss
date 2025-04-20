@@ -217,8 +217,9 @@ ul.right-marker {
     height: 231px;
 }
 .branding-logo{
-    // transition: all 0.3s;
-    transform-origin: top left;
+    transition: all 0.01s;
+    transform-origin: top center;
+    position: relative;
 }
 .branding-logo-text {
     fill: var(--bs-emphasis-color);
@@ -228,7 +229,7 @@ ul.right-marker {
         // large size
         // height: 260px;
         scale: 3;
-        position: relative;
+       
 
         &:before {
             content: "";

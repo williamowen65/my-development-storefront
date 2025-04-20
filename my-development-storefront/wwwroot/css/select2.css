@@ -160,7 +160,9 @@ ul.right-marker {
 }
 
 .branding-logo {
-  transform-origin: top left;
+  transition: all 0.01s;
+  transform-origin: top center;
+  position: relative;
 }
 
 .branding-logo-text {
@@ -169,7 +171,6 @@ ul.right-marker {
 
 .animation-trigger .branding-logo {
   scale: 3;
-  position: relative;
 }
 .animation-trigger .branding-logo:before {
   content: "";

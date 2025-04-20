@@ -35,7 +35,7 @@ function initBrandingLogo() {
             start: "top bottom-=1",
             end: "bottom top+=1",
             // end: "bottom top+=350",
-            // scrub: true,
+            scrub: true,
             onEnter: function() {
                 start();
                 document.getElementById('website-header').classList.add('animation-trigger');
@@ -55,14 +55,23 @@ function initBrandingLogo() {
         }
     });
 
+    logoTl.to('.branding-logo', {
+        scale: 4
+    })
+    .to('.branding-logo', {
+        scale: 1
+    })
+
     const isMobile = window.innerWidth <= 768; // Adjust the breakpoint as needed
 
     function start() {
         gsap.set(".branding-logo", {
             // middle of the screen
-            left: "50vw",
+            left: `calc(50vw - ${(isMobile ? 0 : 30) +70}px)`, // Adjust the value based on your logo size
+            // left: `calc(50vw)`, // Adjust the value based on your logo size
             // x: "-50%"
-            translate: isMobile ?"-170% 0" :"-190% 0"
+            // translate: isMobile ?"-170% 0" :"-190% 0"
+            // translate: "-80%"
         })
     }
     function finish() {
