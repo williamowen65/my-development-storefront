@@ -128,3 +128,25 @@ ul.right-marker {
 
 .modal-header > div:first-of-type {
   flex-grow: 1; }
+
+.fake-header {
+  width: 100%;
+  height: 231px;
+  background-color: white; }
+
+.branding-logo {
+  transition: all 0.3s;
+  transform-origin: top left; }
+
+.animation-trigger .branding-logo {
+  scale: 4;
+  position: relative; }
+  .animation-trigger .branding-logo:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: -1; }
