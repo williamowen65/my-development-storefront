@@ -14,7 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
     initializePricingPlanLinks()
     initializeOffersSection();
 
-    initBrandingLogo()
+    const urlIsRoot = window.location.pathname === '/';
+    if(urlIsRoot){
+        initBrandingLogo()
+    } else {
+        // hide the fake header on other pages
+        const fakeHeader = document.querySelector('.fake-header');
+        if (fakeHeader) {
+            fakeHeader.style.display = 'none';
+        }
+    }
 })
 
 function initBrandingLogo() {
