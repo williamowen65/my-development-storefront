@@ -13,8 +13,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initializePricingPlanLinks()
     initializeOffersSection();
+
+    handleBrandLogoResize();
 })
 
+function handleBrandLogoResize(){
+
+    /*
+    This method encapsulates the logic for resizing the brand logo 
+    as a singleton function, mean that only one instance of this function 
+    will run at a time.
+
+    This is because the brand logo resize can cause the scroll event, which causes a loop
+    */ 
+
+    function generateSingletonFn(fn) {
+        let isRunning = false;
+        return function(...args) {
+            if (!isRunning) {
+                isRunning = true;
+                console.log("Singleton function is running, executing:", fn.name, "with args:", {...args}, );
+                fn(...args);
+                console.log("Singleton function execution finished, setting isRunning to false.");
+                isRunning = false;
+
+
+            }
+
+            console.log("Singleton function execution completed.");
+        };
+    }
+
+    const resizeBrandLogo = generateSingletonFn(() => {
+        console.log("", "Resizing brand logo...");
+        const brandLogo = document.querySelector('.branding-logo');
+        if (brandLogo) {
+            const currentScrollY = window.scrollY || document.documentElement.scrollTop;
+            // Start with a large size and reduce as scroll increases
+            const maxSize = 460; // Define maximum size in pixels when at top
+            const minSize = 80;  // Define a minimum size so logo doesn't disappear
+            const newSize = Math.max(maxSize - currentScrollY * 0.5, minSize);
+            brandLogo.style.maxHeight = `${newSize}px`;
+    }
+    })
+
+    resizeBrandLogo();
+
+    // Attach the resize event listener
+    window.addEventListener('scroll', resizeBrandLogo);
+
+
+}
 
 function setUpAccordionListener() {
 
