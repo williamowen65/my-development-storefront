@@ -13,8 +13,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initializePricingPlanLinks()
     initializeOffersSection();
+
+    initBrandingLogo()
 })
 
+function initBrandingLogo() {
+    // Update the logo animation to start larger and scale down
+    const element = document.querySelector('.scroll-trigger-target');
+    const logoTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: element,
+            start: "top bottom-=1",
+            end: "bottom top+=1",
+            scrub: true,
+            onEnter: function() {
+                document.getElementById('website-header').classList.add('animation-trigger');
+            },
+            onLeave: function() {
+                document.getElementById('website-header').classList.remove('animation-trigger');
+            },
+            onEnterBack: function() {
+                document.getElementById('website-header').classList.add('animation-trigger');
+            },
+            onLeaveBack: function() {
+                document.getElementById('website-header').classList.remove('animation-trigger');
+            }
+        }
+    });
+
+    // // // First set the initial state - larger scale for logo and header
+    // gsap.set(".branding-logo", {
+    //     scale: 2.5,  // Start with an even larger scale
+    //     opacity: 1
+    // });
+    // gsap.set("#website-header", {
+    //     height: "235px", // Start with a larger height
+    //     paddingTop: "1.5rem",
+    //     paddingBottom: "1.5rem"
+    // })
+
+
+    // gsap.set('.branding-logo', { transformOrigin: "top left" })
+    // // Then animate both elements to a smaller state on scroll
+    // logoTl.to(".branding-logo", {
+    //     scale: 1,
+    //     y: -15,
+    //     duration: 0.5
+    // }, 0)
+    //     .to("#website-header", {
+    //         height: 80,
+    //         paddingTop: "0.5rem",
+    //         paddingBottom: "0.5rem",
+    //         duration: 0.5
+    //     }, 0)
+    //     .to(".branding-logo", {
+    //         opacity: 0.9,
+    //         duration: 0.3
+    //     }, 0.2);
+
+    //     // updateCardHeaderPosition();
+}
 
 function setUpAccordionListener() {
 

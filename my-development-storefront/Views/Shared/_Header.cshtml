@@ -1,0 +1,36 @@
+@inject IHttpContextAccessor _httpContext
+
+<header class="py-3  border-bottom sticky-top bg-body" id="website-header">
+        @* <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;"> *@
+        <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr">
+            <a asp-area="" asp-controller="Home" asp-action="Index" style="width:fit-content" class="ff-consolas align-items-center fs-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none  fw-bold">
+               <img class="branding-logo show" id="branding-logo" src="~/images/branding-logo.png" width="80" /> 
+            </a>
+
+
+        </div>
+        <div class="container d-flex justify-content-center">
+            <div id="cart-details"></div>
+
+            @{
+                string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
+            }
+            @if (userEmail != null)
+            {
+                <div class="d-flex justify-content-end px-2 align-items-center gap-2" style="">
+                    <div>Logged in as <a asp-controller="Home" asp-action="AdminDashboard" class="text-decoration-underline">@userEmail</a></div>
+                    <a asp-action="Logout" asp-controller="Home">Log out</a>
+                </div>
+            }
+
+        </div>
+
+    </header>
+
+    
+@* <div class="d-flex align-items-center"> *@
+@* <form class="w-100 me-3" role="search"> *@
+@*     <input type="search" class="form-control" placeholder="Search..." aria-label="Search"> *@
+@* </form> *@
+
+@* </div> *@
