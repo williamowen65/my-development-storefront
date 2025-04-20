@@ -14,99 +14,63 @@ document.addEventListener("DOMContentLoaded", () => {
     initializePricingPlanLinks()
     initializeOffersSection();
 
-    handleBrandLogoResize();
+    initBrandingLogo()
 })
 
-function handleBrandLogoResize() {
-
-    function resizeBrandLogo() {
-        const currentScrollY = window.scrollY || document.documentElement.scrollTop;
-
-        const websiteHeader = document.querySelector('#website-header');
-        if (websiteHeader) {
-            const range = [0, 100]; // Scale over the first 100px of scrolling
-            
-            // Calculate scroll progress as a value from 0 to 1
-            const scrollProgress = Math.min(currentScrollY / (range[1] - range[0]), 1);
-            
-            // Start with a large size at top and reduce as scroll increases
-            const maxSize = 360; // Define maximum size in pixels when at top
-            const minSize = 120;  // Define a minimum size so logo doesn't disappear
-            
-            // Linear interpolation between maxSize and minSize based on scroll progress
-            const newSize = maxSize - (scrollProgress * (maxSize - minSize));
-            
-
-            // If new size is is 120px, set header to sticky-top, else remove sticky-top
-            if (newSize <= minSize + 160) {
-                
-                websiteHeader.classList.add('sticky-top');
-                websiteHeader.style.height = `${minSize + 160}px`; // Set to minimum size + 160px for sticky effect
-            } else {
-                // websiteHeader.style.height = `${newSize}px`;
-                websiteHeader.style.height = `${newSize}px`;
-                websiteHeader.classList.remove('sticky-top');
+function initBrandingLogo() {
+    // Update the logo animation to start larger and scale down
+    const element = document.querySelector('.fake-header');
+    const logoTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: element,
+            start: "top bottom-=1",
+            end: "bottom top+=1",
+            // end: "bottom top+=350",
+            // scrub: true,
+            onEnter: function() {
+                // start();
+                document.getElementById('website-header').classList.add('animation-trigger');
+            },
+            onLeave: function() {
+                finish();
+                document.getElementById('website-header').classList.remove('animation-trigger');
+            },
+            onEnterBack: function() {
+                start();
+                document.getElementById('website-header').classList.add('animation-trigger');
+            },
+            onLeaveBack: function() {
+                finish();
+                document.getElementById('website-header').classList.remove('animation-trigger');
             }
         }
+    });
 
-        const brandingLogo = document.querySelector('.branding-logo');
-        if(brandingLogo) {
-            // Calculate the new scale based on scroll position
-            const range = [0, 120]; // The first 100 pixels of the page will scale the logo
 
-            // Start with a large scale at top and reduce as scroll increases
-            const maxScale = 4.0; // Maximum scale (400%) when at top
-            const minScale = 1; // Minimum scale (100%) when scrolled down
-
-            // Use the range to properly interpolate between maxScale and minScale
-            // Calculate how far we've scrolled through the range as a percentage (0 to 1)
-            const scrollProgress = Math.min(currentScrollY / (range[1] - range[0]), 1);
-
-            // Linear interpolation between maxScale and minScale based on scroll progress
-            const newScale = maxScale - scrollProgress * (maxScale - minScale);
-
-            brandingLogo.style.transform = `scale(${newScale})`;
-        }
+    function start() {
+        gsap.set(".branding-logo", {
+            // middle of the screen
+            left: "50vw",
+            // x: "-50%"
+            translate: "-200% 0"
+        })
     }
+    function finish() {
+        gsap.set(".branding-logo", {
+            left: "0vw",
+            translate: "0% 0"
+        })
+    }
+   
 
+    // logoTl.from('.branding-logo', {
+    //     left: "0vw",
+    //     translate: "0% 0",
+    // })
 
-    resizeBrandLogo();
+  
 
-    // Attach the resize event listener
-    window.addEventListener('scroll', resizeBrandLogo);
 }
-// function handleBrandLogoResize() {
-
-//     function resizeBrandLogo() {
-
-//         const websiteHeader = document.querySelector('#website-header');
-//         if (websiteHeader) {
-//             const currentScrollY = window.scrollY || document.documentElement.scrollTop;
-
-//             // Calculate the new scale based on scroll position
-//             const range = [0, 100]; // The first 100 pixels of the page will scale the logo
-
-//             // Start with a large scale at top and reduce as scroll increases
-//             const maxScale = 4.0; // Maximum scale (100%) when at top
-//             const minScale = 1; // Minimum scale (60%) when scrolled down
-
-//             // Use the range to properly interpolate between maxScale and minScale
-//             // Calculate how far we've scrolled through the range as a percentage (0 to 1)
-//             const scrollProgress = Math.min(currentScrollY / (range[1] - range[0]), 1);
-
-//             // Linear interpolation between maxScale and minScale based on scroll progress
-//             const newScale = maxScale - scrollProgress * (maxScale - minScale);
-
-//             websiteHeader.style.scale = newScale;
-//         }
-//     }
-
-
-//     resizeBrandLogo();
-
-//     // Attach the resize event listener
-//     window.addEventListener('scroll', resizeBrandLogo);
-// }
 
 function setUpAccordionListener() {
 

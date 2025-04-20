@@ -154,4 +154,31 @@ ul.right-marker {
   flex-grow: 1;
 }
 
+.fake-header {
+  width: 100%;
+  height: 231px;
+}
+
+.branding-logo {
+  transform-origin: top left;
+}
+
+.branding-logo-text {
+  fill: var(--bs-emphasis-color);
+}
+
+.animation-trigger .branding-logo {
+  scale: 3;
+  position: relative;
+}
+.animation-trigger .branding-logo:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
 /*# sourceMappingURL=site.css.map */
