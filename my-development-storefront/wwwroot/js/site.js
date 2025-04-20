@@ -6,86 +6,19 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Set up offer section accordion listener
     setUpAccordionListener();
-    // Set card header position based on website-header
-    updateCardHeaderPosition();
-    // Update on window resize to maintain correct positioning
-    window.addEventListener('resize', updateCardHeaderPosition);
 
-    // Add click event for footer pricing link
-    const footerPricingLink = document.querySelector('footer .pricing a');
-    if (footerPricingLink) {
-        footerPricingLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            scrollToPremiumOffers();
-        });
-    }
-    
-    // Check URL for pricing-plans query parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('section') && urlParams.get('section') === 'pricing-plans') {
-        scrollToPremiumOffers();
-    }
+    initializeCardHeaderPosition();
 
-    Array.from(document.querySelectorAll('#pricingModelForm input'))
-        .forEach(e => {
-
-            e.addEventListener('change', () => {
-
-                // enable button
-                document.querySelector("#selectPriceModel").classList.remove("disabled")
-            })
-        })
+    initializePricingPlanLinks()
+    initializeOffersSection();
+})
 
 
-    const offerSection = document.querySelector('#offers')
-    if (offerSection) {
+function setUpAccordionListener() {
 
-    offerSection.addEventListener("click", (e) => {
-        if (e.target.closest(".breadcrumb") && e.target.closest('.breadcrumb-item:not(.active)')) {
-            // navigate back to part of other offers
-            resetOffers()
-        }
-    })
-    }
-    function resetOffers() {
 
-        const breadcrumb = document.querySelector("#offers .breadcrumb")
-        const allOptions = document.querySelectorAll(".option-level-1");
-        // Show all options again
-        allOptions.forEach(option => {
-            option.style.display = "";
-            // Restore the column width class
-            option.classList.remove("col-md-12");
-            option.classList.add("col-md-6");
-
-            // Make sure both options are closed
-            option.querySelector('.accordion-collapse').classList.remove("show")
-
-            // Remove the selected class
-            option.classList.remove("selected-option");
-            // Update Breadcrumb
-            breadcrumb.innerHTML = `
-              <li class="breadcrumb-item active">My Offers</li>
-                `
-
-            const container = document.querySelector('#offers')
-
-            //// Get the position of the top of the container
-            const containerTop = container.getBoundingClientRect().top + window.scrollY - 90;
-
-            // Scroll to place it at the top of the view
-            window.scrollTo({
-                top: containerTop,
-                behavior: 'smooth'
-            });
-
-        });
-    }
-
-    function setUpAccordionListener(){
-
-  
     // Offers section listener on ".option-level-1"
     document.body.addEventListener('click', (e) => {
         if (e.target.closest(".option-level-1 .accordion-button")) {
@@ -129,32 +62,100 @@ document.addEventListener("DOMContentLoaded", () => {
                     case 'barter':
                         link = "Barter"
                         break
-                    default: 
-                        link ="no link text"
+                    default:
+                        link = "no link text"
                 }
 
                 // Update Breadcrumb
                 breadcrumb.innerHTML = `
-              <li class="breadcrumb-item fs-5">My Offers</li>
-    <li class="breadcrumb-item active fs-5" aria-current="page" data-option-type="${accordianItem}">${link}</li>
-                `
-
-
-           
+          <li class="breadcrumb-item fs-5">My Offers</li>
+<li class="breadcrumb-item active fs-5" aria-current="page" data-option-type="${accordianItem}">${link}</li>
+            `
             } else {
                 resetOffers()
             }
-
-
-
-        }     
-
-     
+        }
     })
 }
 
+function initializeOffersSection() {
 
-})
+
+    // Additional logic for resetting offers section
+    const offerSection = document.querySelector('#offers')
+    if (offerSection) {
+
+        offerSection.addEventListener("click", (e) => {
+            if (e.target.closest(".breadcrumb") && e.target.closest('.breadcrumb-item:not(.active)')) {
+                // navigate back to part of other offers
+                resetOffers()
+            }
+        })
+    }
+    function resetOffers() {
+
+        const breadcrumb = document.querySelector("#offers .breadcrumb")
+        const allOptions = document.querySelectorAll(".option-level-1");
+        // Show all options again
+        allOptions.forEach(option => {
+            option.style.display = "";
+            // Restore the column width class
+            option.classList.remove("col-md-12");
+            option.classList.add("col-md-6");
+
+            // Make sure both options are closed
+            option.querySelector('.accordion-collapse').classList.remove("show")
+
+            // Remove the selected class
+            option.classList.remove("selected-option");
+            // Update Breadcrumb
+            breadcrumb.innerHTML = `
+              <li class="breadcrumb-item active">My Offers</li>
+                `
+
+            const container = document.querySelector('#offers')
+
+            //// Get the position of the top of the container
+            const containerTop = container.getBoundingClientRect().top + window.scrollY - 90;
+
+            // Scroll to place it at the top of the view
+            window.scrollTo({
+                top: containerTop,
+                behavior: 'smooth'
+            });
+
+        });
+    }
+
+}
+
+function initializeCardHeaderPosition() {
+    // Set card header position based on website-header
+    updateCardHeaderPosition();
+
+    // This listener is meant to capture horizontal resize of window, which may resize the header
+    // Update on window resize to maintain correct positioning
+    window.addEventListener('resize', updateCardHeaderPosition);
+}
+
+
+function initializePricingPlanLinks() {
+    // Add click event for footer pricing link (Also opens up premium offers if it closed on on another page.)
+    const footerPricingLink = document.querySelector('footer .pricing a');
+    if (footerPricingLink) {
+        footerPricingLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            scrollToPremiumOffers();
+        });
+    }
+
+    // Setup for handling pricing link from other pages
+    // Check URL for pricing-plans query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('section') && urlParams.get('section') === 'pricing-plans') {
+        scrollToPremiumOffers();
+    }
+}
 
 
 // Globally available methods
@@ -187,16 +188,16 @@ function setupTooltip(productId) {
         ['click', showTooltip]
     ]
 
-     events.forEach(([event, listener]) => {
-         button.addEventListener(event, () => {
-             // close existing tool tips
-             Array.from(document.querySelectorAll('.tooltip2')).forEach(el => {
-                 el.style.display = 'none'
-             })
-             listener();
-         });
+    events.forEach(([event, listener]) => {
+        button.addEventListener(event, () => {
+            // close existing tool tips
+            Array.from(document.querySelectorAll('.tooltip2')).forEach(el => {
+                el.style.display = 'none'
+            })
+            listener();
         });
- 
+    });
+
     function update() {
         FloatingUIDOM.computePosition(button, tooltip).then(({ x, y }) => {
             Object.assign(tooltip.style, {
@@ -240,7 +241,7 @@ function updateImagePreview() {
 const cookieName = 'merch-cart'
 
 
- // Set the cookie on the server side
+// Set the cookie on the server side
 function addItemToCart(data) {
     const jsonPayload = JSON.stringify({
         ProductId: data.productId
@@ -248,12 +249,12 @@ function addItemToCart(data) {
     console.log("to add to cart", { data, jsonPayload });
 
     fetch('/api/add-item-to-cart/' + data.productId)
-    .then(response => response.json())
-    .then(result => {
-        console.log('Item added to cart:', result);
-        displayCart();
-    })
-    .catch(error => console.error('Error adding item to cart:', error));
+        .then(response => response.json())
+        .then(result => {
+            console.log('Item added to cart:', result);
+            displayCart();
+        })
+        .catch(error => console.error('Error adding item to cart:', error));
 }
 
 function deleteCartItem(event, productId) {
@@ -288,12 +289,12 @@ function deleteCartItem(event, productId) {
         if (merchCartBody.innerHTML.trim() == "") {
             merchCartBody.innerHTML = '<td colspan="6" id="empty-merch-cart">Your cart is empty</td>';
         }
-        
+
     }
 
 
 
-       
+
 }
 
 // Helper function to set a cookie
@@ -350,11 +351,11 @@ function updateCardHeaderPosition() {
 function scrollToPremiumOffers() {
     const offersSection = document.querySelector('#offers');
     if (!offersSection) return;
-    
+
     // First check if we need to reset the view
     const activeSection = offersSection.querySelector('.selected-option');
     const breadcrumbItem = offersSection.querySelector('.breadcrumb-item:not(.active)');
-    
+
     // If another section is open (not premium) or if barter section is open
     if (activeSection && activeSection.querySelector('.accordion-item[data-item-type="barter"]')) {
         // Click on the "My Offers" breadcrumb to reset the view
@@ -369,7 +370,7 @@ function scrollToPremiumOffers() {
     } else {
         continueToShowPremium();
     }
-    
+
     function continueToShowPremium() {
         // Scroll to offers section
         const premiumButton = document.querySelector('.accordion-item[data-item-type="premium"] .accordion-button');
