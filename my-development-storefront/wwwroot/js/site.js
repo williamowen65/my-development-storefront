@@ -35,12 +35,15 @@ function handleBrandLogoResize() {
             
             // Linear interpolation between maxSize and minSize based on scroll progress
             const newSize = maxSize - (scrollProgress * (maxSize - minSize));
-            websiteHeader.style.height = `${newSize}px`;
+            
 
             // If new size is is 120px, set header to sticky-top, else remove sticky-top
-            if (newSize <= minSize) {
+            if (newSize <= minSize + 160) {
+                
                 websiteHeader.classList.add('sticky-top');
             } else {
+                // websiteHeader.style.height = `${newSize}px`;
+                websiteHeader.style.height = `${newSize}px`;
                 websiteHeader.classList.remove('sticky-top');
             }
         }
