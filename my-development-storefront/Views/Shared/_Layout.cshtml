@@ -22,8 +22,8 @@
     <script src="https://kit.fontawesome.com/16aebb51db.js" crossorigin="anonymous"></script>
     <script src="~/js/ajax_crud.js"></script>
 </head>
-<body>
 
+<body>
     <script>
         // set the data-theme on the html
             // Set initial theme based on stored preference or default to dark
@@ -86,11 +86,12 @@
     </div>
 
 
-    <header class="py-3  border-bottom sticky-top bg-body" id="website-header">
+    <header class="py-3  border-bottom  bg-body" id="website-header" >
         @* <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;"> *@
         <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr">
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="ff-consolas  align-items-center fs-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none  fw-bold">
-               <img class="branding-logo show" id="branding-logo" src="~/images/branding-logo.png" style="height: 100%; max-height: 80px;" /> 
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="ff-consolas d-flex justify-content-center align-items-center fs-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none  fw-bold">
+               <img class="branding-logo show" id="branding-logo" src="~/images/branding-logo.png" 
+               style="height: 80px; transform-origin: top;" /> 
             </a>
 
 
