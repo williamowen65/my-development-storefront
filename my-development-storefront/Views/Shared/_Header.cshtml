@@ -4,7 +4,8 @@
         @* <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;"> *@
         <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr">
             <a asp-area="" asp-controller="Home" asp-action="Index" style="width:fit-content" class="ff-consolas align-items-center fs-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none  fw-bold">
-               <img class="branding-logo show" id="branding-logo" src="~/images/branding-logo.png" width="80" /> 
+               @* <img class="branding-logo show" id="branding-logo" src="~/images/branding-logo.svg" width="80" />  *@
+               <partial name="_Branding_Logo_svg.cshtml"></partial>
             </a>
 
 

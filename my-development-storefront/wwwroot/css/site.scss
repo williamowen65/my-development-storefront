@@ -215,18 +215,21 @@ ul.right-marker {
 .fake-header{
     width: 100%;
     height: 231px;
-    background-color: white;
 }
 .branding-logo{
     // transition: all 0.3s;
     transform-origin: top left;
 }
-.animation-trigger{
+.branding-logo-text {
+    fill: var(--bs-emphasis-color);
+}
+.animation-trigger {
     .branding-logo {
         // large size
         // height: 260px;
         scale: 4;
         position: relative;
+
         &:before {
             content: "";
             position: absolute;
@@ -238,7 +241,8 @@ ul.right-marker {
             z-index: -1;
         }
     }
-    &#website-header{
+
+    &#website-header {
         // height: 300px;
     }
 }
