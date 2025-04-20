@@ -85,25 +85,24 @@
         </ul>
     </div>
 
+    <header class="" id="website-header" style="z-index: -1">
+        <div class="border-bottom  py-3  bg-body sticky-top" style="height:120px">
 
-    <header class="border-bottom " id="website-header" >
-        <div class="py-3  bg-body sticky-top" style="height:120px">
-
-        @* <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;"> *@
-        <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr; position: sticky;top: 16px;">
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="ff-consolas d-flex justify-content-center align-items-center fs-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none  fw-bold">
-               <img class="branding-logo show" id="branding-logo" src="~/images/branding-logo.png" 
-               style="height: 80px; transform-origin: top;" /> 
-            </a>
+            @* <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;"> *@
+            <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr; position: sticky;top: 16px;">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="ff-consolas d-flex align-items-center fs-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none  fw-bold">
+                    <img class="branding-logo show" id="branding-logo" src="~/images/branding-logo.png"
+                         style="height: 80px; transform-origin: top left;" />
+                </a>
 
 
-            @* <div class="d-flex align-items-center"> *@
+                @* <div class="d-flex align-items-center"> *@
                 @* <form class="w-100 me-3" role="search"> *@
                 @*     <input type="search" class="form-control" placeholder="Search..." aria-label="Search"> *@
                 @* </form> *@
 
-            @* </div> *@
-        </div>
+                @* </div> *@
+            </div>
         </div>
         <div class="container d-flex justify-content-center">
             <div id="cart-details"></div>
@@ -138,17 +137,18 @@
             @{
                 bool isHomePage = Context.Request.Path.Value == "/" || Context.Request.Path.Value == "/Home" || Context.Request.Path.Value == "/Home/Index";
             }
-                @if (isHomePage)
-                {
-                     <li class="nav-item pricing">
+            @if (isHomePage)
+            {
+                <li class="nav-item pricing">
                     <a href="#pricing" class="nav-link px-2 text-body-secondary pricing">Pricing</a>
-                    </li>   
-                }
-                else
-                {   <li class="nav-item">
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
                     <a asp-controller="Home" asp-action="Index" asp-route-section="pricing-plans" class="nav-link px-2 text-body-secondary not-on-home-page">Pricing</a>
-                     </li>
-                }
+                </li>
+            }
             <li class="nav-item faq"><a asp-controller="Home" asp-action="FAQ" class="nav-link px-2 text-body-secondary">FAQs</a></li>
             <li class="nav-item"><a asp-controller="Home" asp-action="About" class="nav-link px-2 text-body-secondary">About</a></li>
         </ul>

@@ -41,6 +41,7 @@ function handleBrandLogoResize() {
             if (newSize <= minSize + 160) {
                 
                 websiteHeader.classList.add('sticky-top');
+                websiteHeader.style.height = `${minSize + 160}px`; // Set to minimum size + 160px for sticky effect
             } else {
                 // websiteHeader.style.height = `${newSize}px`;
                 websiteHeader.style.height = `${newSize}px`;
