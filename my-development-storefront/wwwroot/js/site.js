@@ -28,7 +28,7 @@ function initBrandingLogo() {
             // end: "bottom top+=350",
             // scrub: true,
             onEnter: function() {
-                start();
+                // start();
                 document.getElementById('website-header').classList.add('animation-trigger');
             },
             onLeave: function() {
