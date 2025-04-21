@@ -60,6 +60,20 @@ namespace cptc_CPW219_eCommerceSite.Controllers
             return PartialView("_modals/BarterContactForm", new ContactMessage { ContactType = "Barter" });
         }
 
+        [HttpGet]
+        [Route("createCollaborationContactForm")]
+        public IActionResult CreateCollaborationContact()
+        {
+            return PartialView("_modals/CollaborationContactForm", new ContactMessage { ContactType = "Collaboration" });
+        }
+
+        [HttpGet]
+        [Route("createProjectIdeaContactForm")]
+        public IActionResult CreateProjectIdeaContact()
+        {
+            return PartialView("_modals/ProjectIdeaContactForm", new ContactMessage { ContactType = "ProjectIdea" });
+        }
+
         [HttpPost]
         [Route("api/contact/create")]
         public IActionResult CreateContact([FromForm] ContactMessage contact)
@@ -109,6 +123,46 @@ namespace cptc_CPW219_eCommerceSite.Controllers
 
             // Set type and creation time
             contact.ContactType = "Barter";
+            contact.CreatedAt = DateTime.Now;
+            
+            // Save to database
+            _context.ContactMessages.Add(contact);
+            _context.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        [Route("api/contact/create-collaboration")]
+        public IActionResult CreateCollaborationContact([FromForm] ContactMessage contact)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_modals/CollaborationContactForm", contact);
+            }
+
+            // Set type and creation time
+            contact.ContactType = "Collaboration";
+            contact.CreatedAt = DateTime.Now;
+            
+            // Save to database
+            _context.ContactMessages.Add(contact);
+            _context.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        [Route("api/contact/create-project-idea")]
+        public IActionResult CreateProjectIdeaContact([FromForm] ContactMessage contact)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_modals/ProjectIdeaContactForm", contact);
+            }
+
+            // Set type and creation time
+            contact.ContactType = "ProjectIdea";
             contact.CreatedAt = DateTime.Now;
             
             // Save to database

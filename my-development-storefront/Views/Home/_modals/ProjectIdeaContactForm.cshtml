@@ -1,0 +1,86 @@
+@model ContactMessage
+
+<div class="modal-header">
+    <h5 class="modal-title">Project Idea Pitch</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<form id="projectIdeaContactForm" asp-action="CreateProjectIdeaContact" asp-controller="Home" method="post">
+    <div class="modal-body">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Your Name</label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email Address</label>
+            <input asp-for="Email" class="form-control" type="email" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ProjectTitle" class="form-label">Project Title</label>
+            <input asp-for="ProjectTitle" class="form-control" required placeholder="A brief title for your project idea" />
+            <span asp-validation-for="ProjectTitle" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ProjectDescription" class="form-label">Project Description</label>
+            <textarea asp-for="ProjectDescription" class="form-control" rows="4" required placeholder="Describe your project idea in detail..."></textarea>
+            <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Budget" class="form-label">Estimated Budget (Optional)</label>
+            <input asp-for="Budget" class="form-control" placeholder="What is your approximate budget for this project?" />
+            <span asp-validation-for="Budget" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Timeline" class="form-label">Desired Timeline</label>
+            <input asp-for="Timeline" class="form-control" placeholder="When would you like this project completed?" required />
+            <span asp-validation-for="Timeline" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Message" class="form-label">Additional Details</label>
+            <textarea asp-for="Message" class="form-control" rows="3" placeholder="Any other information about your project idea..."></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="ContactType" value="ProjectIdea" />
+    </div>
+    <div class="modal-footer">
+        <div class="flex-grow-1">
+            @Html.Partial("../_partials/_select2-forms.cshtml")
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Project Idea</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#projectIdeaContactForm').on('submit', function (e) {
+            e.preventDefault();
+            
+            var formData = $(this).serialize();
+            
+            $.ajax({
+                url: '/api/contact/create-project-idea',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        // Close modal
+                        $('#projectIdeaContactModal').modal('hide');
+                        
+                        // Show success message
+                        alert('Thank you for your project idea! We will review it and get back to you soon.');
+                        
+                        // Reset form
+                        $('#projectIdeaContactForm')[0].reset();
+                    } else {
+                        // Show error message
+                        alert('There was an error submitting your project idea. Please try again later.');
+                    }
+                },
+                error: function () {
+                    alert('There was an error submitting your project idea. Please try again later.');
+                }
+            });
+        });
+    });
+</script>

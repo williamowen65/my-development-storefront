@@ -1,0 +1,76 @@
+@model ContactMessage
+
+<div class="modal-header">
+    <h5 class="modal-title">Collaboration Proposal</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<form id="collaborationContactForm" asp-action="CreateCollaborationContact" asp-controller="Home" method="post">
+    <div class="modal-body">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Your Name</label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email Address</label>
+            <input asp-for="Email" class="form-control" type="email" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ProjectDescription" class="form-label">Collaboration Idea</label>
+            <textarea asp-for="ProjectDescription" class="form-control" rows="4" required placeholder="Describe your collaboration idea..."></textarea>
+            <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Timeline" class="form-label">Proposed Timeline</label>
+            <input asp-for="Timeline" class="form-control" placeholder="When would you like to start/complete this collaboration?" required />
+            <span asp-validation-for="Timeline" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Message" class="form-label">Additional Details</label>
+            <textarea asp-for="Message" class="form-control" rows="3" required placeholder="Any other information about your collaboration proposal..."></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="ContactType" value="Collaboration" />
+    </div>
+    <div class="modal-footer">
+        <div class="flex-grow-1">
+            @Html.Partial("../_partials/_select2-forms.cshtml")
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Collaboration</button>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#collaborationContactForm').on('submit', function (e) {
+            e.preventDefault();
+            
+            var formData = $(this).serialize();
+            
+            $.ajax({
+                url: '/api/contact/create-collaboration',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        // Close modal
+                        $('#collaborationContactModal').modal('hide');
+                        
+                        // Show success message
+                        alert('Thank you for your collaboration proposal! We will review it and get back to you soon.');
+                        
+                        // Reset form
+                        $('#collaborationContactForm')[0].reset();
+                    } else {
+                        // Show error message
+                        alert('There was an error submitting your collaboration proposal. Please try again later.');
+                    }
+                },
+                error: function () {
+                    alert('There was an error submitting your collaboration proposal. Please try again later.');
+                }
+            });
+        });
+    });
+</script>

@@ -19,7 +19,7 @@ namespace cptc_CPW219_eCommerceSite.Models
         
         // Common field to identify the type of contact
         [Required]
-        public string ContactType { get; set; } // "General", "Premium", "Barter"
+        public string ContactType { get; set; } // "General", "Premium", "Barter", "Collaboration", "ProjectIdea"
         
         // Date and time the message was created
         public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -46,6 +46,11 @@ namespace cptc_CPW219_eCommerceSite.Models
         public string? ProjectDescription { get; set; }
         
         public string? SkillsOffered { get; set; }
+        
+        // Fields for Project Idea contacts
+        public string? ProjectTitle { get; set; }
+        
+        public string? Timeline { get; set; }
         
         // Additional useful fields
         public bool IsRead { get; set; } = false;
