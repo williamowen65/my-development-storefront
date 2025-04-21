@@ -56,10 +56,10 @@ function initBrandingLogo() {
     });
 
     logoTl.to('.branding-logo', {
-        scale: 4
+        scale: 3.3, // Start larger (3.3)
     })
     .to('.branding-logo', {
-        scale: 1
+        scale: 1 // Go back to normal size
     })
 
     const isMobile = window.innerWidth <= 768; // Adjust the breakpoint as needed
