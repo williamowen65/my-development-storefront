@@ -17,7 +17,7 @@ namespace cptc_CPW219_eCommerceSite
 
  
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<data.AppContext>(options =>
+            builder.Services.AddDbContext<data.WebAppContext>(options =>
                 options.UseSqlServer(connectionString));
 
 

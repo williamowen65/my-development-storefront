@@ -17,11 +17,11 @@ namespace cptc_CPW219_eCommerceSite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly data.AppContext _context;
+        private readonly data.WebAppContext _context;
         private readonly CRUDController _crudController;
         private readonly ICompositeViewEngine _viewEngine;
 
-        public HomeController(ILogger<HomeController> logger, data.AppContext context, ICompositeViewEngine viewEngine)
+        public HomeController(ILogger<HomeController> logger, data.WebAppContext context, ICompositeViewEngine viewEngine)
         {
             _logger = logger;
             _context = context;

@@ -3,9 +3,9 @@ using cptc_CPW219_eCommerceSite.Models;
 
 namespace cptc_CPW219_eCommerceSite.data
 {
-    public partial class AppContext : DbContext
+    public partial class WebAppContext : DbContext
     {
-        public AppContext(DbContextOptions<AppContext> options) : base(options)
+        public WebAppContext(DbContextOptions<WebAppContext> options) : base(options)
         {
         }
 

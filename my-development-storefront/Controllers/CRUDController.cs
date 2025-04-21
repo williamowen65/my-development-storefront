@@ -7,9 +7,9 @@ namespace cptc_CPW219_eCommerceSite.Controllers
     public class CRUDController
     {
 
-        private readonly data.AppContext _context;
+        private readonly data.WebAppContext _context;
 
-        public CRUDController(data.AppContext context)
+        public CRUDController(data.WebAppContext context)
         {
             _context = context;
         }
