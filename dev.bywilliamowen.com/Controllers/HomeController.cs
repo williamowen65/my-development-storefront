@@ -206,17 +206,29 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         [Route("register")]
         public IActionResult Register()
         {
+            // Check if any users exist
+            if (_context.Users.Any())
+            {
+                // If users exist, redirect to home
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
         [HttpPost]
         [Route("register")]
-
         public async Task<IActionResult> Register(RegisterUserViewModel regModel)
         {
+            // Check if any users exist
+            if (_context.Users.Any())
+            {
+                // If users exist, redirect to home
+                return RedirectToAction("Index", "Home");
+            }
+
             if (ModelState.IsValid)
             {
-
                 // Hash the password
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(regModel.Password);
 
