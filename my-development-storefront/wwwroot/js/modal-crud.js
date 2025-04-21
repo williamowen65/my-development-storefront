@@ -42,6 +42,12 @@
                         firstInput.focus();
                     }
 
+                    // Using requestAnimationFrame (better for visual updates)
+                    requestAnimationFrame(() => {
+                        // Waiting for the modal to be fully rendered before scrolling
+                        modal.scrollTop(0);
+                    });
+
                     setFormSubmissionListener(modal);
                 }
 
