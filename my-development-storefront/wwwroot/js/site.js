@@ -55,8 +55,10 @@ function initBrandingLogo() {
         }
     });
 
+    const isMobileScreen = window.innerWidth <= 768; // Adjust the breakpoint as needed
+
     logoTl.to('.branding-logo', {
-        scale: 3.3, // Start larger (3.3)
+        scale: isMobileScreen ? 4.5: 3.3, // Start larger (two sizes 4.5 for mobile, 3.3 for desktop)
     })
     .to('.branding-logo', {
         scale: 1 // Go back to normal size
