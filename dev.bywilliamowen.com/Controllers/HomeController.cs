@@ -201,7 +201,43 @@ namespace cptc_CPW219_eCommerceSite.Controllers
         }
 
 
-       
+
+        [HttpGet]
+        [Route("register")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("register")]
+
+        public async Task<IActionResult> Register(RegisterUserViewModel regModel)
+        {
+            if (ModelState.IsValid)
+            {
+
+                // Hash the password
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(regModel.Password);
+
+                // Map RegisterUserViewModel data to User object
+                User newUser = new()
+                {
+                    Email = regModel.Email,
+                    Password = hashedPassword
+                };
+
+                _context.Users.Add(newUser);
+                await _context.SaveChangesAsync();
+
+                LogUserIn(newUser.Email);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(regModel);
+        }
+
 
         [HttpGet]
         [Route("merch-editor")]
