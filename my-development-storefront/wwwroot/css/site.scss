@@ -246,3 +246,7 @@ ul.right-marker {
         // height: 300px;
     }
 }
+
+.accordion-body {
+    padding: 0 !important; // override bs
+}

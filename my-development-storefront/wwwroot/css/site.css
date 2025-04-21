@@ -181,5 +181,8 @@ ul.right-marker {
   height: 100%;
   z-index: -1;
 }
+.accordion-body {
+  padding: 0 !important;
+}
 
 /*# sourceMappingURL=site.css.map */

@@ -181,6 +181,10 @@ ul.right-marker {
   height: 100%;
   z-index: -1;
 }
+.accordion-body {
+  padding: 0 !important;
+}
+
 [data-bs-theme=dark] .select2-container .select2-results, [data-bs-theme=dark] .select2-container .select2-search {
   background-color: var(--bs-tertiary-bg);
 }
