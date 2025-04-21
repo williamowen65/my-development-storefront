@@ -76,14 +76,16 @@
         const form = modal.find('form').get(0);
         console.log({ form });
         if (form) {
-            // Remove any existing handlers to prevent duplicates
-            $(form).off('submit').on('submit', function (e) {
+            // Use a namespace for the submit event to better manage our handlers
+            $(form).off('submit.modalCrud').on('submit.modalCrud', function (e) {
+                // Stop immediate propagation to prevent other handlers from running
+                e.stopImmediatePropagation();
                 e.preventDefault();
-
+    
                 var form = $(this);
                 const data = form.serialize();
-                console.log({ form, data });
-
+                console.log({ form, data, handler: 'modalCrud' });  // Add handler info for debugging
+    
                 $.ajax({
                     type: form.attr('method'),
                     url: form.attr('action'),
@@ -94,9 +96,14 @@
                             modal.modal('hide');
                         } else {
                             modal.find('.modal-content').html(res);
+                            // Re-attach handlers to the new content
+                            setFormSubmissionListener(modal);
                         }
                     }
                 });
+                
+                // Return false to prevent any default behavior and event bubbling
+                return false;
             });
         }
     }
