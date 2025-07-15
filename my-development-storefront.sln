@@ -5,13 +5,6 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "my-development-storefront", "my-development-storefront\my-development-storefront.csproj", "{7CB1D748-BE97-4886-AE99-F31293FF513D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure-proxy", "azure-proxy", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-	ProjectSection(SolutionItems) = preProject
-		azure-proxy-old\index.html = azure-proxy-old\index.html
-		azure-proxy-old\Web.config = azure-proxy-old\Web.config
-		azure-proxy-old\_redirects = azure-proxy-old\_redirects
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
