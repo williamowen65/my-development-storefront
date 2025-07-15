@@ -1,6 +1,6 @@
 # My Personal eCommerce Site
 
-> #### [dev.bywilliamowen.com](https://dev.bywilliamowen.com)
+> #### [www.williamowen.dev](https://www.williamowen.dev)
 
 This is a project to show case that I know how to use bootstrap, but also to act as a frontend for my dev services. There is a merch store integration.
 
